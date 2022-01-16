@@ -4,33 +4,37 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import DndService from "./js/dnd-service.js";
 import Character from "./js/character";
+import CharClass from "./js/char-class";
+import Race from "./js/race";
+
 //Business Logic
+function makeClass(response){
+  let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws)
+  return newClass;
+}
 
+function makeRace(response){
+  let newRace = new Race(response.name, response.speed, response.size, response.languages)
+  return newRace;
+}
 
+function getLanguages(languageResponse) {
+  let languageString = ""
+  languageResponse.forEach(function(element){
+    languageString = languageString + ", " + element.name;
+  });
+  return languageString;
+}
 
 //UI Logic
-function displayRace(response){
-  $("#displayRace").text(`${response.name}`);
+function displayRace(race){
+  let languages = getLanguages(race.languages);
+  $("#displayRace").text(`name: ${race.name}, speed: ${race.speed}, size: ${race.size}, languages: ${languages}`);
   //$("#displayRace").html(`${response.ability_bonuses}`);
 }
 
-function displayClass(response){
-  $("#displayClass").text(`${response.name}, hit die: ${response.hit_die}`);
-}
-
-
-function displayAbilityBonus(response){
-  let abilityBonusMap = new Map([
-    ['str', 0],
-    ['dex', 0],
-    ['con', 0],
-    ['int', 0],
-    ['wis', 0],
-    ['cha', 0],
-  ]);
-  const bonusArray = response.ability_bonuses
-
-  $("#displayAbilityBonus").html();
+function displayClass(charClass){
+  $("#displayClass").text(`class: ${charClass.name}, hit die: ${charClass.hitDie}, saving throws: ${charClass.savingThrows[0].name}, ${charClass.savingThrows[1].name}`);
 }
 
 function displayErrors(error) {
@@ -43,12 +47,14 @@ $(document).ready(function(){
     event.preventDefault();
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
+    let newClass;
     DndService.getService("classes", charClass)
     .then(function(response){
       if (response instanceof Error) {
         throw Error(`DnD API error: ${response.message}`);
       }
-      displayClass(response);
+      newClass = makeClass(response);
+      displayClass(newClass);
     })
     .catch(function(error) {
       displayErrors(error.message)
