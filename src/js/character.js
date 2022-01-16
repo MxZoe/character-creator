@@ -6,10 +6,10 @@ class Character {
     this.race = {};
     this.class = {};
     this.hitpoints = 0;
-    this.abilityScores = {};
+    this.abilityScores = [];
     this.armorClass = 0;
   }
-  getAbilityScores() {
-    
+  addAbilityScores(array) {
+    this.abilityScores = array;
   }
 }
