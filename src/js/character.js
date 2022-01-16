@@ -8,8 +8,12 @@ class Character {
     this.hitpoints = 0;
     this.abilityScores = [];
     this.armorClass = 0;
+    this.equipment = {};
   }
   addAbilityScores(array) {
     this.abilityScores = array;
+  }
+  addRace(race) {
+    this.race = race;
   }
 }
