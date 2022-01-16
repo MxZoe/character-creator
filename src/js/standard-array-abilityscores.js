@@ -9,12 +9,9 @@ function CreateAbilityScores(scores) {
   return abilityScores;
 }
 
-// Experiental Functions
-function isDuplicate(previousSelections, newSelection) {
-  return (previousSelections.includes(newSelection)) ? true : false;
+function isStandardArray(array) {
+  array.sort((a, b) => a - b);
+  const standardArray = new Set([8, 10, 12, 13, 14, 15]);
+  return (array === standardArray) ? true : false;
 }
-
-
-if (!isDuplicate(currentScoresArray, currentlySelected)) {
-  currentScoresArray.push(currentlySelected);
-}
+// next step make button create array for the function
