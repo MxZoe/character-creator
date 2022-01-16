@@ -1,10 +1,14 @@
 import $ from "jquery";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './../css/styles.css';
+import './css/styles.css';
 import DndService from "./js/dnd-service.js";
 import Character from "./js/character";
+//Business Logic
 
+
+
+//UI Logic
 function displayRace(response){
   $("#displayRace").text(`${response.name}`);
   //$("#displayRace").html(`${response.ability_bonuses}`);
@@ -33,27 +37,28 @@ function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
 
+
 $(document).ready(function(){
   $("#formOne").submit(function(){
     event.preventDefault();
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
     DndService.getService("classes", charClass)
-    .then(function(dndResponse){
-      if (dndResponse instanceof Error) {
-        throw Error(`DnD API error: ${dndResponse.message}`);
+    .then(function(response){
+      if (response instanceof Error) {
+        throw Error(`DnD API error: ${response.message}`);
       }
-      displayClass(dndResponse);
+      displayClass(response);
     })
     .catch(function(error) {
       displayErrors(error.message)
     });
     DndService.getService("races", charRace)
-    .then(function(dndResponse){
-      if (dndResponse instanceof Error) {
-        throw Error(`DnD API error: ${dndResponse.message}`);
+    .then(function(response){
+      if (response instanceof Error) {
+        throw Error(`DnD API error: ${response.message}`);
       }
-      displayRace(dndResponse);
+      displayRace(response);
     })
     .catch(function(error) {
       displayErrors(error.message)
