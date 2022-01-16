@@ -1,4 +1,4 @@
-class Character {
+export default class Character {
   constructor() {
     this.characterName = "";
     this.playerName = "";
@@ -39,5 +39,9 @@ class Character {
     this.equipment = equipment;
   }
   // Shortcut Methods 
-  
+  characterStepOne(characterName, playerName, alignment) {
+    this.addCharacterName(characterName);
+    this.addPlayerName(playerName);
+    this.addAlignment(alignment);
+  }
 }
