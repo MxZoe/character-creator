@@ -30,11 +30,15 @@ function getLanguages(languageResponse) {
 function displayRace(race){
   let languages = getLanguages(race.languages);
   $("#displayRace").text(`name: ${race.name}, speed: ${race.speed}, size: ${race.size}, languages: ${languages}`);
-  //$("#displayRace").html(`${response.ability_bonuses}`);
+  displayBonuses(race);
 }
 
 function displayClass(charClass){
   $("#displayClass").text(`class: ${charClass.name}, hit die: ${charClass.hitDie}, saving throws: ${charClass.savingThrows[0].name}, ${charClass.savingThrows[1].name}`);
+}
+
+function displayBonuses(race){
+  $("#displayAbilityBonus").text(`STR: ${race.bonuses.get("str")} DEX: ${race.bonuses.get("dex")}  CON: ${race.bonuses.get("con")}  INT:${race.bonuses.get("int")}  WIS:${race.bonuses.get("wis")}  CHA: ${race.bonuses.get("cha")} `)
 }
 
 function displayErrors(error) {
@@ -48,6 +52,7 @@ $(document).ready(function(){
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
     let newClass;
+    let newRace;
     DndService.getService("classes", charClass)
     .then(function(response){
       if (response instanceof Error) {
@@ -64,7 +69,9 @@ $(document).ready(function(){
       if (response instanceof Error) {
         throw Error(`DnD API error: ${response.message}`);
       }
-      displayRace(response);
+      newRace = makeRace(response);
+      newRace.getAbilityBonuses(response);
+      displayRace(newRace);
     })
     .catch(function(error) {
       displayErrors(error.message)
