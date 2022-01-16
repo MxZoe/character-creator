@@ -10,7 +10,7 @@ export default class Character {
     this.armorClass = 0;
     this.equipment = {};
   }
-  // Add methods for constructor
+  // Adding methods for constructor
   addCharacterName(characterName) {
     this.characterName = characterName;
   }
