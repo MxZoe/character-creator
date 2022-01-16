@@ -4,6 +4,48 @@
   <title></title>
 </head>
 <body>
-  
+  <div id="top">
+    <h2>D&D 5e Character Creator</h2>
+  </div>
+  <div class="container">
+    <form id="formOne">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <select class="form-control" id="charClass">
+            <option value="barbarian">Barbarian</option>
+            <option value="bard">Bard</option>
+            <option value="cleric">Cleric</option>
+            <option value="druid">Druid</option>
+            <option value="fighter">Fighter</option>
+            <option value="monk">Monk</option>
+            <option value="paladin">Paladin</option>
+            <option value="ranger">Ranger</option>
+            <option value="rogue">Rogue</option>
+            <option value="sorcerer">Sorcercer</option>
+            <option value="warlock">Warlock</option>
+            <option value="wizard">Wizard</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <select class="form-control" id="charRace">
+            <option value="dragonborn">DragonBorn</option>
+            <option value="dwarf">Dwarf</option>
+            <option value="elf">elf</option>
+            <option value="gnome">Gnome</option>
+            <option value="half-elf">Half-elf</option>
+            <option value="half-orc">Monk</option>
+            <option value="halfling">Halfling</option>
+            <option value="human">Human</option>
+            <option value="Tiefling">Rogue</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" id="submit">Show</button>
+    </form>
+    <div id="displayRace"></div>
+    <div id="displayClass"></div>
+    <div id="displayAbilityBonus"></div>
+    <div class="show-errors"></div>
+  </div>
 </body>
 </html>
