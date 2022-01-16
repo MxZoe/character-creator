@@ -6,7 +6,7 @@ export default class Character {
     this.race = {};
     this.characterClass = {};
     this.hitpoints = 0;
-    this.abilityScores = [];
+    this.abilityScores = {};
     this.armorClass = 0;
     this.equipment = {};
   }
@@ -29,8 +29,8 @@ export default class Character {
   addHitPoints(hitpoints) {
     this.hitpoints = hitpoints;
   }
-  addAbilityScores(array) {
-    this.abilityScores = array;
+  addAbilityScores(map) {
+    this.abilityScores = map;
   }
   addArmorClass(armorClass) {
     this.armorClass = armorClass;
