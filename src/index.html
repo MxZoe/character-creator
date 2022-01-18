@@ -9,107 +9,109 @@
       <h2>D&D 5e Character Creator</h2>
     </div>
     <form id="formOne">
-      <div class="row g-3">
-        <div class="mb-3 col-md-6">
-          <label for="charClass">Select your characters class:</label>
-          <select class="form-control" id="charClass">
-            <option value="barbarian">Barbarian</option>
-            <option value="bard">Bard</option>
-            <option value="cleric">Cleric</option>
-            <option value="druid">Druid</option>
-            <option value="fighter">Fighter</option>
-            <option value="monk">Monk</option>
-            <option value="paladin">Paladin</option>
-            <option value="ranger">Ranger</option>
-            <option value="rogue">Rogue</option>
-            <option value="sorcerer">Sorcercer</option>
-            <option value="warlock">Warlock</option>
-            <option value="wizard">Wizard</option>
-          </select>
+      <div id="characterClassAndRace">
+        <div class="row g-3">
+          <div class="mb-3 col-md-6">
+            <label for="charClass">Select your characters class:</label>
+            <select class="form-control" id="charClass">
+              <option value="barbarian">Barbarian</option>
+              <option value="bard">Bard</option>
+              <option value="cleric">Cleric</option>
+              <option value="druid">Druid</option>
+              <option value="fighter">Fighter</option>
+              <option value="monk">Monk</option>
+              <option value="paladin">Paladin</option>
+              <option value="ranger">Ranger</option>
+              <option value="rogue">Rogue</option>
+              <option value="sorcerer">Sorcercer</option>
+              <option value="warlock">Warlock</option>
+              <option value="wizard">Wizard</option>
+            </select>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="charRace">Select your characters race:</label>
+            <select class="form-control" id="charRace">
+              <option value="dragonborn">DragonBorn</option>
+              <option value="dwarf">Dwarf</option>
+              <option value="elf">Elf</option>
+              <option value="gnome">Gnome</option>
+              <option value="half-elf">Half-elf</option>
+              <option value="half-orc">Monk</option>
+              <option value="halfling">Halfling</option>
+              <option value="human">Human</option>
+              <option value="Tiefling">Rogue</option>
+            </select>
+          </div>
         </div>
-        <div class="mb-3 col-md-6">
-          <label for="charRace">Select your characters race:</label>
-          <select class="form-control" id="charRace">
-            <option value="dragonborn">DragonBorn</option>
-            <option value="dwarf">Dwarf</option>
-            <option value="elf">Elf</option>
-            <option value="gnome">Gnome</option>
-            <option value="half-elf">Half-elf</option>
-            <option value="half-orc">Monk</option>
-            <option value="halfling">Halfling</option>
-            <option value="human">Human</option>
-            <option value="Tiefling">Rogue</option>
-          </select>
-        </div>
-        <!--Standard Array Section-->
-        <div class="standardArray">
-          <div class="row">
-            <div class = "mb-3 col-md-2">
-              <label for = "charStrength">Strength</label>
-              <select class = "form-control" id = "charStrength">
-                <option value = "15" selected>15</option>
-                <option value = "14">14</option>
-                <option value = "13">13</option>
-                <option value = "12">12</option>
-                <option value = "10">10</option>
-                <option value = "8">8</option>
-              </select>
-            </div>
-            <div class = "mb-3 col-md-2">
-              <label for = "charDexterity">Dexterity</label>
-              <select class = "form-control" id = "charDexterity">
-                <option value = "15">15</option>
-                <option value = "14" selected>14</option>
-                <option value = "13">13</option>
-                <option value = "12">12</option>
-                <option value = "10">10</option>
-                <option value = "8">8</option>
-              </select>
-            </div>
-            <div class = "mb-3 col-md-2">
-              <label for = "charConstitution">Constitution</label>
-              <select class = "form-control" id = "charConstitution">
-                <option value = "15">15</option>
-                <option value = "14">14</option>
-                <option value = "13" selected>13</option>
-                <option value = "12">12</option>
-                <option value = "10">10</option>
-                <option value = "8">8</option>
-              </select>
-            </div>
-            <div class = "mb-3 col-md-2">
-              <label for = "charIntelligence">Intelligence</label>
-              <select class = "form-control" id = "charIntelligence">
-                <option value = "15">15</option>
-                <option value = "14">14</option>
-                <option value = "13">13</option>
-                <option value = "12" selected>12</option>
-                <option value = "10">10</option>
-                <option value = "8">8</option>
-              </select>
-            </div>
-            <div class = "mb-3 col-md-2">
-              <label for = "charWisdom">Wisdom</label>
-              <select class = "form-control" id = "charWisdom">
-                <option value = "15">15</option>
-                <option value = "14">14</option>
-                <option value = "13">13</option>
-                <option value = "12">12</option>
-                <option value = "10" selected>10</option>
-                <option value = "8">8</option>
-              </select>
-            </div>
-            <div class = "mb-3 col-md-2">
-              <label for = "charCharisma">Charisma</label>
-              <select class = "form-control" id = "charCharisma">
-                <option value = "15">15</option>
-                <option value = "14">14</option>
-                <option value = "13">13</option>
-                <option value = "12">12</option>
-                <option value = "10">10</option>
-                <option value = "8" selected>8</option>
-              </select>
-            </div>
+      </div>
+      <!--Standard Array Section-->
+      <div id="standardArray">
+        <div class="row g-3">
+          <div class = "mb-3 col-md-2">
+            <label for = "charStrength">Strength</label>
+            <select class = "form-control" id = "charStrength">
+              <option value = "15" selected>15</option>
+              <option value = "14">14</option>
+              <option value = "13">13</option>
+              <option value = "12">12</option>
+              <option value = "10">10</option>
+              <option value = "8">8</option>
+            </select>
+          </div>
+          <div class = "mb-3 col-md-2">
+            <label for = "charDexterity">Dexterity</label>
+            <select class = "form-control" id = "charDexterity">
+              <option value = "15">15</option>
+              <option value = "14" selected>14</option>
+              <option value = "13">13</option>
+              <option value = "12">12</option>
+              <option value = "10">10</option>
+              <option value = "8">8</option>
+            </select>
+          </div>
+          <div class = "mb-3 col-md-2">
+            <label for = "charConstitution">Constitution</label>
+            <select class = "form-control" id = "charConstitution">
+              <option value = "15">15</option>
+              <option value = "14">14</option>
+              <option value = "13" selected>13</option>
+              <option value = "12">12</option>
+              <option value = "10">10</option>
+              <option value = "8">8</option>
+            </select>
+          </div>
+          <div class = "mb-3 col-md-2">
+            <label for = "charIntelligence">Intelligence</label>
+            <select class = "form-control" id = "charIntelligence">
+              <option value = "15">15</option>
+              <option value = "14">14</option>
+              <option value = "13">13</option>
+              <option value = "12" selected>12</option>
+              <option value = "10">10</option>
+              <option value = "8">8</option>
+            </select>
+          </div>
+          <div class = "mb-3 col-md-2">
+            <label for = "charWisdom">Wisdom</label>
+            <select class = "form-control" id = "charWisdom">
+              <option value = "15">15</option>
+              <option value = "14">14</option>
+              <option value = "13">13</option>
+              <option value = "12">12</option>
+              <option value = "10" selected>10</option>
+              <option value = "8">8</option>
+            </select>
+          </div>
+          <div class = "mb-3 col-md-2">
+            <label for = "charCharisma">Charisma</label>
+            <select class = "form-control" id = "charCharisma">
+              <option value = "15">15</option>
+              <option value = "14">14</option>
+              <option value = "13">13</option>
+              <option value = "12">12</option>
+              <option value = "10">10</option>
+              <option value = "8" selected>8</option>
+            </select>
           </div>
         </div>
       </div>
