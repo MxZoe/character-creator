@@ -6,21 +6,20 @@ import DndService from "./js/dnd-service.js";
 import Character from "./js/character";
 import CharClass from "./js/char-class";
 import Race from "./js/race";
-import { disableOption } from "./js/standard-array-abilityscores";
 
 //Business Logic
 function makeClass(response){
-  let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws)
+  let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
   return newClass;
 }
 
 function makeRace(response){
-  let newRace = new Race(response.name, response.speed, response.size, response.languages)
+  let newRace = new Race(response.name, response.speed, response.size, response.languages);
   return newRace;
 }
 
 function getLanguages(languageResponse) {
-  let languageString = ""
+  let languageString = "";
   languageResponse.forEach(function(element){
     languageString = languageString + ", " + element.name;
   });
@@ -39,7 +38,7 @@ function displayClass(charClass){
 }
 
 function displayBonuses(race){
-  $("#displayAbilityBonus").text(`STR: ${race.bonuses.get("str")} DEX: ${race.bonuses.get("dex")}  CON: ${race.bonuses.get("con")}  INT:${race.bonuses.get("int")}  WIS:${race.bonuses.get("wis")}  CHA: ${race.bonuses.get("cha")} `)
+  $("#displayAbilityBonus").text(`STR: ${race.bonuses.get("str")} DEX: ${race.bonuses.get("dex")}  CON: ${race.bonuses.get("con")}  INT:${race.bonuses.get("int")}  WIS:${race.bonuses.get("wis")}  CHA: ${race.bonuses.get("cha")} `);
 }
 
 function displayErrors(error) {
@@ -55,28 +54,28 @@ $(document).ready(function(){
     let newClass;
     let newRace;
     DndService.getService("classes", charClass)
-    .then(function(response){
-      if (response instanceof Error) {
-        throw Error(`DnD API error: ${response.message}`);
-      }
-      newClass = makeClass(response);
-      displayClass(newClass);
-    })
-    .catch(function(error) {
-      displayErrors(error.message)
-    });
+      .then(function(response){
+        if (response instanceof Error) {
+          throw Error(`DnD API error: ${response.message}`);
+        }
+        newClass = makeClass(response);
+        displayClass(newClass);
+      })
+      .catch(function(error) {
+        displayErrors(error.message);
+      });
     DndService.getService("races", charRace)
-    .then(function(response){
-      if (response instanceof Error) {
-        throw Error(`DnD API error: ${response.message}`);
-      }
-      newRace = makeRace(response);
-      newRace.getAbilityBonuses(response);
-      displayRace(newRace);
-    })
-    .catch(function(error) {
-      displayErrors(error.message)
-    });
+      .then(function(response){
+        if (response instanceof Error) {
+          throw Error(`DnD API error: ${response.message}`);
+        }
+        newRace = makeRace(response);
+        newRace.getAbilityBonuses(response);
+        displayRace(newRace);
+      })
+      .catch(function(error) {
+        displayErrors(error.message);
+      });
   });
   // Standard Array UI logic
   $("select#charStrength").change(() => {
