@@ -1,10 +1,10 @@
 export default class Race {
   constructor(name, speed, size, languages){
-  this.name = name;
-  this.speed = speed;
-  this.size = size;
-  this.languages = languages;
-  this.bonuses;
+    this.name = name;
+    this.speed = speed;
+    this.size = size;
+    this.languages = languages;
+    this.bonuses;
   }
 
   getAbilityBonuses(response){
