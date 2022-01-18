@@ -9,7 +9,35 @@
       <h2>D&D 5e Character Creator</h2>
     </div>
     <form id="formOne">
-      <div id="characterClassAndRace">
+      <!--Player Name, Character Name, and Alignment Section-->
+      <div id="namesAndAlignment">
+        <div class="row g-3">
+          <div class="mb-3 col-md-4">
+            <label for="playerName">Enter your name here:</label>
+            <input type="text" class="form-control" id="playerName" placeholder="Your name here">
+          </div>
+          <div class="mb-3 col-md-4">
+            <label for="charName">Enter your characters name here:</label>
+            <input type="text" class="form-control" id="charName" placeholder="Character name here">
+          </div>
+          <div class="mb-3 col-md-4">
+            <label for="charAlignment">Choose your alignment:</label>
+            <select class="form-select" name="alignment" id="charAlignment">
+              <option value="Lawful Good">Lawful Good</option>
+              <option value="Neutral Good">Neutral Good</option>
+              <option value="Chaotic Good">Chaotic Good</option>
+              <option value="Lawful Neutral">Lawful Neutral</option>
+              <option value="True Neutral">True Neutral</option>
+              <option value="Chaotic Neutral">Chaotic Neutral</option>
+              <option value="Lawful Evil">Lawful Evil</option>
+              <option value="Neutral Evil">Neutral Evil</option>
+              <option value="Chaotic Evil">Chaotic Evil</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!--Class and Race Section-->
+      <div id="classAndRaceSection">
         <div class="row g-3">
           <div class="mb-3 col-md-6">
             <label for="charClass">Select your characters class:</label>
@@ -45,7 +73,7 @@
         </div>
       </div>
       <!--Standard Array Section-->
-      <div id="standardArray">
+      <div id="standardArraySection">
         <div class="row g-3">
           <div class = "mb-3 col-md-2">
             <label for = "charStrength">Strength</label>
