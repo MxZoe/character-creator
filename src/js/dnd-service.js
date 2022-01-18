@@ -9,8 +9,6 @@ export default class DndService{
       })
       .catch(function(error) {
         return Error(error);
-      }) 
+      });
   }
-
-
 }
