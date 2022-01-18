@@ -6,6 +6,7 @@ import DndService from "./js/dnd-service.js";
 import Character from "./js/character";
 import CharClass from "./js/char-class";
 import Race from "./js/race";
+import { disableOption } from "./js/standard-array-abilityscores";
 
 //Business Logic
 function makeClass(response){
@@ -76,5 +77,152 @@ $(document).ready(function(){
     .catch(function(error) {
       displayErrors(error.message)
     });
-  })
+  });
+  // Standard Array UI logic
+  $("select#charStrength").change(() => {
+    switch ($("#charStrength").find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+  });
+  $("select#charDexterity").change(() => {
+    switch ($("#charDexterity").find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+  });
+  $("select#charConstitution").change(() => {
+    switch ($("#charConstitution").find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+  });
+  $("select#charIntelligence").change(() => {
+    switch ($("#charIntelligence").find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+  });
+  $("select#charWisdom").change(() => {
+    switch ($("#charWisdom").find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+  });
+  $("select#charCharisma").change(() => {
+    switch ($("#charCharisma").find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+  });
+  $("#resetAbilityScores").click(() => {
+    $("#charStrength").prop("selectedIndex", 0);
+    $("#charDexterity").prop("selectedIndex", 0);
+    $("#charConstitution").prop("selectedIndex", 0);
+    $("#charIntelligence").prop("selectedIndex", 0);
+    $("#charWisdom").prop("selectedIndex", 0);
+    $("#charCharisma").prop("selectedIndex", 0);
+    $(".option15").prop("disabled", false);
+    $(".option14").prop("disabled", false);
+    $(".option13").prop("disabled", false);
+    $(".option12").prop("disabled", false);
+    $(".option10").prop("disabled", false);
+    $(".option8").prop("disabled", false);
+  });
 });
