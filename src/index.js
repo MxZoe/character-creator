@@ -92,7 +92,7 @@ $(document).ready(function(){
         newRace.getAbilityBonuses(response);
         newRace.getLanguages(response);
         character.addRace(newRace);
-        //character.addRacialBonuses();
+        character.addRacialBonuses();
         console.log(character);
         displayRace(newRace);
       })
