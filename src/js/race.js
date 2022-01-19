@@ -24,5 +24,11 @@ export default class Race {
     this.bonuses = abilityBonusMap;
   }
   
+  getLanguages() {
+    let languageString = "";
+    this.languages.forEach(function(element){
+      languageString = languageString + ", " + element.name;
+    });
+    return languageString;
+  }
 }
-
