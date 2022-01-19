@@ -5,30 +5,11 @@ import './css/styles.css';
 import DndService from "./js/dnd-service.js";
 import Character from "./js/character";
 import CharClass from "./js/char-class";
-import { Race } from "./js/race";
-
-//Business Logic
-function makeClass(response){
-  let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
-  return newClass;
-}
-
-function makeRace(response){
-  let newRace = new Race(response.name, response.speed, response.size, response.languages);
-  return newRace;
-}
-
-function getLanguages(languageResponse) {
-  let languageString = "";
-  languageResponse.forEach(function(element){
-    languageString = languageString + ", " + element.name;
-  });
-  return languageString;
-}
+import Race from "./js/race";
 
 //UI Logic
 function displayRace(race){
-  let languages = getLanguages(race.languages);
+  let languages = race.languages.getLanguages();
   $("#displayRace").text(`name: ${race.name}, speed: ${race.speed}, size: ${race.size}, languages: ${languages}`);
   displayBonuses(race);
 }
@@ -82,23 +63,23 @@ $(document).ready(function(){
     character.addAlignment(alignment);
     // Get Ability Scores
     let abilityScores = {};
-    abilityScores.str = parseInt($("#charStrength").find(":selected").val());
-    abilityScores.dex = parseInt($("#charDexterity").find(":selected").val());
-    abilityScores.con = parseInt($("#charConstitution").find(":selected").val());
-    abilityScores.int = parseInt($("#charIntelligence").find(":selected").val());
-    abilityScores.wis = parseInt($("#charWisdom").find(":selected").val());
-    abilityScores.cha = parseInt($("#charCharisma").find(":selected").val());
+    abilityScores.str += parseInt($("#charStrength").find(":selected").val());
+    abilityScores.dex += parseInt($("#charDexterity").find(":selected").val());
+    abilityScores.con += parseInt($("#charConstitution").find(":selected").val());
+    abilityScores.int += parseInt($("#charIntelligence").find(":selected").val());
+    abilityScores.wis += parseInt($("#charWisdom").find(":selected").val());
+    abilityScores.cha += parseInt($("#charCharisma").find(":selected").val());
     character.addAbilityScores(abilityScores);
+    // Get Race and Class
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
-    let newClass;
-    let newRace;
     DndService.getService("classes", charClass)
       .then(function(response){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        newClass = makeClass(response);
+        let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
+        character.addCharacterClass(newClass);
         displayClass(newClass);
       })
       .catch(function(error) {
@@ -109,8 +90,9 @@ $(document).ready(function(){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        newRace = makeRace(response);
+        let newRace = new Race(response.name, response.speed, response.size, response.languages);
         newRace.getAbilityBonuses(response);
+        newRace.getLanguages(response);
         character.addRace(newRace);
         console.log(character);
         displayRace(newRace);
