@@ -8,6 +8,7 @@
     <div id="top">
       <h2>D&D 5e Character Creator</h2>
     </div>
+    <hr>
     <form id="formOne">
       <!--Player Name, Character Name, and Alignment Section-->
       <div id="namesAndAlignment">
@@ -75,6 +76,8 @@
       <!--Standard Array Section-->
       <div id="standardArraySection">
         <div class="row g-3">
+          <h4>Choose where your ability scores will start using the standard array:</h4>
+          <p class="text-muted">The standard array is the following numbers: 15, 14, 13, 12, 10, and 8. Choose what ability scores get which numbers below. If you have any issues with reassigning scores just hit the red "Reset ability scores" button below and re-enter them.</p>
           <div class="mb-3 col-md-2">
             <label for="charStrength">Strength</label>
             <select class="form-select" id="charStrength" required>
@@ -149,11 +152,11 @@
           </div>
         </div>
         <div class="d-grid gap-2">
-          <button type="button" class="btn btn-danger" id="resetAbilityScores">Reset Ability Scores</button>
+          <button type="button" class="btn btn-danger" id="resetAbilityScores">Reset ability scores</button>
         </div>
       </div>
       <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-success" id="submit">Create Character</button>
+        <button type="submit" class="btn btn-success" id="submit">Create Character!</button>
       </div>
     </form>
     <div id="displayRace"></div>
