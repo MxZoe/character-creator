@@ -36,9 +36,6 @@ export default class Character {
   addHitPoints(hitpoints) {
     this.hitpoints = hitpoints;
   }
-  addAbilityScores(abilityScores) {
-    this.abilityScores = abilityScores;
-  }
   addArmorClass(armorClass) {
     this.armorClass = armorClass;
   }
