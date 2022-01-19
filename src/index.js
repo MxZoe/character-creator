@@ -59,6 +59,7 @@ $(document).ready(function(){
     abilityScores.int = parseInt($("#charIntelligence").find(":selected").val());
     abilityScores.wis = parseInt($("#charWisdom").find(":selected").val());
     abilityScores.cha = parseInt($("#charCharisma").find(":selected").val());
+    character.addAbilityScores(abilityScores);
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
     let newClass;
