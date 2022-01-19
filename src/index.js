@@ -62,14 +62,12 @@ $(document).ready(function(){
     character.addCharacterName(characterName);
     character.addAlignment(alignment);
     // Get Ability Scores
-    let abilityScores = {};
-    abilityScores.str += parseInt($("#charStrength").find(":selected").val());
-    abilityScores.dex += parseInt($("#charDexterity").find(":selected").val());
-    abilityScores.con += parseInt($("#charConstitution").find(":selected").val());
-    abilityScores.int += parseInt($("#charIntelligence").find(":selected").val());
-    abilityScores.wis += parseInt($("#charWisdom").find(":selected").val());
-    abilityScores.cha += parseInt($("#charCharisma").find(":selected").val());
-    character.addAbilityScores(abilityScores);
+    character.abilityScores.str += parseInt($("#charStrength").find(":selected").val());
+    character.abilityScores.dex += parseInt($("#charDexterity").find(":selected").val());
+    character.abilityScores.con += parseInt($("#charConstitution").find(":selected").val());
+    character.abilityScores.int += parseInt($("#charIntelligence").find(":selected").val());
+    character.abilityScores.wis += parseInt($("#charWisdom").find(":selected").val());
+    character.abilityScores.cha += parseInt($("#charCharisma").find(":selected").val());
     // Get Race and Class
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
