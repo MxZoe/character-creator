@@ -5,7 +5,7 @@ import './css/styles.css';
 import DndService from "./js/dnd-service.js";
 import Character from "./js/character";
 import CharClass from "./js/char-class";
-import Race from "./js/race";
+import { Race } from "./js/race";
 
 //Business Logic
 function makeClass(response){
@@ -73,6 +73,13 @@ $(document).ready(function(){
     event.preventDefault();
     // Create Character
     let character = new Character();
+    // Get Player Name, Character Name, & Alignment
+    let playerName = $("#playerName").val();
+    let characterName = $("#charName").val();
+    let alignment = $("#charAlignment").find(":selected").val();
+    character.addPlayerName(playerName);
+    character.addCharacterName(characterName);
+    character.addAlignment(alignment);
     // Get Ability Scores
     let abilityScores = {};
     abilityScores.str = parseInt($("#charStrength").find(":selected").val());
@@ -104,6 +111,8 @@ $(document).ready(function(){
         }
         newRace = makeRace(response);
         newRace.getAbilityBonuses(response);
+        character.addRace(newRace);
+        console.log(character);
         displayRace(newRace);
       })
       .catch(function(error) {
