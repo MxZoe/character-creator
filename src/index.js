@@ -47,25 +47,25 @@ function displayErrors(error) {
 
 function disableAbilityScoreOption(option) {
   switch ($(`${option}`).find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+  case "15":
+    $(".option15").prop("disabled", true);
+    break;
+  case "14":
+    $(".option14").prop("disabled", true);
+    break;
+  case "13":
+    $(".option13").prop("disabled", true);
+    break;
+  case "12":
+    $(".option12").prop("disabled", true);
+    break;
+  case "10":
+    $(".option10").prop("disabled", true);
+    break;
+  case "8":
+    $(".option8").prop("disabled", true);
+    break;
+  }
 }
 
 $(document).ready(function(){
@@ -115,7 +115,7 @@ $(document).ready(function(){
     disableAbilityScoreOption(`#charStrength`);
   });
   $("select#charDexterity").change(() => {
-      disableAbilityScoreOption(`#charDexterity`);
+    disableAbilityScoreOption(`#charDexterity`);
   });
   $("select#charConstitution").change(() => {
     disableAbilityScoreOption(`#charConstitution`);
@@ -124,10 +124,10 @@ $(document).ready(function(){
     disableAbilityScoreOption(`#charIntelligence`);
   });
   $("select#charWisdom").change(() => {
-      disableAbilityScoreOption(`#charWisdom`);
+    disableAbilityScoreOption(`#charWisdom`);
   });
   $("select#charCharisma").change(() => {
-      disableAbilityScoreOption(`#charCharisma`);
+    disableAbilityScoreOption(`#charCharisma`);
   });
   $("#resetAbilityScores").click(() => {
     $("#charStrength").prop("selectedIndex", 0);
