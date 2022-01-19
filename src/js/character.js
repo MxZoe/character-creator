@@ -42,6 +42,14 @@ export default class Character {
   addEquipment(equipment) {
     this.equipment = equipment;
   }
+  addRacialBonuses() {
+    this.abilityScores.str += this.race.bonuses.get("str");
+    this.abilityScores.str += this.race.bonuses.get("dex");
+    this.abilityScores.str += this.race.bonuses.get("con");
+    this.abilityScores.str += this.race.bonuses.get("int");
+    this.abilityScores.str += this.race.bonuses.get("wis");
+    this.abilityScores.str += this.race.bonuses.get("cha");
+  }
   // Shortcut Methods 
   characterStepOne(characterName, playerName, alignment) {
     this.addCharacterName(characterName);
