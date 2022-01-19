@@ -49,6 +49,16 @@ function displayErrors(error) {
 $(document).ready(function(){
   $("#formOne").submit(function(){
     event.preventDefault();
+    // Create Character
+    let character = new Character();
+    // Get Ability Scores
+    let abilityScores = [];
+    abilityScores.push(parseInt($("#charStrength").find(":selected").val()));
+    abilityScores.push(parseInt($("#charDexterity").find(":selected").val()));
+    abilityScores.push(parseInt($("#charConstitution").find(":selected").val()));
+    abilityScores.push(parseInt($("#charIntelligence").find(":selected").val()));
+    abilityScores.push(parseInt($("#charWisdom").find(":selected").val()));
+    abilityScores.push(parseInt($("#charCharisma").find(":selected").val()));
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
     let newClass;
