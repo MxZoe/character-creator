@@ -45,6 +45,28 @@ function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
 
+function disableAbilityScoreOption(option) {
+  switch ($(`${option}`).find(":selected").val()) {
+    case "15":
+      $(".option15").prop("disabled", true);
+      break;
+    case "14":
+      $(".option14").prop("disabled", true);
+      break;
+    case "13":
+      $(".option13").prop("disabled", true);
+      break;
+    case "12":
+      $(".option12").prop("disabled", true);
+      break;
+    case "10":
+      $(".option10").prop("disabled", true);
+      break;
+    case "8":
+      $(".option8").prop("disabled", true);
+      break;
+    }
+}
 
 $(document).ready(function(){
   $("#formOne").submit(function(){
@@ -90,136 +112,22 @@ $(document).ready(function(){
   });
   // Standard Array UI logic
   $("select#charStrength").change(() => {
-    switch ($("#charStrength").find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+    disableAbilityScoreOption(`#charStrength`);
   });
   $("select#charDexterity").change(() => {
-    switch ($("#charDexterity").find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+      disableAbilityScoreOption(`#charDexterity`);
   });
   $("select#charConstitution").change(() => {
-    switch ($("#charConstitution").find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+    disableAbilityScoreOption(`#charConstitution`);
   });
   $("select#charIntelligence").change(() => {
-    switch ($("#charIntelligence").find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+    disableAbilityScoreOption(`#charIntelligence`);
   });
   $("select#charWisdom").change(() => {
-    switch ($("#charWisdom").find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+      disableAbilityScoreOption(`#charWisdom`);
   });
   $("select#charCharisma").change(() => {
-    switch ($("#charCharisma").find(":selected").val()) {
-    case "15":
-      $(".option15").prop("disabled", true);
-      break;
-    case "14":
-      $(".option14").prop("disabled", true);
-      break;
-    case "13":
-      $(".option13").prop("disabled", true);
-      break;
-    case "12":
-      $(".option12").prop("disabled", true);
-      break;
-    case "10":
-      $(".option10").prop("disabled", true);
-      break;
-    case "8":
-      $(".option8").prop("disabled", true);
-      break;
-    }
+      disableAbilityScoreOption(`#charCharisma`);
   });
   $("#resetAbilityScores").click(() => {
     $("#charStrength").prop("selectedIndex", 0);
