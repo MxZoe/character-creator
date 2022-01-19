@@ -6,11 +6,11 @@ export default class Character {
     this.race = {};
     this.characterClass = {};
     this.hitpoints = 0;
-    this.abilityScores = [];
+    this.abilityScores = {};
     this.armorClass = 0;
     this.equipment = {};
   }
-  // Add methods for constructor
+  // Adding methods for constructor
   addCharacterName(characterName) {
     this.characterName = characterName;
   }
@@ -29,8 +29,8 @@ export default class Character {
   addHitPoints(hitpoints) {
     this.hitpoints = hitpoints;
   }
-  addAbilityScores(array) {
-    this.abilityScores = array;
+  addAbilityScores(abilityScores) {
+    this.abilityScores = abilityScores;
   }
   addArmorClass(armorClass) {
     this.armorClass = armorClass;

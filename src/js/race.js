@@ -1,10 +1,11 @@
 export default class Race {
-  constructor(name, speed, size, languages){
-  this.name = name;
-  this.speed = speed;
-  this.size = size;
-  this.languages = languages;
-  this.bonuses;
+  constructor(name, speed, size, subrace, languages){
+    this.name = name;
+    this.speed = speed;
+    this.size = size;
+    this.languages = languages;
+    this.subrace = subrace;
+    this.bonuses;
   }
 
   getAbilityBonuses(response){
@@ -20,9 +21,26 @@ export default class Race {
     abilities.forEach(function(element){
       abilityBonusMap.set(element.ability_score.index, element.bonus);
     });
+
     
     this.bonuses = abilityBonusMap;
   }
   
+  getSubBonuses(response, abilityBonusMap){
+    let abilities = response.ability_bonuses;
+    abilities.forEach(function(element){
+      let bonus = abilityBonusMap.get(element.ability_score.index);
+      bonus += element.bonus;
+      abilityBonusMap.set(element.ability_score.index, bonus);
+    });
+
+    
+    this.bonuses = abilityBonusMap;
+  }
+
 }
+
+
+
+
 
