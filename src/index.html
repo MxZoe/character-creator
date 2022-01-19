@@ -82,7 +82,7 @@
             <label for="charStrength">Strength</label>
             <select class="form-select" id="charStrength" required>
               <option value="">Select option here</option>
-              <option value="15" class="option15">15</option>
+              <option value="15" class="option15" default>15</option>
               <option value="14" class="option14">14</option>
               <option value="13" class="option13">13</option>
               <option value="12" class="option12">12</option>
@@ -160,10 +160,15 @@
       </div>
     </form>
     <!--Display character information-->
-    <div id="displayRace"></div>
-    <div id="displayClass"></div>
-    <div id="displayAbilityBonus"></div>
-    <div class="show-errors"></div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <div id="displayRace"></div>
+        <div id="displayClass"></div>
+        <div id="displayAbilityBonus"></div>
+        <div class="show-errors"></div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
