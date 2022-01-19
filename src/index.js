@@ -52,13 +52,13 @@ $(document).ready(function(){
     // Create Character
     let character = new Character();
     // Get Ability Scores
-    let abilityScores = [];
-    abilityScores.push(parseInt($("#charStrength").find(":selected").val()));
-    abilityScores.push(parseInt($("#charDexterity").find(":selected").val()));
-    abilityScores.push(parseInt($("#charConstitution").find(":selected").val()));
-    abilityScores.push(parseInt($("#charIntelligence").find(":selected").val()));
-    abilityScores.push(parseInt($("#charWisdom").find(":selected").val()));
-    abilityScores.push(parseInt($("#charCharisma").find(":selected").val()));
+    let abilityScores = {};
+    abilityScores.str = parseInt($("#charStrength").find(":selected").val());
+    abilityScores.dex = parseInt($("#charDexterity").find(":selected").val());
+    abilityScores.con = parseInt($("#charConstitution").find(":selected").val());
+    abilityScores.int = parseInt($("#charIntelligence").find(":selected").val());
+    abilityScores.wis = parseInt($("#charWisdom").find(":selected").val());
+    abilityScores.cha = parseInt($("#charCharisma").find(":selected").val());
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
     let newClass;
