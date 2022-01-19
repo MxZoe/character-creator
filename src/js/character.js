@@ -6,7 +6,14 @@ export default class Character {
     this.race = {};
     this.characterClass = {};
     this.hitpoints = 0;
-    this.abilityScores = {};
+    this.abilityScores = {
+      str: 0,
+      dex: 0,
+      con: 0,
+      int: 0,
+      wis: 0,
+      cha: 0
+    };
     this.armorClass = 0;
     this.equipment = {};
   }
