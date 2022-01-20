@@ -1,9 +1,9 @@
 export default class Race {
-  constructor(name, speed, size, subrace, languages){
+  constructor(name, speed, size, subrace){
     this.name = name;
     this.speed = speed;
     this.size = size;
-    this.languages = languages;
+    this.languages;
     this.subrace = subrace;
     this.bonuses;
   }
@@ -18,26 +18,25 @@ export default class Race {
       ['cha', 0],
     ]);
     let abilities = response.ability_bonuses;
-    abilities.forEach(function(element){
-      abilityBonusMap.set(element.ability_score.index, element.bonus);
-    });
-
-    
+    for(let i=0; i < abilities.length;i++){
+      abilityBonusMap.set(abilities[i].ability_score.index, abilities[i].bonus);
+    }
     this.bonuses = abilityBonusMap;
   }
   
-  getSubBonuses(response, abilityBonusMap){
-    let abilities = response.ability_bonuses;
-    abilities.forEach(function(element){
-      let bonus = abilityBonusMap.get(element.ability_score.index);
-      bonus += element.bonus;
-      abilityBonusMap.set(element.ability_score.index, bonus);
-    });
-
-    
-    this.bonuses = abilityBonusMap;
+  getSubBonuses(response){
+      this.bonuses.set(response.ability_bonuses[0].ability_score.index, response.ability_bonuses[0].bonus);
   }
 
+  getLanguages(response){
+    
+      let languages = response.languages;
+      let languageString = "";
+      for(let i=0;i<languages.length;i++){
+        languageString = languageString + ", " + languages[i].name;
+      }
+      this.languages = languageString;
+  }
 }
 
 

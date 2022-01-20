@@ -15,27 +15,24 @@ function makeClass(response){
 
 function makeRace(response){
   
-  let newRace = new Race(response.name, response.speed, response.size, response.languages);
+  let newRace = new Race(response.name, response.speed, response.size);
   if(response.subraces !== []){
-    newRace.subrace = response.subraces[0].index;
+    
+    let subraces = response.subraces[0].index;
+    newRace.subrace = subraces;
+    console.log(newRace.subrace);
   } else{
     newRace.subrace = "none";
   }
   return newRace;
 }
 
-function getLanguages(languageResponse) {
-  let languageString = "";
-  languageResponse.forEach(function(element){
-    languageString = languageString + ", " + element.name;
-  });
-  return languageString;
-}
+
 
 //UI Logic
 function displayRace(race){
-  let languages = getLanguages(race.languages);
-  $("#displayRace").text(`name: ${race.name}, speed: ${race.speed}, size: ${race.size}, languages: ${languages}`);
+
+  $("#displayRace").text(`name: ${race.name}, speed: ${race.speed}, size: ${race.size}, subrace: ${race.subrace} languages: ${race.languages}`);
   displayBonuses(race);
 }
 
@@ -109,12 +106,31 @@ $(document).ready(function(){
           throw Error(`DnD API error: ${response.message}`);
         }
         newRace = makeRace(response);
+        newRace.getLanguages(response);
         newRace.getAbilityBonuses(response);
+        return DndService.getService("subraces", newRace.subrace);
+      })
+      .then((subraceResponse) => {
+        if(subraceResponse instanceof Error) {
+          throw Error (`DnD Api Error: ${subraceResponse.message}`);
+        }
+
+        newRace.getSubBonuses(subraceResponse, newRace.bonuses);
         displayRace(newRace);
       })
       .catch(function(error) {
         displayErrors(error.message);
       });
+      // DndService.getService("subraces", newRace.subrace)
+      // .then(function(response){
+      //   if (response instanceof Error) {
+      //     throw Error(`DnD API error: ${response.message}`);
+      //   } 
+      //   displayRace(newRace);
+      // })
+      // .catch(function(error) {
+      //   displayErrors(error.message);
+      // });
       
       
      
