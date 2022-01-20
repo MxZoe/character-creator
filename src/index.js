@@ -7,41 +7,18 @@ import Character from "./js/character";
 import CharClass from "./js/char-class";
 import Race from "./js/race";
 
-//Business Logic
-function makeClass(response){
-  let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
-  return newClass;
-}
-
-function makeRace(response){
-  
-  let newRace = new Race(response.name, response.speed, response.size);
-  if(response.subraces !== []){
-    
-    let subraces = response.subraces[0].index;
-    newRace.subrace = subraces;
-    console.log(newRace.subrace);
-  } else{
-    newRace.subrace = "none";
-  }
-  return newRace;
-}
-
-
-
 //UI Logic
-function displayRace(race){
-
-  $("#displayRace").text(`name: ${race.name}, speed: ${race.speed}, size: ${race.size}, subrace: ${race.subrace} languages: ${race.languages}`);
-  displayBonuses(race);
+function displayRace(character){
+ // let languages = character.race.getLanguages();
+  $("#displayRace").text(`Race: ${character.race.name}, Speed: ${character.race.speed}, Size: ${character.race.size}, Languages: ${languages}`);
 }
 
-function displayClass(charClass){
-  $("#displayClass").text(`class: ${charClass.name}, hit die: ${charClass.hitDie}, saving throws: ${charClass.savingThrows[0].name}, ${charClass.savingThrows[1].name}`);
+function displayClass(character){
+  $("#displayClass").text(`Class: ${character.characterClass.name}, Hit die: ${character.characterClass.hitDie}, Saving throws: ${character.characterClass.savingThrows[0].name}, ${character.characterClass.savingThrows[1].name}`);
 }
 
-function displayBonuses(race){
-  $("#displayAbilityBonus").text(`STR: ${race.bonuses.get("str")} DEX: ${race.bonuses.get("dex")}  CON: ${race.bonuses.get("con")}  INT:${race.bonuses.get("int")}  WIS:${race.bonuses.get("wis")}  CHA: ${race.bonuses.get("cha")} `);
+function displayBonuses(character){
+  $("#displayAbilityBonus").text(`STR: ${character.race.bonuses.get("str")} DEX: ${character.race.bonuses.get("dex")}  CON: ${character.race.bonuses.get("con")}  INT:${character.race.bonuses.get("int")}  WIS:${character.race.bonuses.get("wis")}  CHA: ${character.race.bonuses.get("cha")} `);
 }
 
 function displayErrors(error) {
@@ -76,26 +53,31 @@ $(document).ready(function(){
     event.preventDefault();
     // Create Character
     let character = new Character();
+    // Get Player Name, Character Name, & Alignment
+    let playerName = $("#playerName").val();
+    let characterName = $("#charName").val();
+    let alignment = $("#charAlignment").find(":selected").val();
+    character.addPlayerName(playerName);
+    character.addCharacterName(characterName);
+    character.addAlignment(alignment);
     // Get Ability Scores
-    let abilityScores = {};
-    abilityScores.str = parseInt($("#charStrength").find(":selected").val());
-    abilityScores.dex = parseInt($("#charDexterity").find(":selected").val());
-    abilityScores.con = parseInt($("#charConstitution").find(":selected").val());
-    abilityScores.int = parseInt($("#charIntelligence").find(":selected").val());
-    abilityScores.wis = parseInt($("#charWisdom").find(":selected").val());
-    abilityScores.cha = parseInt($("#charCharisma").find(":selected").val());
-    character.addAbilityScores(abilityScores);
+    character.abilityScores.str += parseInt($("#charStrength").find(":selected").val());
+    character.abilityScores.dex += parseInt($("#charDexterity").find(":selected").val());
+    character.abilityScores.con += parseInt($("#charConstitution").find(":selected").val());
+    character.abilityScores.int += parseInt($("#charIntelligence").find(":selected").val());
+    character.abilityScores.wis += parseInt($("#charWisdom").find(":selected").val());
+    character.abilityScores.cha += parseInt($("#charCharisma").find(":selected").val());
+    // Get Race and Class
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
-    let newClass = new CharClass();
-    let newRace = new Race();
     DndService.getService("classes", charClass)
       .then(function(response){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        newClass = makeClass(response);
-        displayClass(newClass);
+        let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
+        character.addCharacterClass(newClass);
+        displayClass(character);
       })
       .catch(function(error) {
         displayErrors(error.message);
