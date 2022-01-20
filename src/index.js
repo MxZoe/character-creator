@@ -24,6 +24,21 @@ function displayBonuses(character){
 function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
+function displayScore(currentCharacter){
+  $("#strNum").text(currentCharacter.abilities.get('str'));
+  $("#dexNum").text(currentCharacter.abilities.get('dex'));
+  $("#conNum").text(currentCharacter.abilities.get('con'));
+  $("#intNum").text(currentCharacter.abilities.get('int'));
+  $("#wisNum").text(currentCharacter.abilities.get('wis'));
+  $("#chaNum").text(currentCharacter.abilities.get('cha'));
+  $("#strBonus").text(currentCharacter.race.bonuses.get('str'));
+  $("#dexBonus").tex(currentCharacter.race.bonuses.get('dex'));
+  $("#conBonus").text(currentCharacter.race.bonuses.get('con'));
+  $("#intBonus").text(currentCharacter.race.bonuses.get('int'));
+  $("#wisBonus").text(currentCharacter.race.bonuses.get('wis'));
+  $("#chaBonus").text(currentCharacter.race.bonuses.get('cha'));
+  $("#pointsRemaining").text(currentCharacter.pointBuy);
+}
 
 function disableAbilityScoreOption(option) {
   switch ($(`${option}`).find(":selected").val()) {
@@ -47,20 +62,92 @@ function disableAbilityScoreOption(option) {
     break;
   }
 }
+function attachIncreaseListeners(currentCharacter){
+  $("#strUp").on("click", function(){
+    currentCharacter.increaseScore('str');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#dexUp").on("click", function(){
+    currentCharacter.increaseScore('dex');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#conUp").on("click", function(){
+    currentCharacter.increaseScore('con');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#intUp").on("click", function(){
+    currentCharacter.increaseScore('int');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#wisUp").on("click", function(){
+    currentCharacter.increaseScore('wis');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#chaUp").on("click", function(){
+    currentCharacter.increaseScore('cha');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+}
+
+function attachDecreaseListeners(currentCharacter){
+  $("#strDown").on("click", function(){
+    currentCharacter.decreaseScore('str');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#dexDown").on("click", function(){
+    currentCharacter.decreaseScore('dex');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#conDown").on("click", function(){
+    currentCharacter.decreaseScore('con');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#intDown").on("click", function(){
+    currentCharacter.decreaseScore('int');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#wisDown").on("click", function(){
+    currentCharacter.decreaseScore('wis');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+  $("#chaDown").on("click", function(){
+    currentCharacter.decreaseScore('cha');
+    displayScore(currentCharacter);
+    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+  });
+}
 
 $(document).ready(function(){
+  let character = new Character();
+
+  attachIncreaseListeners(character);
+  attachDecreaseListeners(character);
   $("#standardButton").click(function(){
     $("#standardArrayRadioContainer").show();
     $("#pointBuyContainer").hide();
+    character.resetAbilityScores();
   });
   $("#pointButton").click(function(){
     $("#pointBuyContainer").show();
     $("#standardArrayRadioContainer").hide();
+    character.setPointBuyStart();
+    displayScore(character);
   });
   $("#formOne").submit(function(){
     event.preventDefault();
     // Create Character
-    let character = new Character();
+    
     // Get Player Name, Character Name, & Alignment
     let playerName = $("#playerName").val();
     let characterName = $("#charName").val();

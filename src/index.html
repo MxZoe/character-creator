@@ -73,6 +73,11 @@
           </div>
         </div>
       </div>
+      <!--buttons for ability score methods-->
+      <h4>Choose how you want to generate your ability score:</h4>
+      <button type="click" id="standardButton">Standard Array</button>
+      <button type="click" id="pointButton">Point Buy</button> 
+      <button type="click" id="rollButton">Roll 4d6</button> 
       <!-- Standard Array Radio Button -->
       <div id="standardArrayRadioContainer">
         <div class="row g-3">
@@ -340,6 +345,7 @@
       </div>
       <!--Point Buy-->
       <div id="pointBuyContainer">
+        <h4>Points remaining: <span id="pointsRemaining"></span></h4>
         <div class="row" id="increaseButtons">
           <div class="col-sm-2">
             <button type='click' class="btn btn-primary" id="strUp">+</button>
@@ -449,11 +455,7 @@
           </div>
         </div>
       </div>
-      <!--buttons for ability score methods-->
-        <h4>Choose how you want to generate your ability score:</h4>
-        <button type="click" id="standardButton">Standard Array</button>
-        <button type="click" id="pointButton">Point Buy</button> 
-        <button type="click" id="rollButton">Roll 4d6</button>         
+            
         <div class="d-grid gap-2">
           <button type="button" class="btn btn-danger" id="resetAbilityScores">Reset ability scores</button>
         </div>
