@@ -25,16 +25,15 @@ export default class Race {
   }
   
   getSubBonuses(response){
-      this.bonuses.set(response.ability_bonuses[0].ability_score.index, response.ability_bonuses[0].bonus);
+    this.bonuses.set(response.ability_bonuses[0].ability_score.index, response.ability_bonuses[0].bonus);
   }
 
   getLanguages(response){
-    
-      let languages = response.languages;
-      let languageString = "";
-      for(let i=0;i<languages.length;i++){
-        languageString = languageString + ", " + languages[i].name;
-      }
-      this.languages = languageString;
+    let languages = response.languages;
+    let languageString = "";
+    for(let i=0;i<languages.length;i++){
+      languageString = languageString + ", " + languages[i].name;
+    }
+    this.languages = languageString;
   }
 }

@@ -9,7 +9,7 @@ import Race from "./js/race";
 
 //UI Logic
 function displayRace(character){
- // let languages = character.race.getLanguages();
+  // let languages = character.race.getLanguages();
   $("#displayRace").text(`Race: ${character.race.name}, Speed: ${character.race.speed}, Size: ${character.race.size}, Languages: ${character.race.languages}`);
 }
 
