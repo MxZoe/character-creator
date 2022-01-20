@@ -55,6 +55,14 @@ function displayAbilityScores(character) {
   });
 }
 
+function displayCharacterHeader(character) {
+  $(`#charNameDisplay`).text(character.characterName);
+  $(`#playerNameDisplay`).text(character.playerName);
+  $(`#raceDisplay`).text(character.race.name);
+  $(`#classDisplay`).text(character.characterClass.name);
+  $(`#alignmentDisplay`).text(character.alignment);
+}
+
 $(document).ready(function(){
   $("#formOne").submit(function(){
     event.preventDefault();
@@ -86,6 +94,7 @@ $(document).ready(function(){
         let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
         character.addCharacterClass(newClass);
         displayClass(character);
+        displayCharacterHeader(character);
       })
       .catch(function(error) {
         displayErrors(error.message);
