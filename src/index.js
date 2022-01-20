@@ -9,7 +9,7 @@ import Race from "./js/race";
 
 //UI Logic
 function displayRace(character){
- // let languages = character.race.getLanguages();
+  // let languages = character.race.getLanguages();
   $("#displayRace").text(`Race: ${character.race.name}, Speed: ${character.race.speed}, Size: ${character.race.size}, Languages: ${character.race.languages}`);
 }
 
@@ -41,7 +41,8 @@ function displayScore(currentCharacter){
 }
 
 function disableAbilityScoreOption(option) {
-  switch ($(`${option}`).find(":selected").val()) {
+  $(`${option}`).prop("disabled", true);
+  switch ($(`${option}:checked`).val()) {
   case "15":
     $(".option15").prop("disabled", true);
     break;
@@ -128,6 +129,24 @@ function attachDecreaseListeners(currentCharacter){
   });
 }
 
+function displayAbilityScores(character) {
+  Object.keys(character.abilityScores).forEach((abilityScore) => {
+    $(`#${abilityScore}AbilityScore`).text(character.abilityScores[abilityScore]);
+  });
+}
+
+function displayCharacterHeader(character) {
+  $(`#charNameDisplay`).text(character.characterName);
+  $(`#playerNameDisplay`).text(character.playerName);
+  $(`#raceDisplay`).text(character.race.name);
+  $(`#classDisplay`).text(character.characterClass.name);
+  $(`#alignmentDisplay`).text(character.alignment);
+}
+
+function displayCharacterStats(character) {
+  $(`#speedDisplay`).text(character.race.speed);
+}
+
 $(document).ready(function(){
   let character = new Character();
 
@@ -152,16 +171,17 @@ $(document).ready(function(){
     let playerName = $("#playerName").val();
     let characterName = $("#charName").val();
     let alignment = $("#charAlignment").find(":selected").val();
+    const subraceNames = ["hill-dwarf", "rock-gnome", "high-elf", "lightfoot-halfling"];
     character.addPlayerName(playerName);
     character.addCharacterName(characterName);
     character.addAlignment(alignment);
     // Get Ability Scores
-    character.abilityScores.str += parseInt($("#charStrength").find(":selected").val());
-    character.abilityScores.dex += parseInt($("#charDexterity").find(":selected").val());
-    character.abilityScores.con += parseInt($("#charConstitution").find(":selected").val());
-    character.abilityScores.int += parseInt($("#charIntelligence").find(":selected").val());
-    character.abilityScores.wis += parseInt($("#charWisdom").find(":selected").val());
-    character.abilityScores.cha += parseInt($("#charCharisma").find(":selected").val());
+    character.abilityScores.str += parseInt($(`input[name="str"]:checked`).val());
+    character.abilityScores.dex += parseInt($(`input[name="dex"]:checked`).val());
+    character.abilityScores.con += parseInt($(`input[name="con"]:checked`).val());
+    character.abilityScores.int += parseInt($(`input[name="int"]:checked`).val());
+    character.abilityScores.wis += parseInt($(`input[name="wis"]:checked`).val());
+    character.abilityScores.cha += parseInt($(`input[name="cha"]:checked`).val());
     // Get Race and Class
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
@@ -173,6 +193,7 @@ $(document).ready(function(){
         let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
         character.addCharacterClass(newClass);
         displayClass(character);
+        displayCharacterHeader(character);
       })
       .catch(function(error) {
         displayErrors(error.message);
@@ -182,20 +203,25 @@ $(document).ready(function(){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        console.log(response.subraces[0].index);
-        console.log(response.name);
-        let newRace = new Race(response.name,  response.speed, response.size, response.subraces[0].index);
+        let newRace = new Race(response.name,  response.speed, response.size, "");
         character.race = newRace;
         console.log(character.race);
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
-        return DndService.getService("subraces", newRace.subrace);
+        displayAbilityScores(character);
+        displayCharacterStats(character);
+        console.log(character);
+        if(subraceNames.includes(character.race.name)){
+          return DndService.getService("subraces", newRace.name);
+        } else{
+          displayRace(character);
+          displayBonuses(character);
+        }
       })
       .then((subraceResponse) => {
         if(subraceResponse instanceof Error) {
           throw Error (`DnD Api Error: ${subraceResponse.message}`);
         }
-
         character.race.getSubBonuses(subraceResponse, character.race.bonuses);
         displayRace(character);
         displayBonuses(character);
@@ -203,46 +229,34 @@ $(document).ready(function(){
       .catch(function(error) {
         displayErrors(error.message);
       });
-      // DndService.getService("subraces", newRace.subrace)
-      // .then(function(response){
-      //   if (response instanceof Error) {
-      //     throw Error(`DnD API error: ${response.message}`);
-      //   } 
-      //   displayRace(newRace);
-      // })
-      // .catch(function(error) {
-      //   displayErrors(error.message);
-      // });
-      
-      
-     
+
   });
   // Standard Array UI logic
-  $("select#charStrength").change(() => {
-    disableAbilityScoreOption(`#charStrength`);
+  $("#charStrength").change(() => {
+    disableAbilityScoreOption(`input[name="str"]`);
   });
-  $("select#charDexterity").change(() => {
-    disableAbilityScoreOption(`#charDexterity`);
+  $("#charDexterity").change(() => {
+    disableAbilityScoreOption(`input[name="dex"]`);
   });
-  $("select#charConstitution").change(() => {
-    disableAbilityScoreOption(`#charConstitution`);
+  $("#charConstitution").change(() => {
+    disableAbilityScoreOption(`input[name="con"]`);
   });
-  $("select#charIntelligence").change(() => {
-    disableAbilityScoreOption(`#charIntelligence`);
+  $("#charIntelligence").change(() => {
+    disableAbilityScoreOption(`input[name="int"]`);
   });
-  $("select#charWisdom").change(() => {
-    disableAbilityScoreOption(`#charWisdom`);
-  });
-  $("select#charCharisma").change(() => {
-    disableAbilityScoreOption(`#charCharisma`);
+  $("#charWisdom").change(() => {
+    disableAbilityScoreOption(`input[name="wis"]`);
+  });  
+  $("#charCharisma").change(() => {
+    disableAbilityScoreOption(`input[name="cha"]`);
   });
   $("#resetAbilityScores").click(() => {
-    $("#charStrength").prop("selectedIndex", 0);
-    $("#charDexterity").prop("selectedIndex", 0);
-    $("#charConstitution").prop("selectedIndex", 0);
-    $("#charIntelligence").prop("selectedIndex", 0);
-    $("#charWisdom").prop("selectedIndex", 0);
-    $("#charCharisma").prop("selectedIndex", 0);
+    $(`input[name="str"]`).prop("checked", false);
+    $(`input[name="dex"]`).prop("checked", false);
+    $(`input[name="con"]`).prop("checked", false);
+    $(`input[name="int"]`).prop("checked", false);
+    $(`input[name="wis"]`).prop("checked", false);
+    $(`input[name="cha"]`).prop("checked", false);
     $(".option15").prop("disabled", false);
     $(".option14").prop("disabled", false);
     $(".option13").prop("disabled", false);

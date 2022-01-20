@@ -62,11 +62,15 @@
             <select class="form-select" id="charRace">
               <option value="dragonborn">DragonBorn</option>
               <option value="dwarf">Dwarf</option>
+              <option value="hill-dwarf">Hill Dwarf</option>
               <option value="elf">Elf</option>
+              <option value="high-elf">High Elf</option>
               <option value="gnome">Gnome</option>
+              <option value="rock-gnome">Rock Gnome</option>
               <option value="half-elf">Half-elf</option>
               <option value="half-orc">Half-orc</option>
               <option value="halfling">Halfling</option>
+              <option value="lightfoot-halfling">Lightfoot Halfling</option>
               <option value="human">Human</option>
               <option value="tiefling">Tiefling</option>
             </select>
@@ -80,47 +84,51 @@
       <button type="click" id="rollButton">Roll 4d6</button> 
       <!-- Standard Array Radio Button -->
       <div id="standardArrayRadioContainer">
+<<<<<<< HEAD
         <div class="row g-3">
+=======
+        <div class="row">
+>>>>>>> 41b8efdeb9173c5300bdb65295184ac3b582d634
           <h4>Choose where your ability scores will start using the standard array:</h4>
           <p class="text-muted">The standard array is the following numbers: 15, 14, 13, 12, 10, and 8. Choose what ability scores get which numbers below. If you have any issues with reassigning scores just hit the red "Reset ability scores" button below and re-enter them.</p>
           <div class="col-4">
             <p>Strength</p>
           </div>
           <div class="col-8">
-            <div class="row">
+            <div class="row" id ="charStrength">
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" value="15" name="str" id="str-15">
+                  <input class="form-check-input option15" value="15" type="radio" name="str" id="str-15" checked>
                   <label class="form-check-label" for="str-15">15</label>
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="str" id="str-14">
+                  <input class="form-check-input option14" value="14" type="radio" name="str" id="str-14">
                   <label class="form-check-label" for="str-14">14</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="str" id="str-13">
+                  <input class="form-check-input option13" value="13" type="radio" name="str" id="str-13">
                   <label class="form-check-label" for="str-13">13</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="str" id="str-12">
+                  <input class="form-check-input option12" value="12" type="radio" name="str" id="str-12">
                   <label class="form-check-label" for="str-12">12</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="str" id="str-10">
+                  <input class="form-check-input option10" value="10" type="radio" name="str" id="str-10">
                   <label class="form-check-label" for="str-10">10</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="str" id="str-8">
+                  <input class="form-check-input option8" value="8" type="radio" name="str" id="str-8">
                   <label class="form-check-label" for="str-8">8</label> 
                 </div>
               </div>
@@ -130,40 +138,40 @@
             <p>Dexterity</p>
           </div>
           <div class="col-8">
-            <div class="row">
+            <div class="row" id ="charDexterity">
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" value="15" name="dex" id="dex-15">
+                  <input class="form-check-input option15" value="15" type="radio" name="dex" id="dex-15">
                   <label class="form-check-label" for="dex-15">15</label>
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="dex" id="dex-14">
+                  <input class="form-check-input option14" value="14" type="radio" name="dex" id="dex-14" checked>
                   <label class="form-check-label" for="dex-14">14</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="dex" id="dex-13">
+                  <input class="form-check-input option13" value="13" type="radio" name="dex" id="dex-13">
                   <label class="form-check-label" for="dex-13">13</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="dex" id="dex-12">
+                  <input class="form-check-input option12" value="12" type="radio" name="dex" id="dex-12">
                   <label class="form-check-label" for="dex-12">12</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="dex" id="dex-10">
+                  <input class="form-check-input option10" value="10" type="radio" name="dex" id="dex-10">
                   <label class="form-check-label" for="dex-10">10</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="dex" id="dex-8">
+                  <input class="form-check-input option8" value="8" type="radio" name="dex" id="dex-8">
                   <label class="form-check-label" for="dex-8">8</label> 
                 </div>
               </div>
@@ -173,40 +181,40 @@
             <p>Constitution</p>
           </div>
           <div class="col-8">
-            <div class="row">
+            <div class="row" id ="charConstitution">
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" value="15" name="con" id="con-15">
+                  <input class="form-check-input option15" value="15" type="radio" name="con" id="con-15">
                   <label class="form-check-label" for="con-15">15</label>
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="con" id="con-14">
+                  <input class="form-check-input option14" value="14" type="radio" name="con" id="con-14">
                   <label class="form-check-label" for="con-14">14</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="con" id="con-13">
+                  <input class="form-check-input option13" value="13" type="radio" name="con" id="con-13" checked>
                   <label class="form-check-label" for="con-13">13</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="con" id="con-12">
+                  <input class="form-check-input option12" value="12" type="radio" name="con" id="con-12">
                   <label class="form-check-label" for="con-12">12</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="con" id="dex-10">
+                  <input class="form-check-input option10" value="10" type="radio" name="con" id="dex-10">
                   <label class="form-check-label" for="con-10">10</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="con" id="con-8">
+                  <input class="form-check-input option8" value="8" type="radio" name="con" id="con-8">
                   <label class="form-check-label" for="con-8">8</label> 
                 </div>
               </div>
@@ -216,40 +224,40 @@
             <p>Intelligence</p>
           </div>
           <div class="col-8">
-            <div class="row">
+            <div class="row" id ="charIntelligence">
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" value="15" name="int" id="int-15">
+                  <input class="form-check-input option15" value="15" type="radio" name="int" id="int-15">
                   <label class="form-check-label" for="int-15">15</label>
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="int" id="int-14">
+                  <input class="form-check-input option14" value="14" type="radio" name="int" id="int-14">
                   <label class="form-check-label" for="int-14">14</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="int" id="int-13">
+                  <input class="form-check-input option13" value="13" type="radio" name="int" id="int-13">
                   <label class="form-check-label" for="int-13">13</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="int" id="int-12">
+                  <input class="form-check-input option12" value="12" type="radio" name="int" id="int-12" checked>
                   <label class="form-check-label" for="int-12">12</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="int" id="int-10">
+                  <input class="form-check-input option10" value="10" type="radio" name="int" id="int-10">
                   <label class="form-check-label" for="int-10">10</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="int" id="int-8">
+                  <input class="form-check-input option8" value="8" type="radio" name="int" id="int-8">
                   <label class="form-check-label" for="int-8">8</label> 
                 </div>
               </div>
@@ -259,40 +267,40 @@
             <p>Wisdom</p>
           </div>
           <div class="col-8">
-            <div class="row">
+            <div class="row" id ="charWisdom">
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" value="15" name="wis" id="wis-15">
+                  <input class="form-check-input option15" value="15" type="radio" name="wis" id="wis-15">
                   <label class="form-check-label" for="wis-15">15</label>
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="wis" id="wis-14">
+                  <input class="form-check-input option14" value="14" type="radio" name="wis" id="wis-14">
                   <label class="form-check-label" for="wis-14">14</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="wis" id="wis-13">
+                  <input class="form-check-input option13" value="13" type="radio" name="wis" id="wis-13">
                   <label class="form-check-label" for="wis-13">13</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="wis" id="wis-12">
+                  <input class="form-check-input option12" value="12" type="radio" name="wis" id="wis-12">
                   <label class="form-check-label" for="wis-12">12</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="wis" id="wis-10">
+                  <input class="form-check-input option10" value="10" type="radio" name="wis" id="wis-10" checked>
                   <label class="form-check-label" for="wis-10">10</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="wis" id="wis-8">
+                  <input class="form-check-input option8" value="8" type="radio" name="wis" id="wis-8">
                   <label class="form-check-label" for="wis-8">8</label> 
                 </div>
               </div>
@@ -302,46 +310,47 @@
             <p>Charisma</p>
           </div>
           <div class="col-8">
-            <div class="row">
+            <div class="row" id ="charCharisma">
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" value="15" name="cha" id="cha-15">
+                  <input class="form-check-input option15" value="15" type="radio" name="cha" id="cha-15">
                   <label class="form-check-label" for="cha-15">15</label>
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="cha" id="cha-14">
+                  <input class="form-check-input option14" value="14" type="radio" name="cha" id="cha-14">
                   <label class="form-check-label" for="cha-14">14</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="cha" id="cha-13">
+                  <input class="form-check-input option13" value="13" type="radio" name="cha" id="cha-13">
                   <label class="form-check-label" for="cha-13">13</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="cha" id="cha-12">
+                  <input class="form-check-input option12" value="12" type="radio" name="cha" id="cha-12">
                   <label class="form-check-label" for="cha-12">12</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="cha" id="cha-10">
+                  <input class="form-check-input option10" value="10" type="radio" name="cha" id="cha-10">
                   <label class="form-check-label" for="cha-10">10</label> 
                 </div>
               </div>
               <div class="col-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="cha" id="cha-8">
+                  <input class="form-check-input option8" value="8" type="radio" name="cha" id="cha-8" checked>
                   <label class="form-check-label" for="cha-8">8</label> 
                 </div>
               </div>
             </div>
           </div>
         </div>
+<<<<<<< HEAD
       </div>
       <!--Point Buy-->
       <div id="pointBuyContainer">
@@ -456,21 +465,133 @@
         </div>
       </div>
             
+=======
+>>>>>>> 41b8efdeb9173c5300bdb65295184ac3b582d634
         <div class="d-grid gap-2">
           <button type="button" class="btn btn-danger" id="resetAbilityScores">Reset ability scores</button>
         </div>
-      </div>
-      <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-success" id="submit">Create Character!</button>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-success" id="submit">Create Character!</button>
+        </div>
       </div>
     </form>
     <!--Display character information-->
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title"></h5>
-        <div id="displayRace"></div>
-        <div id="displayClass"></div>
-        <div id="displayAbilityBonus"></div>
+        <h5 class="card-title">Character Sheet</h5>
+        <!--Names, Race, Class & Alignment-->
+        <div class="row">
+          <div class="col-md-6">
+            <p class="text-muted">Character Name:</p>
+            <h3><span id="charNameDisplay"></span></h3>
+          </div>
+          <div class="col-md-3">
+            <p class="text-muted">Player Name:</p>
+            <p><span id="playerNameDisplay"></span></p>
+            <p class="text-muted">Race:</p>
+            <p><span id="raceDisplay"></span></p>
+          </div>
+          <div class="col-md-3">
+            <p class="text-muted">Class:</p>
+            <p><span id="classDisplay"></span></p>
+            <p class="text-muted">Alignment:</p>
+            <p><span id="alignmentDisplay"></span></p>
+          </div>
+        </div>
+        <!--Main character sheet content row-->
+        <div class="row">
+          <div class="col-md-3" id="abilityScoreTable">
+            <table class="table">
+                <tr>
+                  <th>Strength</th>
+                </tr>
+                <tr>
+                  <td><span id="strAbilityScore"></span></td>
+                </tr>
+                <tr>
+                  <td><span id="strAbilityModifier" class="text-muted"></span></td>
+                </tr>
+                <tr>
+                  <th>Dexterity</th>
+                </tr>
+                <tr>
+                  <td><span id="dexAbilityScore"></span></td>
+                </tr>
+                <tr>
+                  <td><span id="dexAbilityModifier" class="text-muted"></span></td>
+                </tr>
+                <tr>
+                  <th>Constitution</th>
+                </tr>
+                <tr>
+                  <td><span id="conAbilityScore"></span></td>
+                </tr>
+                <tr>
+                  <td><span id="conAbilityModifier" class="text-muted"></span></td>
+                </tr>
+                <tr>
+                  <th>Intelligence</th>
+                </tr>
+                <tr>
+                  <td><span id="intAbilityScore"></span></td>
+                </tr>
+                <tr>
+                  <td><span id="intAbilityModifier" class="text-muted"></span></td>
+                </tr>
+              <tr>
+                  <th>Wisdom</th>
+                </tr>
+                <tr>
+                  <td><span id="wisAbilityScore"></span></td>
+                </tr>
+                <tr>
+                  <td><span id="wisAbilityModifier" class="text-muted"></span></td>
+                </tr>
+              <tr>
+                  <th>Charisma</th>
+                </tr>
+                <tr>
+                  <td><span id="chaAbilityScore"></span></td>
+                </tr>
+                <tr>
+                  <td><span id="chaAbilityModifier" class="text-muted"></span></td>
+                </tr>
+            </table>
+          </div>
+          <!--Character stats (AC, Initiative, Speed, MaxHP, Hit Dice, and DeathSaves)-->
+          <div class="col-md-5" id="characterStats">
+            <div class="row">
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Armor Class:</p>
+                <p><span id="armorClassDisplay"></span></p>
+              </div>
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Initiative:</p>
+                <p><span id="initiativeDisplay"></span></p>
+              </div>
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Speed:</p>
+                <p><span id="speedDisplay"></span></p>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <p class="text-muted">Max Hit Points:</p>
+                <p><span id="maxHitPointsDisplay"></span></p>
+              </div>
+              <div>
+                <p class="text-muted">Total Hit Dice</p>
+                <p><span id="totalHitDiceDisplay"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+          <div id="displayRace"></div>
+          <div id="displayClass"></div>
+          <div id="displayAbilityBonus"></div>
+        </div>
         <div class="show-errors"></div>
       </div>
     </div>
