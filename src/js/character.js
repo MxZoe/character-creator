@@ -16,6 +16,7 @@ export default class Character {
     };
     this.armorClass = 0;
     this.equipment = {};
+    this.pointBuy = 27;
   }
   // Adding methods for constructor
   addCharacterName(characterName) {
@@ -44,16 +45,37 @@ export default class Character {
   }
   addRacialBonuses() {
     this.abilityScores.str += this.race.bonuses.get("str");
-    this.abilityScores.str += this.race.bonuses.get("dex");
-    this.abilityScores.str += this.race.bonuses.get("con");
-    this.abilityScores.str += this.race.bonuses.get("int");
-    this.abilityScores.str += this.race.bonuses.get("wis");
-    this.abilityScores.str += this.race.bonuses.get("cha");
+    this.abilityScores.dex += this.race.bonuses.get("dex");
+    this.abilityScores.con += this.race.bonuses.get("con");
+    this.abilityScores.int += this.race.bonuses.get("int");
+    this.abilityScores.wis += this.race.bonuses.get("wis");
+    this.abilityScores.cha += this.race.bonuses.get("cha");
   }
+
+  setPointBuyStart(){
+    this.abilityScores.str = 8;
+    this.abilityScores.dex = 8;
+    this.abilityScores.con = 8;
+    this.abilityScores.int = 8;
+    this.abilityScores.wis = 8;
+    this.abilityScores.cha = 8;
+  }
+
+  resetAbilityScores(){
+    this.abilityScores.str = 0;
+    this.abilityScores.dex = 0;
+    this.abilityScores.con = 0;
+    this.abilityScores.int = 0;
+    this.abilityScores.wis = 0;
+    this.abilityScores.cha = 0;
+    
+  }
+
   // Shortcut Methods 
   characterStepOne(characterName, playerName, alignment) {
     this.addCharacterName(characterName);
     this.addPlayerName(playerName);
     this.addAlignment(alignment);
   }
+
 }

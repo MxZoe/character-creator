@@ -75,7 +75,9 @@
       </div>
       <!-- Standard Array Radio Button -->
       <div id="standardArrayRadioContainer">
-        <div class="row">
+        <div class="row g-3">
+          <h4>Choose where your ability scores will start using the standard array:</h4>
+          <p class="text-muted">The standard array is the following numbers: 15, 14, 13, 12, 10, and 8. Choose what ability scores get which numbers below. If you have any issues with reassigning scores just hit the red "Reset ability scores" button below and re-enter them.</p>
           <div class="col-4">
             <p>Strength</p>
           </div>
@@ -336,84 +338,122 @@
           </div>
         </div>
       </div>
-      <!--Standard Array Section-->
-      <div id="standardArraySection">
-        <div class="row g-3">
-          <h4>Choose where your ability scores will start using the standard array:</h4>
-          <p class="text-muted">The standard array is the following numbers: 15, 14, 13, 12, 10, and 8. Choose what ability scores get which numbers below. If you have any issues with reassigning scores just hit the red "Reset ability scores" button below and re-enter them.</p>
-          <div class="mb-3 col-md-2">
-            <label for="charStrength">Strength</label>
-            <select class="form-select" id="charStrength" required>
-              <option value="">Select option here</option>
-              <option value="15" class="option15" default>15</option>
-              <option value="14" class="option14">14</option>
-              <option value="13" class="option13">13</option>
-              <option value="12" class="option12">12</option>
-              <option value="10" class="option10">10</option>
-              <option value="8" class="option8">8</option>
-            </select>
+      <!--Point Buy-->
+      <div id="pointBuyContainer">
+        <div class="row" id="increaseButtons">
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="strUp">+</button>
           </div>
-          <div class="mb-3 col-md-2">
-            <label for="charDexterity">Dexterity</label>
-            <select class="form-select" id="charDexterity" required>
-              <option value="">Select option here</option>
-              <option value="15" class="option15">15</option>
-              <option value="14" class="option14" selected>14</option>
-              <option value="13" class="option13">13</option>
-              <option value="12" class="option12">12</option>
-              <option value="10" class="option10">10</option>
-              <option value="8" class="option8">8</option>
-            </select>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="dexUp">+</button>
           </div>
-          <div class="mb-3 col-md-2">
-            <label for="charConstitution">Constitution</label>
-            <select class="form-select" id="charConstitution" required>
-              <option value="">Select option here</option>
-              <option value="15" class="option15">15</option>
-              <option value="14" class="option14">14</option>
-              <option value="13" class="option13" selected>13</option>
-              <option value="12" class="option12">12</option>
-              <option value="10" class="option10">10</option>
-              <option value="8" class="option8">8</option>
-            </select>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="conUp">+</button>
           </div>
-          <div class="mb-3 col-md-2">
-            <label for="charIntelligence">Intelligence</label>
-            <select class="form-select" id="charIntelligence" required>
-              <option value="">Select option here</option>
-              <option value="15" class="option15">15</option>
-              <option value="14" class="option14">14</option>
-              <option value="13" class="option13">13</option>
-              <option value="12" class="option12" selected>12</option>
-              <option value="10" class="option10">10</option>
-              <option value="8" class="option8">8</option>
-            </select>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="intUp">+</button>
           </div>
-          <div class="mb-3 col-md-2">
-            <label for="charWisdom">Wisdom</label>
-            <select class="form-select" id="charWisdom" required>
-              <option value="">Select option here</option>
-              <option value="15" class="option15">15</option>
-              <option value="14" class="option14">14</option>
-              <option value="13" class="option13">13</option>
-              <option value="12" class="option12">12</option>
-              <option value="10" class="option10" selected>10</option>
-              <option value="8" class="option8">8</option>
-            </select>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="wisUp">+</button>
           </div>
-          <div class="mb-3 col-md-2">
-            <label for="charCharisma">Charisma</label>
-            <select class="form-select" id="charCharisma" required>
-              <option value="">Select option here</option>
-              <option value="15" class="option15">15</option>
-              <option value="14" class="option14">14</option>
-              <option value="13" class="option13">13</option>
-              <option value="12" class="option12">12</option>
-              <option value="10" class="option10">10</option>
-              <option value="8" class="option8" selected>8</option>
-            </select>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="chaUp">+</button>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="row">
+              <p>Str</p>
+            </div>
+            <div class="row">
+              <p id="strNum"></p>
+            </div>
+            <div class="row">
+              <p>+<span id="strBonus">0</span></p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="row">
+              <p>Dex</p>
+            </div>
+            <div class="row">
+              <p id="dexNum"></p>
+            </div>
+            <div class="row">
+              <p>+<span id="dexBonus">0</span></p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="row">
+              <p>Con</p>
+            </div>
+            <div class="row">
+              <p id="conNum"></p>
+            </div>
+            <div class="row">
+              <p>+<span id="conBonus">0</span></p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="row">
+              <p>Int</p>
+            </div>
+            <div class="row">
+              <p id="intNum"></p>
+            </div>
+            <div class="row">
+              <p>+<span id="intBonus">0</span></p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="row">
+              <p>Wis</p>
+            </div>
+            <div class="row">
+              <p id="wisNum"></p>
+            </div>
+            <div class="row">
+              <p>+<span id="wisBonus">0</span></p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="row">
+              <p>Cha</p>
+            </div>
+            <div class="row">
+              <p id="chaNum"></p>
+            </div>
+            <div class="row">
+              <p>+<span id="chaBonus">0</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="decreaseButtons">
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="strDown">-</button>
+          </div>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="dexDown">-</button>
+          </div>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="conDown">-</button>
+          </div>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="intDown">-</button>
+          </div>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="wisDown">-</button>
+          </div>
+          <div class="col-sm-2">
+            <button type='click' class="btn btn-primary" id="chaDown">-</button>
+          </div>
+        </div>
+      </div>
+      <!--buttons for ability score methods-->
+        <h4>Choose how you want to generate your ability score:</h4>
+        <button type="click" id="standardButton">Standard Array</button>
+        <button type="click" id="pointButton">Point Buy</button> 
+        <button type="click" id="rollButton">Roll 4d6</button>         
         <div class="d-grid gap-2">
           <button type="button" class="btn btn-danger" id="resetAbilityScores">Reset ability scores</button>
         </div>

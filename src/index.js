@@ -49,6 +49,14 @@ function disableAbilityScoreOption(option) {
 }
 
 $(document).ready(function(){
+  $("#standardButton").click(function(){
+    $("#standardArrayRadioContainer").show();
+    $("#pointBuyContainer").hide();
+  });
+  $("#pointButton").click(function(){
+    $("#pointBuyContainer").show();
+    $("#standardArrayRadioContainer").hide();
+  });
   $("#formOne").submit(function(){
     event.preventDefault();
     // Create Character
