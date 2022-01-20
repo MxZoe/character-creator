@@ -26,7 +26,8 @@ function displayErrors(error) {
 }
 
 function disableAbilityScoreOption(option) {
-  switch ($(`${option}`).find(":selected").val()) {
+  $(`${option}`).prop("disabled", true);
+  switch ($(`${option}:checked`).val()) {
   case "15":
     $(".option15").prop("disabled", true);
     break;
@@ -61,12 +62,12 @@ $(document).ready(function(){
     character.addCharacterName(characterName);
     character.addAlignment(alignment);
     // Get Ability Scores
-    character.abilityScores.str += parseInt($("#charStrength").find(":selected").val());
-    character.abilityScores.dex += parseInt($("#charDexterity").find(":selected").val());
-    character.abilityScores.con += parseInt($("#charConstitution").find(":selected").val());
-    character.abilityScores.int += parseInt($("#charIntelligence").find(":selected").val());
-    character.abilityScores.wis += parseInt($("#charWisdom").find(":selected").val());
-    character.abilityScores.cha += parseInt($("#charCharisma").find(":selected").val());
+    character.abilityScores.str += parseInt($(`input[name="str"]:checked`).val());
+    character.abilityScores.dex += parseInt($(`input[name="dex"]:checked`).val());
+    character.abilityScores.con += parseInt($(`input[name="con"]:checked`).val());
+    character.abilityScores.int += parseInt($(`input[name="int"]:checked`).val());
+    character.abilityScores.wis += parseInt($(`input[name="wis"]:checked`).val());
+    character.abilityScores.cha += parseInt($(`input[name="cha"]:checked`).val());
     // Get Race and Class
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
@@ -118,31 +119,31 @@ $(document).ready(function(){
      
   });
   // Standard Array UI logic
-  $("select#charStrength").change(() => {
-    disableAbilityScoreOption(`#charStrength`);
+  $("#charStrength").change(() => {
+    disableAbilityScoreOption(`input[name="str"]`);
   });
-  $("select#charDexterity").change(() => {
-    disableAbilityScoreOption(`#charDexterity`);
+  $("#charDexterity").change(() => {
+    disableAbilityScoreOption(`input[name="dex"]`);
   });
-  $("select#charConstitution").change(() => {
-    disableAbilityScoreOption(`#charConstitution`);
+  $("#charConstitution").change(() => {
+    disableAbilityScoreOption(`input[name="con"]`);
   });
-  $("select#charIntelligence").change(() => {
-    disableAbilityScoreOption(`#charIntelligence`);
+  $("#charIntelligence").change(() => {
+    disableAbilityScoreOption(`input[name="int"]`);
   });
-  $("select#charWisdom").change(() => {
-    disableAbilityScoreOption(`#charWisdom`);
-  });
-  $("select#charCharisma").change(() => {
-    disableAbilityScoreOption(`#charCharisma`);
+  $("#charWisdom").change(() => {
+    disableAbilityScoreOption(`input[name="wis"]`);
+  });  
+  $("#charCharisma").change(() => {
+    disableAbilityScoreOption(`input[name="cha"]`);
   });
   $("#resetAbilityScores").click(() => {
-    $("#charStrength").prop("selectedIndex", 0);
-    $("#charDexterity").prop("selectedIndex", 0);
-    $("#charConstitution").prop("selectedIndex", 0);
-    $("#charIntelligence").prop("selectedIndex", 0);
-    $("#charWisdom").prop("selectedIndex", 0);
-    $("#charCharisma").prop("selectedIndex", 0);
+    $(`input[name="str"]`).prop("checked", false);
+    $(`input[name="dex"]`).prop("checked", false);
+    $(`input[name="con"]`).prop("checked", false);
+    $(`input[name="int"]`).prop("checked", false);
+    $(`input[name="wis"]`).prop("checked", false);
+    $(`input[name="cha"]`).prop("checked", false);
     $(".option15").prop("disabled", false);
     $(".option14").prop("disabled", false);
     $(".option13").prop("disabled", false);
