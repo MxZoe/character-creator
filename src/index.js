@@ -63,6 +63,10 @@ function displayCharacterHeader(character) {
   $(`#alignmentDisplay`).text(character.alignment);
 }
 
+function displayCharacterStats(character) {
+  $(`#speedDisplay`).text(character.race.speed);
+}
+
 $(document).ready(function(){
   $("#formOne").submit(function(){
     event.preventDefault();
@@ -110,6 +114,7 @@ $(document).ready(function(){
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
         displayAbilityScores(character);
+        displayCharacterStats(character);
         console.log(character);
         if(subraceNames.includes(character.race.name)){
           return DndService.getService("subraces", newRace.name);
