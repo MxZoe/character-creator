@@ -49,6 +49,12 @@ function disableAbilityScoreOption(option) {
   }
 }
 
+function displayAbilityScores(character) {
+  Object.keys(character.abilityScores).forEach((abilityScore) => {
+    $(`#${abilityScore}AbilityScore`).text(character.abilityScores[abilityScore]);
+  });
+}
+
 $(document).ready(function(){
   $("#formOne").submit(function(){
     event.preventDefault();
@@ -90,24 +96,23 @@ $(document).ready(function(){
           throw Error(`DnD API error: ${response.message}`);
         }
         let newRace = new Race(response.name,  response.speed, response.size, "");
-       
         character.race = newRace;
         console.log(character.race);
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
+        displayAbilityScores(character);
+        console.log(character);
         if(subraceNames.includes(character.race.name)){
           return DndService.getService("subraces", newRace.name);
         } else{
           displayRace(character);
           displayBonuses(character);
         }
-        
       })
       .then((subraceResponse) => {
         if(subraceResponse instanceof Error) {
           throw Error (`DnD Api Error: ${subraceResponse.message}`);
         }
-
         character.race.getSubBonuses(subraceResponse, character.race.bonuses);
         displayRace(character);
         displayBonuses(character);
@@ -115,10 +120,7 @@ $(document).ready(function(){
       .catch(function(error) {
         displayErrors(error.message);
       });
-    
-      
-       
-     
+
   });
   // Standard Array UI logic
   $("#charStrength").change(() => {
