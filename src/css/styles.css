@@ -1,3 +1,6 @@
 #abilityScoresTable, table {
   text-align: center;
 }
+.characterStatsDisplayBox {
+  border: 1px dashed black;
+}
