@@ -58,6 +58,7 @@ $(document).ready(function(){
     let playerName = $("#playerName").val();
     let characterName = $("#charName").val();
     let alignment = $("#charAlignment").find(":selected").val();
+    const subraceNames = ["hill-dwarf", "rock-gnome", "high-elf", "lightfoot-halfling"];
     character.addPlayerName(playerName);
     character.addCharacterName(characterName);
     character.addAlignment(alignment);
@@ -88,14 +89,19 @@ $(document).ready(function(){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        console.log(response.subraces[0].index);
-        console.log(response.name);
-        let newRace = new Race(response.name,  response.speed, response.size, response.subraces[0].index);
+        let newRace = new Race(response.name,  response.speed, response.size, "");
+       
         character.race = newRace;
         console.log(character.race);
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
-        return DndService.getService("subraces", newRace.subrace);
+        if(subraceNames.includes(character.race.name)){
+          return DndService.getService("subraces", newRace.name);
+        } else{
+          displayRace(character);
+          displayBonuses(character);
+        }
+        
       })
       .then((subraceResponse) => {
         if(subraceResponse instanceof Error) {
@@ -109,18 +115,9 @@ $(document).ready(function(){
       .catch(function(error) {
         displayErrors(error.message);
       });
-      // DndService.getService("subraces", newRace.subrace)
-      // .then(function(response){
-      //   if (response instanceof Error) {
-      //     throw Error(`DnD API error: ${response.message}`);
-      //   } 
-      //   displayRace(newRace);
-      // })
-      // .catch(function(error) {
-      //   displayErrors(error.message);
-      // });
+    
       
-      
+       
      
   });
   // Standard Array UI logic
