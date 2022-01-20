@@ -357,91 +357,110 @@
         <div class="row">
           <div class="col-md-6">
             <p class="text-muted">Character Name:</p>
-            <h3><span id="charNameDisplay">TESTINGPLACEHOLDER</span></h3>
+            <h3><span id="charNameDisplay"></span></h3>
           </div>
           <div class="col-md-3">
             <p class="text-muted">Player Name:</p>
-            <p><span id="playerNameDisplay">TESTINGPLACEHOLDER</span></p>
+            <p><span id="playerNameDisplay"></span></p>
             <p class="text-muted">Race:</p>
-            <p><span id="raceDisplay">TESTINGPLACEHOLDER</span></p>
+            <p><span id="raceDisplay"></span></p>
           </div>
           <div class="col-md-3">
             <p class="text-muted">Class:</p>
-            <p><span id="classDisplay">TESTINGPLACEHOLDER</span></p>
+            <p><span id="classDisplay"></span></p>
             <p class="text-muted">Alignment:</p>
-            <p><span id="alignmentDisplay">TESTINGPLACEHOLDER</span></p>
+            <p><span id="alignmentDisplay"></span></p>
           </div>
         </div>
+        <!--Main character sheet content row-->
         <div class="row">
-          <div class="col-md-1" id="abilityScoreTable">
+          <div class="col-md-3" id="abilityScoreTable">
             <table class="table">
-              <div class="strDisplay">
                 <tr>
                   <th>Strength</th>
                 </tr>
                 <tr>
-                  <td><span id="strAbilityScore">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="strAbilityScore"></span></td>
                 </tr>
                 <tr>
-                  <td><span id="strAbilityModifier" class="text-muted">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="strAbilityModifier" class="text-muted"></span></td>
                 </tr>
-              </div>
-              <div class="dexDisplay">
                 <tr>
                   <th>Dexterity</th>
                 </tr>
                 <tr>
-                  <td><span id="dexAbilityScore">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="dexAbilityScore"></span></td>
                 </tr>
                 <tr>
-                  <td><span id="dexAbilityModifier" class="text-muted">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="dexAbilityModifier" class="text-muted"></span></td>
                 </tr>
-              </div>
-              <div class="conDisplay">
                 <tr>
                   <th>Constitution</th>
                 </tr>
                 <tr>
-                  <td><span id="conAbilityScore">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="conAbilityScore"></span></td>
                 </tr>
                 <tr>
-                  <td><span id="conAbilityModifier" class="text-muted">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="conAbilityModifier" class="text-muted"></span></td>
                 </tr>
-              </div>
-              <div class="intDisplay">
                 <tr>
                   <th>Intelligence</th>
                 </tr>
                 <tr>
-                  <td><span id="intAbilityScore">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="intAbilityScore"></span></td>
                 </tr>
                 <tr>
-                  <td><span id="intAbilityModifier" class="text-muted">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="intAbilityModifier" class="text-muted"></span></td>
                 </tr>
-              </div>
-              <div class="wisDisplay">
               <tr>
                   <th>Wisdom</th>
                 </tr>
                 <tr>
-                  <td><span id="wisAbilityScore">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="wisAbilityScore"></span></td>
                 </tr>
                 <tr>
-                  <td><span id="wisAbilityModifier" class="text-muted">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="wisAbilityModifier" class="text-muted"></span></td>
                 </tr>
-              </div>
-              <div class="chaDisplay">
               <tr>
                   <th>Charisma</th>
                 </tr>
                 <tr>
-                  <td><span id="chaAbilityScore">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="chaAbilityScore"></span></td>
                 </tr>
                 <tr>
-                  <td><span id="chaAbilityModifier" class="text-muted">TESTINGPLACEHOLDER</span></td>
+                  <td><span id="chaAbilityModifier" class="text-muted"></span></td>
                 </tr>
-              </div>
             </table>
+          </div>
+          <!--Character stats (AC, Initiative, Speed, MaxHP, Hit Dice, and DeathSaves)-->
+          <div class="col-md-5" id="characterStats">
+            <div class="row">
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Armor Class:</p>
+                <p><span id="armorClassDisplay"></span></p>
+              </div>
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Initiative:</p>
+                <p><span id="initiativeDisplay"></span></p>
+              </div>
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Speed:</p>
+                <p><span id="speedDisplay"></span></p>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <p class="text-muted">Max Hit Points:</p>
+                <p><span id="maxHitPointsDisplay"></span></p>
+              </div>
+              <div>
+                <p class="text-muted">Total Hit Dice</p>
+                <p><span id="totalHitDiceDisplay"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            
           </div>
           <div id="displayRace"></div>
           <div id="displayClass"></div>
