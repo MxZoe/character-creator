@@ -10,7 +10,7 @@ import Race from "./js/race";
 //UI Logic
 function displayRace(character){
  // let languages = character.race.getLanguages();
-  $("#displayRace").text(`Race: ${character.race.name}, Speed: ${character.race.speed}, Size: ${character.race.size}, Languages: ${languages}`);
+  $("#displayRace").text(`Race: ${character.race.name}, Speed: ${character.race.speed}, Size: ${character.race.size}, Languages: ${character.race.languages}`);
 }
 
 function displayClass(character){
@@ -87,9 +87,13 @@ $(document).ready(function(){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        newRace = makeRace(response);
-        newRace.getLanguages(response);
-        newRace.getAbilityBonuses(response);
+        console.log(response.subraces[0].index);
+        console.log(response.name);
+        let newRace = new Race(response.name,  response.speed, response.size, response.subraces[0].index);
+        character.race = newRace;
+        console.log(character.race);
+        character.race.getLanguages(response);
+        character.race.getAbilityBonuses(response);
         return DndService.getService("subraces", newRace.subrace);
       })
       .then((subraceResponse) => {
@@ -97,8 +101,9 @@ $(document).ready(function(){
           throw Error (`DnD Api Error: ${subraceResponse.message}`);
         }
 
-        newRace.getSubBonuses(subraceResponse, newRace.bonuses);
-        displayRace(newRace);
+        character.race.getSubBonuses(subraceResponse, character.race.bonuses);
+        displayRace(character);
+        displayBonuses(character);
       })
       .catch(function(error) {
         displayErrors(error.message);
