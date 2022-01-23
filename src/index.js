@@ -24,20 +24,20 @@ function displayBonuses(character){
 function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
-function displayScore(currentCharacter){
-  $("#strNum").text(currentCharacter.abilities.get('str'));
-  $("#dexNum").text(currentCharacter.abilities.get('dex'));
-  $("#conNum").text(currentCharacter.abilities.get('con'));
-  $("#intNum").text(currentCharacter.abilities.get('int'));
-  $("#wisNum").text(currentCharacter.abilities.get('wis'));
-  $("#chaNum").text(currentCharacter.abilities.get('cha'));
-  $("#strBonus").text(currentCharacter.race.bonuses.get('str'));
-  $("#dexBonus").text(currentCharacter.race.bonuses.get('dex'));
-  $("#conBonus").text(currentCharacter.race.bonuses.get('con'));
-  $("#intBonus").text(currentCharacter.race.bonuses.get('int'));
-  $("#wisBonus").text(currentCharacter.race.bonuses.get('wis'));
-  $("#chaBonus").text(currentCharacter.race.bonuses.get('cha'));
-  $("#pointsRemaining").text(currentCharacter.pointBuy);
+function displayScore(character){
+  $("#strNum").text(character.abilityScores.str);
+  $("#dexNum").text(character.abilityScores.dex);
+  $("#conNum").text(character.abilityScores.con);
+  $("#intNum").text(character.abilityScores.int);
+  $("#wisNum").text(character.abilityScores.wis);
+  $("#chaNum").text(character.abilityScores.cha);
+  // $("#strBonus").text(character.race.bonuses.get('str'));
+  // $("#dexBonus").text(character.race.bonuses.get('dex'));
+  // $("#conBonus").text(character.race.bonuses.get('con'));
+  // $("#intBonus").text(character.race.bonuses.get('int'));
+  // $("#wisBonus").text(character.race.bonuses.get('wis'));
+  // $("#chaBonus").text(character.race.bonuses.get('cha'));
+  $("#pointsRemaining").text(character.pointBuy);
 }
 
 function disableAbilityScoreOption(option) {
@@ -63,69 +63,69 @@ function disableAbilityScoreOption(option) {
     break;
   }
 }
-function attachIncreaseListeners(currentCharacter){
+function attachIncreaseListeners(character){
   $("#strUp").on("click", function(){
-    currentCharacter.increaseScore('str');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.increaseScore("str");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#dexUp").on("click", function(){
-    currentCharacter.increaseScore('dex');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.increaseScore("dex");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#conUp").on("click", function(){
-    currentCharacter.increaseScore('con');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.increaseScore("con");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#intUp").on("click", function(){
-    currentCharacter.increaseScore('int');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.increaseScore("int");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#wisUp").on("click", function(){
-    currentCharacter.increaseScore('wis');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.increaseScore("wis");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#chaUp").on("click", function(){
-    currentCharacter.increaseScore('cha');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.increaseScore("cha");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
 }
 
-function attachDecreaseListeners(currentCharacter){
+function attachDecreaseListeners(character){
   $("#strDown").on("click", function(){
-    currentCharacter.decreaseScore('str');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.decreaseScore("str");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#dexDown").on("click", function(){
-    currentCharacter.decreaseScore('dex');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.decreaseScore("dex");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#conDown").on("click", function(){
-    currentCharacter.decreaseScore('con');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.decreaseScore("con");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#intDown").on("click", function(){
-    currentCharacter.decreaseScore('int');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.decreaseScore("int");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#wisDown").on("click", function(){
-    currentCharacter.decreaseScore('wis');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.decreaseScore("wis");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#chaDown").on("click", function(){
-    currentCharacter.decreaseScore('cha');
-    displayScore(currentCharacter);
-    $("#pointBuyPoints").html(currentCharacter.pointBuy);
+    character.decreaseScore("cha");
+    displayScore(character);
+    $("#pointBuyPoints").html(character.pointBuy);
   });
 }
 
