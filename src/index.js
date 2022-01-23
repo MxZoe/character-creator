@@ -34,19 +34,19 @@ function displayPointBuyBonuses(character){
   $("#chaBonus").text(character.race.bonuses.get('cha'));
 }
 function displayScore(character){
-  let str = character.abilities.get('str') + character.race.bonuses.get('str');
-  let dex = character.abilities.get('dex') + character.race.bonuses.get('dex');
-  let con = character.abilities.get('con') + character.race.bonuses.get('con');
-  let int = character.abilities.get('int') + character.race.bonuses.get('int');
-  let wis = character.abilities.get('wis') + character.race.bonuses.get('wis');
-  let cha = character.abilities.get('cha') + character.race.bonuses.get('cha');
+  let str = character.abilityScores.str + character.race.bonuses.get('str');
+  let dex = character.abilityScores.dex + character.race.bonuses.get('dex');
+  let con = character.abilityScores.con + character.race.bonuses.get('con');
+  let int = character.abilityScores.int + character.race.bonuses.get('int');
+  let wis = character.abilityScores.wis + character.race.bonuses.get('wis');
+  let cha = character.abilityScores.cha + character.race.bonuses.get('cha');
 
-  $("#strNum").text(character.abilities.get('str'));
-  $("#dexNum").text(character.abilities.get('dex'));
-  $("#conNum").text(character.abilities.get('con'));
-  $("#intNum").text(character.abilities.get('int'));
-  $("#wisNum").text(character.abilities.get('wis'));
-  $("#chaNum").text(character.abilities.get('cha'));
+  $("#strNum").text(character.abilityScores.str);
+  $("#dexNum").text(character.abilityScores.dex);
+  $("#conNum").text(character.abilityScores.con);
+  $("#intNum").text(character.abilityScores.int);
+  $("#wisNum").text(character.abilityScores.wis);
+  $("#chaNum").text(character.abilityScores.cha);
   $("#strAbilityScore").text(str);
   $("#dexAbilityScore").text(dex);
   $("#conAbilityScore").text(con);
@@ -373,7 +373,6 @@ $(document).ready(function(){
     */
     // Get Race and Class
     
-   
     
 
   });
