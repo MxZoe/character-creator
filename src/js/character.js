@@ -6,14 +6,6 @@ export default class Character {
     this.race = {};
     this.characterClass = {};
     this.hitpoints = 0;
-    this.abilities = new Map([
-      ['str', 0],
-      ['dex', 0],
-      ['con', 0],
-      ['int', 0],
-      ['wis', 0],
-      ['cha', 0],
-    ]);
     this.abilityScores = {
       str: 0,
       dex: 0,
@@ -79,15 +71,12 @@ export default class Character {
     this.abilityScores.cha = 0;
   }
 
-  increaseScore(abilityKey){
-    let scoreValue = this.abilities.get(abilityKey);
-    if( scoreValue < 13 && this.pointBuy > 0){
-      scoreValue++;
-      this.abilities.set(abilityKey, scoreValue);
+  increaseScore(ability){
+    if( this.abilityScores[ability] < 13 && this.pointBuy > 0){
+      this.abilityScores[ability]++;
       this.pointBuy--;
-    } else if (scoreValue >= 13 && scoreValue < 15 && this.pointBuy > 1){
-      scoreValue++;
-      this.abilities.set(abilityKey, scoreValue);
+    } else if (this.abilityScores[ability] >= 13 && this.abilityScores[ability] < 15 && this.pointBuy > 1){
+      this.abilityScores[ability]++;
       this.pointBuy -= 2;
     } else if(this.pointBuy === 0){
       alert("you are out of points!");
@@ -96,17 +85,13 @@ export default class Character {
     }
   }
 
-  decreaseScore(abilityKey){
-    let scoreValue = this.abilities.get(abilityKey);
-    if(scoreValue >= 9){
-      if(scoreValue <= 13){
-        scoreValue--;
-        this.abilities.set(abilityKey, scoreValue);
+  decreaseScore(ability){
+    if(this.abilityScores[ability] >= 9){
+      if(this.abilityScores[ability] <= 13){
+        this.abilityScores[ability]--;
         this.pointBuy++;
-        
-      }else if(scoreValue > 13){
-        scoreValue--;
-        this.abilities.set(abilityKey, scoreValue);
+      }else if(this.abilityScores[ability] > 13){
+        this.abilityScores[ability]--;
         this.pointBuy += 2;
       }
     } else{
