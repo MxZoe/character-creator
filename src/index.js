@@ -24,19 +24,36 @@ function displayBonuses(character){
 function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
+
+function displayPointBuyBonuses(character){
+  $("#strBonus").text(character.race.bonuses.get('str'));
+  $("#dexBonus").text(character.race.bonuses.get('dex'));
+  $("#conBonus").text(character.race.bonuses.get('con'));
+  $("#intBonus").text(character.race.bonuses.get('int'));
+  $("#wisBonus").text(character.race.bonuses.get('wis'));
+  $("#chaBonus").text(character.race.bonuses.get('cha'));
+}
 function displayScore(character){
-  $("#strNum").text(character.abilityScores.str);
-  $("#dexNum").text(character.abilityScores.dex);
-  $("#conNum").text(character.abilityScores.con);
-  $("#intNum").text(character.abilityScores.int);
-  $("#wisNum").text(character.abilityScores.wis);
-  $("#chaNum").text(character.abilityScores.cha);
-  // $("#strBonus").text(character.race.bonuses.get('str'));
-  // $("#dexBonus").text(character.race.bonuses.get('dex'));
-  // $("#conBonus").text(character.race.bonuses.get('con'));
-  // $("#intBonus").text(character.race.bonuses.get('int'));
-  // $("#wisBonus").text(character.race.bonuses.get('wis'));
-  // $("#chaBonus").text(character.race.bonuses.get('cha'));
+  let str = character.abilities.get('str') + character.race.bonuses.get('str');
+  let dex = character.abilities.get('dex') + character.race.bonuses.get('dex');
+  let con = character.abilities.get('con') + character.race.bonuses.get('con');
+  let int = character.abilities.get('int') + character.race.bonuses.get('int');
+  let wis = character.abilities.get('wis') + character.race.bonuses.get('wis');
+  let cha = character.abilities.get('cha') + character.race.bonuses.get('cha');
+
+  $("#strNum").text(character.abilities.get('str'));
+  $("#dexNum").text(character.abilities.get('dex'));
+  $("#conNum").text(character.abilities.get('con'));
+  $("#intNum").text(character.abilities.get('int'));
+  $("#wisNum").text(character.abilities.get('wis'));
+  $("#chaNum").text(character.abilities.get('cha'));
+  $("#strAbilityScore").text(str);
+  $("#dexAbilityScore").text(dex);
+  $("#conAbilityScore").text(con);
+  $("#intAbilityScore").text(int);
+  $("#wisAbilityScore").text(wis);
+  $("#chaAbilityScore").text(cha);
+  displayPointBuyBonuses(character);
   $("#pointsRemaining").text(character.pointBuy);
 }
 
@@ -138,6 +155,7 @@ function displayAbilityScores(character) {
 function displayCharacterHeader(character) {
   $(`#charNameDisplay`).text(character.characterName);
   $(`#playerNameDisplay`).text(character.playerName);
+  let name = character.race.name;
   $(`#raceDisplay`).text(character.race.name);
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
@@ -161,16 +179,166 @@ function attachCharacterListeners(character){
     $("#alignmentDisplay").text(character.alignment);
   });
 }
+
+function attachRaceListener(character){
+  $("#charRace").on("change",function(){
+    let charRace = $("#charRace").val();
+    let subrace = '';
+    switch (charRace){
+      case 'high-elf': 
+        charRace = 'elf';
+        subrace = 'high-elf';
+        break;
+      case 'hill-dwarf':
+        charRace = 'dwarf';
+        subrace = 'hill-dwarf';
+        break;
+      case 'rock-gnome':
+        charRace = 'gnome';
+        subrace = 'rock-gnome';
+        break;
+      case 'lightfoot-halfling':
+        charRace = 'halfling';
+        subrace = 'lightfoot-halfling';
+        break;
+      default:
+        subrace = "";
+    }    
+    DndService.getService("races", charRace)
+      .then(function(response){
+        if (response instanceof Error) {
+          throw Error(`DnD API error: ${response.message}`);
+        }
+        let newRace = new Race(response.name,  response.speed, response.size, "");
+        character.race = newRace;
+        character.race.getLanguages(response);
+        character.race.getAbilityBonuses(response);
+        displayAbilityScores(character);
+        displayCharacterStats(character);
+        if(subrace !== ""){
+          character.race.name = subrace;
+          return DndService.getService("subraces", subrace);
+        } else{
+          displayRace(character);
+          displayBonuses(character);
+          displayCharacterHeader(character);
+          displayPointBuyBonuses(character);
+
+        }
+      })
+      .then((subraceResponse) => {
+        if(subraceResponse instanceof Error) {
+          throw Error (`DnD Api Error: ${subraceResponse.message}`);
+        }
+        character.race.getSubBonuses(subraceResponse, character.race.bonuses);
+        displayRace(character);
+        displayBonuses(character);
+        displayCharacterHeader(character);
+        displayPointBuyBonuses(character);
+
+      })
+      .catch(function(error) {
+        displayErrors(error.message);
+      });
+      displayScore(character);
+    });
+}
+
+function attachClassListener(character){
+  $("#charClass").on("change",function(){
+    let charClass = $("#charClass").val();
+    DndService.getService("classes", charClass)
+    .then(function(response){
+      if (response instanceof Error) {
+        throw Error(`DnD API error: ${response.message}`);
+      }
+      let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
+      character.addCharacterClass(newClass);
+      displayClass(character);
+      displayCharacterHeader(character);
+    })
+    .catch(function(error) {
+      displayErrors(error.message);
+    });  
+  })
+}
 $(document).ready(function(){
   let character = new Character();
+  let charClass = $("#charClass").val();
+  let charRace = $("#charRace").val();
+  let subrace = "";
+  switch (charRace){
+    case 'high-elf': 
+      charRace = 'elf';
+      subrace = 'high-elf';
+      break;
+    case 'hill-dwarf':
+      charRace = 'dwarf';
+      subrace = 'hill-dwarf';
+      break;
+    case 'rock-gnome':
+      charRace = 'gnome';
+      subrace = 'rock-gnome';
+      break;
+    case 'lightfoot-halfling':
+      charRace = 'halfling';
+      subrace = 'lightfoot-halfling';
+      break;
+    default:
+      subrace = "";
+  }
+
   attachCharacterListeners(character);
   attachIncreaseListeners(character);
   attachDecreaseListeners(character);
+  attachRaceListener(character);
+  attachClassListener(character)
+
   character.alignment = $("#charAlignment").val();
   $("#alignmentDisplay").text(character.alignment);
-  let charClass = $("#charClass").val();
-  let charRace = $("#charRace").val();
-
+  DndService.getService("races", charRace)
+      .then(function(response){
+        if (response instanceof Error) {
+          throw Error(`DnD API error: ${response.message}`);
+        }
+        let newRace = new Race(response.name,  response.speed, response.size, "");
+        character.race = newRace;
+        character.race.getLanguages(response);
+        character.race.getAbilityBonuses(response);
+        displayAbilityScores(character);
+        displayCharacterStats(character);
+        if(subrace !== ""){
+          return DndService.getService("subraces", subrace);
+        } else{
+          displayRace(character);
+          displayBonuses(character);
+        }
+      })
+      .then((subraceResponse) => {
+        if(subraceResponse instanceof Error) {
+          throw Error (`DnD Api Error: ${subraceResponse.message}`);
+        }
+        character.race.getSubBonuses(subraceResponse, character.race.bonuses);
+        displayRace(character);
+        displayBonuses(character);
+      })
+      .catch(function(error) {
+        displayErrors(error.message);
+      });
+      
+    DndService.getService("classes", charClass)
+      .then(function(response){
+        if (response instanceof Error) {
+          throw Error(`DnD API error: ${response.message}`);
+        }
+        let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
+        character.addCharacterClass(newClass);
+        displayClass(character);
+        displayCharacterHeader(character);
+      })
+      .catch(function(error) {
+        displayErrors(error.message);
+      });  
 
   $("#standardButton").click(function(){
     $("#standardArrayRadioContainer").show();
@@ -188,64 +356,25 @@ $(document).ready(function(){
     // Create Character
     
     // Get Player Name, Character Name, & Alignment
-    // let playerName = $("#playerName").val();
-    // let characterName = $("#charName").val();
-    // let alignment = $("#charAlignment").find(":selected").val();
-    const subraceNames = ["hill-dwarf", "rock-gnome", "high-elf", "lightfoot-halfling"];
-    //  character.addPlayerName(playerName);
-    //  character.addCharacterName(characterName);
-    //  character.addAlignment(alignment);
+   // let playerName = $("#playerName").val();
+   // let characterName = $("#charName").val();
+   // let alignment = $("#charAlignment").find(":selected").val();
+  //  character.addPlayerName(playerName);
+  //  character.addCharacterName(characterName);
+  //  character.addAlignment(alignment);
     // Get Ability Scores
+    /*
     character.abilityScores.str = parseInt($(`input[name="str"]:checked`).val());
     character.abilityScores.dex = parseInt($(`input[name="dex"]:checked`).val());
     character.abilityScores.con = parseInt($(`input[name="con"]:checked`).val());
     character.abilityScores.int = parseInt($(`input[name="int"]:checked`).val());
     character.abilityScores.wis = parseInt($(`input[name="wis"]:checked`).val());
     character.abilityScores.cha = parseInt($(`input[name="cha"]:checked`).val());
+    */
     // Get Race and Class
     
-    DndService.getService("classes", charClass)
-      .then(function(response){
-        if (response instanceof Error) {
-          throw Error(`DnD API error: ${response.message}`);
-        }
-        let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
-        character.addCharacterClass(newClass);
-        displayClass(character);
-        displayCharacterHeader(character);
-      })
-      .catch(function(error) {
-        displayErrors(error.message);
-      });
-    DndService.getService("races", charRace)
-      .then(function(response){
-        if (response instanceof Error) {
-          throw Error(`DnD API error: ${response.message}`);
-        }
-        let newRace = new Race(response.name,  response.speed, response.size, "");
-        character.race = newRace;
-        character.race.getLanguages(response);
-        character.race.getAbilityBonuses(response);
-        displayAbilityScores(character);
-        displayCharacterStats(character);
-        if(subraceNames.includes(character.race.name)){
-          return DndService.getService("subraces", newRace.name);
-        } else{
-          displayRace(character);
-          displayBonuses(character);
-        }
-      })
-      .then((subraceResponse) => {
-        if(subraceResponse instanceof Error) {
-          throw Error (`DnD Api Error: ${subraceResponse.message}`);
-        }
-        character.race.getSubBonuses(subraceResponse, character.race.bonuses);
-        displayRace(character);
-        displayBonuses(character);
-      })
-      .catch(function(error) {
-        displayErrors(error.message);
-      });
+   
+    
 
   });
   // Standard Array UI logic

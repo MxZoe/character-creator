@@ -36,4 +36,6 @@ export default class Race {
     }
     this.languages = languageString;
   }
+
+
 }
