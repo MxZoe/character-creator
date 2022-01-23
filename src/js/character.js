@@ -6,15 +6,15 @@ export default class Character {
     this.race = {};
     this.characterClass = {};
     this.hitpoints = 0;
-    this.abilities = new Map([
-      ['str', 0],
-      ['dex', 0],
-      ['con', 0],
-      ['int', 0],
-      ['wis', 0],
-      ['cha', 0],
-    ]);
     this.abilityScores = {
+      str: 0,
+      dex: 0,
+      con: 0,
+      int: 0,
+      wis: 0,
+      cha: 0
+    };
+    this.abilityModifiers = {
       str: 0,
       dex: 0,
       con: 0,
@@ -45,8 +45,17 @@ export default class Character {
   addHitPoints(hitpoints) {
     this.hitpoints = hitpoints;
   }
-  addArmorClass(armorClass) {
-    this.armorClass = armorClass;
+
+  addAbilityModifier() {
+    Object.keys(this.abilityScores).forEach((score) => {
+      console.log("this.abilityScores_score  "+this.abilityScores[score])
+      const mod = Math.floor((this.abilityScores[score] - 10)/2);
+      this.abilityModifiers[score] = mod;
+    });
+  }
+
+  addArmorClass() {
+    this.armorClass = this.abilityModifiers.dex + 10;
   }
   addEquipment(equipment) {
     this.equipment = equipment;
@@ -61,52 +70,45 @@ export default class Character {
   }
 
   setPointBuyStart(){
-    this.abilities.set("str", 8);
-    this.abilities.set("dex", 8);
-    this.abilities.set("con", 8);
-    this.abilities.set("int", 8);
-    this.abilities.set("wis", 8);
-    this.abilities.set("cha", 8);
+    this.abilityScores.str = 8;
+    this.abilityScores.dex = 8;
+    this.abilityScores.con = 8;
+    this.abilityScores.int = 8;
+    this.abilityScores.wis = 8;
+    this.abilityScores.cha = 8;
   
   }
 
   resetAbilityScores(){
-    this.abilities.set("str", 0);
-    this.abilities.set("dex", 0);
-    this.abilities.set("con", 0);
-    this.abilities.set("int", 0);
-    this.abilities.set("wis", 0);
-    this.abilities.set("cha", 0);
+    this.abilityScores.str = 0;
+    this.abilityScores.dex = 0;
+    this.abilityScores.con = 0;
+    this.abilityScores.int = 0;
+    this.abilityScores.wis = 0;
+    this.abilityScores.cha = 0;
   }
 
-  increaseScore(abilityKey){
-    let scoreValue = this.abilities.get(abilityKey);
-    if( scoreValue < 13 && this.pointBuy > 0){
-      scoreValue++;
-      this.abilities.set(abilityKey, scoreValue);
+  increaseScore(ability){
+    if( this.abilityScores[ability] < 13 && this.pointBuy > 0){
+      this.abilityScores[ability]++;
       this.pointBuy--;
-    } else if (scoreValue >= 13 && scoreValue < 15 && this.pointBuy > 1){
-      scoreValue++;
-      this.abilities.set(abilityKey, scoreValue);
+    } else if (this.abilityScores[ability] >= 13 && this.abilityScores[ability] < 15 && this.pointBuy > 1){
+      this.abilityScores[ability]++;
       this.pointBuy -= 2;
     } else if(this.pointBuy === 0){
-      alert("you are out of points!")
+      alert("you are out of points!");
     } else{
-      alert("Your ability score cannot exceed 15 (before racial modifiers)")
+      alert("Your ability score cannot exceed 15 (before racial modifiers)");
     }
   }
 
-  decreaseScore(abilityKey){
-    let scoreValue = this.abilities.get(abilityKey);
-    if(scoreValue >= 9){
-      if(scoreValue <= 13){
-        scoreValue--;
-        this.abilities.set(abilityKey, scoreValue);
+  decreaseScore(ability){
+    if(this.abilityScores[ability] >= 9){
+      if(this.abilityScores[ability] <= 13){
+        this.abilityScores[ability]--;
         this.pointBuy++;
-        
-      }else if(scoreValue > 13){
-        scoreValue--;
-        this.abilities.set(abilityKey, scoreValue);
+      }else if(this.abilityScores[ability] > 13){
+        this.abilityScores[ability]--;
         this.pointBuy += 2;
       }
     } else{

@@ -34,19 +34,19 @@ function displayPointBuyBonuses(character){
   $("#chaBonus").text(character.race.bonuses.get('cha'));
 }
 function displayScore(character){
-  let str = character.abilities.get('str') + character.race.bonuses.get('str');
-  let dex = character.abilities.get('dex') + character.race.bonuses.get('dex');
-  let con = character.abilities.get('con') + character.race.bonuses.get('con');
-  let int = character.abilities.get('int') + character.race.bonuses.get('int');
-  let wis = character.abilities.get('wis') + character.race.bonuses.get('wis');
-  let cha = character.abilities.get('cha') + character.race.bonuses.get('cha');
+  let str = character.abilityScores.str + character.race.bonuses.get('str');
+  let dex = character.abilityScores.dex + character.race.bonuses.get('dex');
+  let con = character.abilityScores.con + character.race.bonuses.get('con');
+  let int = character.abilityScores.int + character.race.bonuses.get('int');
+  let wis = character.abilityScores.wis + character.race.bonuses.get('wis');
+  let cha = character.abilityScores.cha + character.race.bonuses.get('cha');
 
-  $("#strNum").text(character.abilities.get('str'));
-  $("#dexNum").text(character.abilities.get('dex'));
-  $("#conNum").text(character.abilities.get('con'));
-  $("#intNum").text(character.abilities.get('int'));
-  $("#wisNum").text(character.abilities.get('wis'));
-  $("#chaNum").text(character.abilities.get('cha'));
+  $("#strNum").text(character.abilityScores.str);
+  $("#dexNum").text(character.abilityScores.dex);
+  $("#conNum").text(character.abilityScores.con);
+  $("#intNum").text(character.abilityScores.int);
+  $("#wisNum").text(character.abilityScores.wis);
+  $("#chaNum").text(character.abilityScores.cha);
   $("#strAbilityScore").text(str);
   $("#dexAbilityScore").text(dex);
   $("#conAbilityScore").text(con);
@@ -82,32 +82,33 @@ function disableAbilityScoreOption(option) {
 }
 function attachIncreaseListeners(character){
   $("#strUp").on("click", function(){
-    character.increaseScore('str');
+    character.increaseScore("str");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#dexUp").on("click", function(){
-    character.increaseScore('dex');
+    character.increaseScore("dex");
     displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
+    $("#pointBuyPoints").html(character.pointBuy)
   });
   $("#conUp").on("click", function(){
-    character.increaseScore('con');
+    character.increaseScore("con");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
-  });
+  })
+    
   $("#intUp").on("click", function(){
-    character.increaseScore('int');
+    character.increaseScore("int");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#wisUp").on("click", function(){
-    character.increaseScore('wis');
+    character.increaseScore("wis");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#chaUp").on("click", function(){
-    character.increaseScore('cha');
+    character.increaseScore("cha");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
@@ -115,32 +116,32 @@ function attachIncreaseListeners(character){
 
 function attachDecreaseListeners(character){
   $("#strDown").on("click", function(){
-    character.decreaseScore('str');
+    character.decreaseScore("str");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#dexDown").on("click", function(){
-    character.decreaseScore('dex');
+    character.decreaseScore("dex");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#conDown").on("click", function(){
-    character.decreaseScore('con');
+    character.decreaseScore("con");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#intDown").on("click", function(){
-    character.decreaseScore('int');
+    character.decreaseScore("int");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#wisDown").on("click", function(){
-    character.decreaseScore('wis');
+    character.decreaseScore("wis");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
   $("#chaDown").on("click", function(){
-    character.decreaseScore('cha');
+    character.decreaseScore("cha");
     displayScore(character);
     $("#pointBuyPoints").html(character.pointBuy);
   });
@@ -155,7 +156,6 @@ function displayAbilityScores(character) {
 function displayCharacterHeader(character) {
   $(`#charNameDisplay`).text(character.characterName);
   $(`#playerNameDisplay`).text(character.playerName);
-  let name = character.race.name;
   $(`#raceDisplay`).text(character.race.name);
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
@@ -354,6 +354,7 @@ $(document).ready(function(){
     event.preventDefault();
     // Create Character
     
+    
     // Get Player Name, Character Name, & Alignment
    // let playerName = $("#playerName").val();
    // let characterName = $("#charName").val();
@@ -372,9 +373,13 @@ $(document).ready(function(){
     */
     // Get Race and Class
     
-   
     
-
+      // Calculate Ability Modifiers
+    character.addRacialBonuses();
+    character.addAbilityModifier();
+    console.log(character.abilityModifiers);
+    character.addArmorClass();
+    console.log(character.armorClass);
   });
   // Standard Array UI logic
   $("#charStrength").change(() => {
@@ -409,4 +414,4 @@ $(document).ready(function(){
     $(".option10").prop("disabled", false);
     $(".option8").prop("disabled", false);
   });
-});
+}); 
