@@ -81,68 +81,22 @@ function disableAbilityScoreOption(option) {
   }
 }
 function attachIncreaseListeners(character){
-  $("#strUp").on("click", function(){
-    character.increaseScore("str");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#dexUp").on("click", function(){
-    character.increaseScore("dex");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#conUp").on("click", function(){
-    character.increaseScore("con");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#intUp").on("click", function(){
-    character.increaseScore("int");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#wisUp").on("click", function(){
-    character.increaseScore("wis");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#chaUp").on("click", function(){
-    character.increaseScore("cha");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
+  Object.keys(character.abilityScores).forEach((score) => {
+    $(`#${score}Up`).on("click", () => {
+      character.increaseScore(score);
+      displayScore(character);
+      $("#pointBuyPoints").html(character.pointBuy);
+    });
   });
 }
 
 function attachDecreaseListeners(character){
-  $("#strDown").on("click", function(){
-    character.decreaseScore("str");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#dexDown").on("click", function(){
-    character.decreaseScore("dex");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#conDown").on("click", function(){
-    character.decreaseScore("con");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#intDown").on("click", function(){
-    character.decreaseScore("int");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#wisDown").on("click", function(){
-    character.decreaseScore("wis");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#chaDown").on("click", function(){
-    character.decreaseScore("cha");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
+  Object.keys(character.abilityScores).forEach((score) => {
+    $(`#${score}Down`).on("click", () => {
+      character.decreaseScore(score);
+      displayScore(character);
+      $("#pointBuyPoints").html(character.pointBuy);
+    });
   });
 }
 
@@ -155,7 +109,6 @@ function displayAbilityScores(character) {
 function displayCharacterHeader(character) {
   $(`#charNameDisplay`).text(character.characterName);
   $(`#playerNameDisplay`).text(character.playerName);
-  let name = character.race.name;
   $(`#raceDisplay`).text(character.race.name);
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
@@ -185,89 +138,6 @@ function attachRaceListener(character){
     let charRace = $("#charRace").val();
     let subrace = '';
     switch (charRace){
-      case 'high-elf': 
-        charRace = 'elf';
-        subrace = 'high-elf';
-        break;
-      case 'hill-dwarf':
-        charRace = 'dwarf';
-        subrace = 'hill-dwarf';
-        break;
-      case 'rock-gnome':
-        charRace = 'gnome';
-        subrace = 'rock-gnome';
-        break;
-      case 'lightfoot-halfling':
-        charRace = 'halfling';
-        subrace = 'lightfoot-halfling';
-        break;
-      default:
-        subrace = "";
-    }    
-    DndService.getService("races", charRace)
-      .then(function(response){
-        if (response instanceof Error) {
-          throw Error(`DnD API error: ${response.message}`);
-        }
-        let newRace = new Race(response.name,  response.speed, response.size, "");
-        character.race = newRace;
-        character.race.getLanguages(response);
-        character.race.getAbilityBonuses(response);
-        displayAbilityScores(character);
-        displayCharacterStats(character);
-        if(subrace !== ""){
-          character.race.name = subrace;
-          return DndService.getService("subraces", subrace);
-        } else{
-          displayRace(character);
-          displayBonuses(character);
-          displayCharacterHeader(character);
-          displayPointBuyBonuses(character);
-
-        }
-      })
-      .then((subraceResponse) => {
-        if(subraceResponse instanceof Error) {
-          throw Error (`DnD Api Error: ${subraceResponse.message}`);
-        }
-        character.race.getSubBonuses(subraceResponse, character.race.bonuses);
-        displayRace(character);
-        displayBonuses(character);
-        displayCharacterHeader(character);
-        displayPointBuyBonuses(character);
-
-      })
-      .catch(function(error) {
-        displayErrors(error.message);
-      });
-      displayScore(character);
-    });
-}
-
-function attachClassListener(character){
-  $("#charClass").on("change",function(){
-    let charClass = $("#charClass").val();
-    DndService.getService("classes", charClass)
-    .then(function(response){
-      if (response instanceof Error) {
-        throw Error(`DnD API error: ${response.message}`);
-      }
-      let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
-      character.addCharacterClass(newClass);
-      displayClass(character);
-      displayCharacterHeader(character);
-    })
-    .catch(function(error) {
-      displayErrors(error.message);
-    });  
-  })
-}
-$(document).ready(function(){
-  let character = new Character();
-  let charClass = $("#charClass").val();
-  let charRace = $("#charRace").val();
-  let subrace = "";
-  switch (charRace){
     case 'high-elf': 
       charRace = 'elf';
       subrace = 'high-elf';
@@ -286,17 +156,8 @@ $(document).ready(function(){
       break;
     default:
       subrace = "";
-  }
-
-  attachCharacterListeners(character);
-  attachIncreaseListeners(character);
-  attachDecreaseListeners(character);
-  attachRaceListener(character);
-  attachClassListener(character)
-
-  character.alignment = $("#charAlignment").val();
-  $("#alignmentDisplay").text(character.alignment);
-  DndService.getService("races", charRace)
+    }    
+    DndService.getService("races", charRace)
       .then(function(response){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
@@ -308,10 +169,13 @@ $(document).ready(function(){
         displayAbilityScores(character);
         displayCharacterStats(character);
         if(subrace !== ""){
+          character.race.name = subrace;
           return DndService.getService("subraces", subrace);
-        } else{
+        } else {
           displayRace(character);
           displayBonuses(character);
+          displayCharacterHeader(character);
+          displayPointBuyBonuses(character);
         }
       })
       .then((subraceResponse) => {
@@ -321,11 +185,19 @@ $(document).ready(function(){
         character.race.getSubBonuses(subraceResponse, character.race.bonuses);
         displayRace(character);
         displayBonuses(character);
+        displayCharacterHeader(character);
+        displayPointBuyBonuses(character);
       })
       .catch(function(error) {
         displayErrors(error.message);
       });
-      
+    displayScore(character);
+  });
+}
+
+function attachClassListener(character){
+  $("#charClass").on("change",function(){
+    let charClass = $("#charClass").val();
     DndService.getService("classes", charClass)
       .then(function(response){
         if (response instanceof Error) {
@@ -339,6 +211,84 @@ $(document).ready(function(){
       .catch(function(error) {
         displayErrors(error.message);
       });  
+  });
+}
+$(document).ready(function(){
+  let character = new Character();
+  let charClass = $("#charClass").val();
+  let charRace = $("#charRace").val();
+  let subrace = "";
+  switch (charRace){
+  case 'high-elf': 
+    charRace = 'elf';
+    subrace = 'high-elf';
+    break;
+  case 'hill-dwarf':
+    charRace = 'dwarf';
+    subrace = 'hill-dwarf';
+    break;
+  case 'rock-gnome':
+    charRace = 'gnome';
+    subrace = 'rock-gnome';
+    break;
+  case 'lightfoot-halfling':
+    charRace = 'halfling';
+    subrace = 'lightfoot-halfling';
+    break;
+  default:
+    subrace = "";
+  }
+
+  attachCharacterListeners(character);
+  attachIncreaseListeners(character);
+  attachDecreaseListeners(character);
+  attachRaceListener(character);
+  attachClassListener(character);
+
+  character.alignment = $("#charAlignment").val();
+  $("#alignmentDisplay").text(character.alignment);
+  DndService.getService("races", charRace)
+    .then(function(response){
+      if (response instanceof Error) {
+        throw Error(`DnD API error: ${response.message}`);
+      }
+      let newRace = new Race(response.name,  response.speed, response.size, "");
+      character.race = newRace;
+      character.race.getLanguages(response);
+      character.race.getAbilityBonuses(response);
+      displayAbilityScores(character);
+      displayCharacterStats(character);
+      if(subrace !== ""){
+        return DndService.getService("subraces", subrace);
+      } else{
+        displayRace(character);
+        displayBonuses(character);
+      }
+    })
+    .then((subraceResponse) => {
+      if(subraceResponse instanceof Error) {
+        throw Error (`DnD Api Error: ${subraceResponse.message}`);
+      }
+      character.race.getSubBonuses(subraceResponse, character.race.bonuses);
+      displayRace(character);
+      displayBonuses(character);
+    })
+    .catch(function(error) {
+      displayErrors(error.message);
+    });
+  DndService.getService("classes", charClass)
+    .then(function(response){
+      if (response instanceof Error) {
+        throw Error(`DnD API error: ${response.message}`);
+      }
+      let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
+      character.addCharacterClass(newClass);
+      displayClass(character);
+      displayCharacterHeader(character);
+    })
+    .catch(function(error) {
+      displayErrors(error.message);
+    });  
 
   $("#standardButton").click(function(){
     $("#standardArrayRadioContainer").show();
@@ -357,12 +307,12 @@ $(document).ready(function(){
     
     
     // Get Player Name, Character Name, & Alignment
-   // let playerName = $("#playerName").val();
-   // let characterName = $("#charName").val();
-   // let alignment = $("#charAlignment").find(":selected").val();
-  //  character.addPlayerName(playerName);
-  //  character.addCharacterName(characterName);
-  //  character.addAlignment(alignment);
+    // let playerName = $("#playerName").val();
+    // let characterName = $("#charName").val();
+    // let alignment = $("#charAlignment").find(":selected").val();
+    //  character.addPlayerName(playerName);
+    //  character.addCharacterName(characterName);
+    //  character.addAlignment(alignment);
     // Get Ability Scores
     /*
     character.abilityScores.str = parseInt($(`input[name="str"]:checked`).val());
