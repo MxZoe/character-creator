@@ -176,12 +176,12 @@ $(document).ready(function(){
     character.addCharacterName(characterName);
     character.addAlignment(alignment);
     // Get Ability Scores
-    character.abilityScores.str += parseInt($(`input[name="str"]:checked`).val());
-    character.abilityScores.dex += parseInt($(`input[name="dex"]:checked`).val());
-    character.abilityScores.con += parseInt($(`input[name="con"]:checked`).val());
-    character.abilityScores.int += parseInt($(`input[name="int"]:checked`).val());
-    character.abilityScores.wis += parseInt($(`input[name="wis"]:checked`).val());
-    character.abilityScores.cha += parseInt($(`input[name="cha"]:checked`).val());
+    character.abilityScores.str = parseInt($(`input[name="str"]:checked`).val());
+    character.abilityScores.dex = parseInt($(`input[name="dex"]:checked`).val());
+    character.abilityScores.con = parseInt($(`input[name="con"]:checked`).val());
+    character.abilityScores.int = parseInt($(`input[name="int"]:checked`).val());
+    character.abilityScores.wis = parseInt($(`input[name="wis"]:checked`).val());
+    character.abilityScores.cha = parseInt($(`input[name="cha"]:checked`).val());
     // Get Race and Class
     let charClass = $("#charClass").val();
     let charRace = $("#charRace").val();
