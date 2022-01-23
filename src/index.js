@@ -81,68 +81,22 @@ function disableAbilityScoreOption(option) {
   }
 }
 function attachIncreaseListeners(character){
-  $("#strUp").on("click", function(){
-    character.increaseScore("str");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#dexUp").on("click", function(){
-    character.increaseScore("dex");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#conUp").on("click", function(){
-    character.increaseScore("con");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#intUp").on("click", function(){
-    character.increaseScore("int");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#wisUp").on("click", function(){
-    character.increaseScore("wis");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#chaUp").on("click", function(){
-    character.increaseScore("cha");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
+  Object.keys(character.abilityScores).forEach((score) => {
+    $(`#${score}Up`).on("click", () => {
+      character.increaseScore(score);
+      displayScore(character);
+      $("#pointBuyPoints").html(character.pointBuy);
+    });
   });
 }
 
 function attachDecreaseListeners(character){
-  $("#strDown").on("click", function(){
-    character.decreaseScore("str");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#dexDown").on("click", function(){
-    character.decreaseScore("dex");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#conDown").on("click", function(){
-    character.decreaseScore("con");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#intDown").on("click", function(){
-    character.decreaseScore("int");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#wisDown").on("click", function(){
-    character.decreaseScore("wis");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
-  });
-  $("#chaDown").on("click", function(){
-    character.decreaseScore("cha");
-    displayScore(character);
-    $("#pointBuyPoints").html(character.pointBuy);
+  Object.keys(character.abilityScores).forEach((score) => {
+    $(`#${score}Down`).on("click", () => {
+      character.decreaseScore(score);
+      displayScore(character);
+      $("#pointBuyPoints").html(character.pointBuy);
+    });
   });
 }
 
