@@ -188,6 +188,7 @@ $(document).ready(function(){
     event.preventDefault();
     // Create Character
     
+    
     // Get Player Name, Character Name, & Alignment
    // let playerName = $("#playerName").val();
    // let characterName = $("#charName").val();
@@ -203,6 +204,7 @@ $(document).ready(function(){
     character.abilityScores.int = parseInt($(`input[name="int"]:checked`).val());
     character.abilityScores.wis = parseInt($(`input[name="wis"]:checked`).val());
     character.abilityScores.cha = parseInt($(`input[name="cha"]:checked`).val());
+    
     // Get Race and Class
     
     DndService.getService("classes", charClass)
@@ -247,6 +249,10 @@ $(document).ready(function(){
       .catch(function(error) {
         displayErrors(error.message);
       });
+
+      // Calculate Ability Modifiers
+    character.addAbilityModifier();
+    console.log(character.abilityModifiers);
 
   });
   // Standard Array UI logic

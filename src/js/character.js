@@ -6,15 +6,15 @@ export default class Character {
     this.race = {};
     this.characterClass = {};
     this.hitpoints = 0;
-    this.abilities = new Map([
-      ['str', 0],
-      ['dex', 0],
-      ['con', 0],
-      ['int', 0],
-      ['wis', 0],
-      ['cha', 0],
-    ]);
     this.abilityScores = {
+      str: 0,
+      dex: 0,
+      con: 0,
+      int: 0,
+      wis: 0,
+      cha: 0
+    };
+    this.abilityModifiers = {
       str: 0,
       dex: 0,
       con: 0,
@@ -45,6 +45,14 @@ export default class Character {
   addHitPoints(hitpoints) {
     this.hitpoints = hitpoints;
   }
+
+  addAbilityModifier() {
+    Object.keys(this.abilityScores).forEach((score) => {
+      const mod = Math.floor((this.abilityScores[score] - 10)/2);
+      this.abilityModifiers[score] = mod;
+    });
+  }
+
   addArmorClass(armorClass) {
     this.armorClass = armorClass;
   }
