@@ -24,7 +24,7 @@ export default class Character {
     };
     this.armorClass = 0;
     this.equipment = {};
-    this.pointBuy;
+    this.pointBuy = 27;
   }
   // Adding methods for constructor
   addCharacterName(characterName) {
@@ -67,7 +67,7 @@ export default class Character {
     this.abilities.set("int", 8);
     this.abilities.set("wis", 8);
     this.abilities.set("cha", 8);
-    this.pointBuy = 27;
+  
   }
 
   resetAbilityScores(){

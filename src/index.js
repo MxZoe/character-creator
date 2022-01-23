@@ -32,7 +32,7 @@ function displayScore(currentCharacter){
   $("#wisNum").text(currentCharacter.abilities.get('wis'));
   $("#chaNum").text(currentCharacter.abilities.get('cha'));
   $("#strBonus").text(currentCharacter.race.bonuses.get('str'));
-  $("#dexBonus").tex(currentCharacter.race.bonuses.get('dex'));
+  $("#dexBonus").text(currentCharacter.race.bonuses.get('dex'));
   $("#conBonus").text(currentCharacter.race.bonuses.get('con'));
   $("#intBonus").text(currentCharacter.race.bonuses.get('int'));
   $("#wisBonus").text(currentCharacter.race.bonuses.get('wis'));
@@ -147,11 +147,32 @@ function displayCharacterStats(character) {
   $(`#speedDisplay`).text(character.race.speed);
 }
 
+function attachCharacterListeners(character){
+  $("#playerName").on("change", function(){
+    character.playerName = $("#playerName").val();
+    $("#playerNameDisplay").text(character.playerName);
+  });
+  $("#charName").on("change", function(){
+    character.characterName = $("#charName").val();
+    $("#charNameDisplay").text(character.characterName);
+  });
+  $("#charAlignment").on("change", function(){
+    character.alignment = $("#charAlignment").val();
+    $("#alignmentDisplay").text(character.alignment);
+  });
+}
 $(document).ready(function(){
   let character = new Character();
-
+  attachCharacterListeners(character);
   attachIncreaseListeners(character);
   attachDecreaseListeners(character);
+  character.alignment = $("#charAlignment").val();
+  $("#alignmentDisplay").text(character.alignment);
+ 
+  let charClass = $("#charClass").val();
+  let charRace = $("#charRace").val();
+
+
   $("#standardButton").click(function(){
     $("#standardArrayRadioContainer").show();
     $("#pointBuyContainer").hide();
@@ -168,13 +189,13 @@ $(document).ready(function(){
     // Create Character
     
     // Get Player Name, Character Name, & Alignment
-    let playerName = $("#playerName").val();
-    let characterName = $("#charName").val();
-    let alignment = $("#charAlignment").find(":selected").val();
+   // let playerName = $("#playerName").val();
+   // let characterName = $("#charName").val();
+   // let alignment = $("#charAlignment").find(":selected").val();
     const subraceNames = ["hill-dwarf", "rock-gnome", "high-elf", "lightfoot-halfling"];
-    character.addPlayerName(playerName);
-    character.addCharacterName(characterName);
-    character.addAlignment(alignment);
+  //  character.addPlayerName(playerName);
+  //  character.addCharacterName(characterName);
+  //  character.addAlignment(alignment);
     // Get Ability Scores
     character.abilityScores.str = parseInt($(`input[name="str"]:checked`).val());
     character.abilityScores.dex = parseInt($(`input[name="dex"]:checked`).val());
@@ -183,8 +204,7 @@ $(document).ready(function(){
     character.abilityScores.wis = parseInt($(`input[name="wis"]:checked`).val());
     character.abilityScores.cha = parseInt($(`input[name="cha"]:checked`).val());
     // Get Race and Class
-    let charClass = $("#charClass").val();
-    let charRace = $("#charRace").val();
+    
     DndService.getService("classes", charClass)
       .then(function(response){
         if (response instanceof Error) {
@@ -205,12 +225,10 @@ $(document).ready(function(){
         }
         let newRace = new Race(response.name,  response.speed, response.size, "");
         character.race = newRace;
-        console.log(character.race);
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
         displayAbilityScores(character);
         displayCharacterStats(character);
-        console.log(character);
         if(subraceNames.includes(character.race.name)){
           return DndService.getService("subraces", newRace.name);
         } else{
