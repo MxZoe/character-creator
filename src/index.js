@@ -377,9 +377,11 @@ $(document).ready(function(){
     
 
       // Calculate Ability Modifiers
+    character.addRacialBonuses();
     character.addAbilityModifier();
     console.log(character.abilityModifiers);
-
+    character.addArmorClass();
+    console.log(character.armorClass);
   });
   // Standard Array UI logic
   $("#charStrength").change(() => {
