@@ -155,6 +155,7 @@ function displayAbilityScores(character) {
 function displayCharacterHeader(character) {
   $(`#charNameDisplay`).text(character.characterName);
   $(`#playerNameDisplay`).text(character.playerName);
+  let name = character.race.name;
   $(`#raceDisplay`).text(character.race.name);
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
@@ -221,6 +222,8 @@ function attachRaceListener(character){
           displayRace(character);
           displayBonuses(character);
           displayCharacterHeader(character);
+          displayPointBuyBonuses(character);
+
         }
       })
       .then((subraceResponse) => {
@@ -231,12 +234,13 @@ function attachRaceListener(character){
         displayRace(character);
         displayBonuses(character);
         displayCharacterHeader(character);
+        displayPointBuyBonuses(character);
 
       })
       .catch(function(error) {
         displayErrors(error.message);
       });
-      displayPointBuyBonuses(character);
+      displayScore(character);
     });
 }
 
