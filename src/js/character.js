@@ -67,6 +67,7 @@ export default class Character {
     this.abilities.set("int", 8);
     this.abilities.set("wis", 8);
     this.abilities.set("cha", 8);
+    this.pointBuy = 27;
   
   }
 
