@@ -326,7 +326,7 @@ $(document).ready(function(){
     
     
 
-      // Calculate Ability Modifiers
+    // Calculate Ability Modifiers
     character.addRacialBonuses();
     character.addAbilityModifier();
     console.log(character.abilityModifiers);
