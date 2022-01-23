@@ -168,7 +168,6 @@ $(document).ready(function(){
   attachDecreaseListeners(character);
   character.alignment = $("#charAlignment").val();
   $("#alignmentDisplay").text(character.alignment);
- 
   let charClass = $("#charClass").val();
   let charRace = $("#charRace").val();
 
@@ -189,13 +188,13 @@ $(document).ready(function(){
     // Create Character
     
     // Get Player Name, Character Name, & Alignment
-   // let playerName = $("#playerName").val();
-   // let characterName = $("#charName").val();
-   // let alignment = $("#charAlignment").find(":selected").val();
+    // let playerName = $("#playerName").val();
+    // let characterName = $("#charName").val();
+    // let alignment = $("#charAlignment").find(":selected").val();
     const subraceNames = ["hill-dwarf", "rock-gnome", "high-elf", "lightfoot-halfling"];
-  //  character.addPlayerName(playerName);
-  //  character.addCharacterName(characterName);
-  //  character.addAlignment(alignment);
+    //  character.addPlayerName(playerName);
+    //  character.addCharacterName(characterName);
+    //  character.addAlignment(alignment);
     // Get Ability Scores
     character.abilityScores.str = parseInt($(`input[name="str"]:checked`).val());
     character.abilityScores.dex = parseInt($(`input[name="dex"]:checked`).val());
