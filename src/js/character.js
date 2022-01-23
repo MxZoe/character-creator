@@ -61,22 +61,22 @@ export default class Character {
   }
 
   setPointBuyStart(){
-    this.abilities.set("str", 8);
-    this.abilities.set("dex", 8);
-    this.abilities.set("con", 8);
-    this.abilities.set("int", 8);
-    this.abilities.set("wis", 8);
-    this.abilities.set("cha", 8);
+    this.abilityScores.str = 8;
+    this.abilityScores.dex = 8;
+    this.abilityScores.con = 8;
+    this.abilityScores.int = 8;
+    this.abilityScores.wis = 8;
+    this.abilityScores.cha = 8;
   
   }
 
   resetAbilityScores(){
-    this.abilities.set("str", 0);
-    this.abilities.set("dex", 0);
-    this.abilities.set("con", 0);
-    this.abilities.set("int", 0);
-    this.abilities.set("wis", 0);
-    this.abilities.set("cha", 0);
+    this.abilityScores.str = 0;
+    this.abilityScores.dex = 0;
+    this.abilityScores.con = 0;
+    this.abilityScores.int = 0;
+    this.abilityScores.wis = 0;
+    this.abilityScores.cha = 0;
   }
 
   increaseScore(abilityKey){
@@ -90,9 +90,9 @@ export default class Character {
       this.abilities.set(abilityKey, scoreValue);
       this.pointBuy -= 2;
     } else if(this.pointBuy === 0){
-      alert("you are out of points!")
+      alert("you are out of points!");
     } else{
-      alert("Your ability score cannot exceed 15 (before racial modifiers)")
+      alert("Your ability score cannot exceed 15 (before racial modifiers)");
     }
   }
 
