@@ -355,6 +355,7 @@ $(document).ready(function(){
     event.preventDefault();
     // Create Character
     
+    
     // Get Player Name, Character Name, & Alignment
    // let playerName = $("#playerName").val();
    // let characterName = $("#charName").val();
@@ -374,6 +375,10 @@ $(document).ready(function(){
     // Get Race and Class
     
     
+
+      // Calculate Ability Modifiers
+    character.addAbilityModifier();
+    console.log(character.abilityModifiers);
 
   });
   // Standard Array UI logic
@@ -409,4 +414,4 @@ $(document).ready(function(){
     $(".option10").prop("disabled", false);
     $(".option8").prop("disabled", false);
   });
-});
+}); 

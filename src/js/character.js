@@ -14,6 +14,14 @@ export default class Character {
       wis: 0,
       cha: 0
     };
+    this.abilityModifiers = {
+      str: 0,
+      dex: 0,
+      con: 0,
+      int: 0,
+      wis: 0,
+      cha: 0
+    };
     this.armorClass = 0;
     this.equipment = {};
     this.pointBuy = 27;
@@ -37,6 +45,14 @@ export default class Character {
   addHitPoints(hitpoints) {
     this.hitpoints = hitpoints;
   }
+
+  addAbilityModifier() {
+    Object.keys(this.abilityScores).forEach((score) => {
+      const mod = Math.floor((this.abilityScores[score] - 10)/2);
+      this.abilityModifiers[score] = mod;
+    });
+  }
+
   addArmorClass(armorClass) {
     this.armorClass = armorClass;
   }
