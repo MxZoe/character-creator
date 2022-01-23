@@ -138,9 +138,27 @@ function attachCharacterListeners(character){
 function attachRaceListener(character){
   $("#charRace").on("change",function(){
     let charRace = $("#charRace").val();
-    let charArray = determineSubrace(charArray);
-    charRace = charArray[0];
-    let subrace = charArray[1];
+    let subrace = '';
+    switch (charRace){
+    case 'high-elf': 
+      charRace = 'elf';
+      subrace = 'high-elf';
+      break;
+    case 'hill-dwarf':
+      charRace = 'dwarf';
+      subrace = 'hill-dwarf';
+      break;
+    case 'rock-gnome':
+      charRace = 'gnome';
+      subrace = 'rock-gnome';
+      break;
+    case 'lightfoot-halfling':
+      charRace = 'halfling';
+      subrace = 'lightfoot-halfling';
+      break;
+    default:
+      subrace = "";
+    }    
     DndService.getService("races", charRace)
       .then(function(response){
         if (response instanceof Error) {
@@ -198,95 +216,39 @@ function attachClassListener(character){
   });
 }
 
-function determineSubrace(charRace){
-  let subrace = "";
-  switch (charRace){
-    case 'high-elf': 
-      charRace = 'elf';
-      subrace = 'high-elf';
-      break;
-    case 'hill-dwarf':
-      charRace = 'dwarf';
-      subrace = 'hill-dwarf';
-      break;
-    case 'rock-gnome':
-      charRace = 'gnome';
-      subrace = 'rock-gnome';
-      break;
-    case 'lightfoot-halfling':
-      charRace = 'halfling';
-      subrace = 'lightfoot-halfling';
-      break;
-    default:
-      subrace = "";  
-  }
-  const charArray = [charRace, subrace];
-  return charArray;
-}
+
 
 $(document).ready(function(){
   let character = new Character();
   let charClass = $("#charClass").val();
   let charRace = $("#charRace").val();
-  let charArray = determineSubrace(charRace);
-  charRace = charArray[0];
-  let subrace = charArray[1];
-  
+  let subrace = "";
+  switch (charRace){
+  case 'high-elf': 
+    charRace = 'elf';
+    subrace = 'high-elf';
+    break;
+  case 'hill-dwarf':
+    charRace = 'dwarf';
+    subrace = 'hill-dwarf';
+    break;
+  case 'rock-gnome':
+    charRace = 'gnome';
+    subrace = 'rock-gnome';
+    break;
+  case 'lightfoot-halfling':
+    charRace = 'halfling';
+    subrace = 'lightfoot-halfling';
+    break;
+  default:
+    subrace = "";
+  }
 
   attachCharacterListeners(character);
   attachIncreaseListeners(character);
   attachDecreaseListeners(character);
   attachRaceListener(character);
   attachClassListener(character);
-
-  //get default value of alignment
-  character.alignment = $("#charAlignment").val();
-  $("#alignmentDisplay").text(character.alignment);
-
-  //get the default race (dragonborn) saved to character
-  DndService.getService("races", charRace)
-    .then(function(response){
-      if (response instanceof Error) {
-        throw Error(`DnD API error: ${response.message}`);
-      }
-      let newRace = new Race(response.name,  response.speed, response.size, "");
-      character.race = newRace;
-      character.race.getLanguages(response);
-      character.race.getAbilityBonuses(response);
-      displayAbilityScores(character);
-      displayCharacterStats(character);
-      if(subrace !== ""){
-        return DndService.getService("subraces", subrace);
-      } else{
-        displayRace(character);
-        displayBonuses(character);
-      }
-    })
-    .then((subraceResponse) => {
-      if(subraceResponse instanceof Error) {
-        throw Error (`DnD Api Error: ${subraceResponse.message}`);
-      }
-      character.race.getSubBonuses(subraceResponse, character.race.bonuses);
-      displayRace(character);
-      displayBonuses(character);
-    })
-    .catch(function(error) {
-      displayErrors(error.message);
-    });
-  //get the default class
-  DndService.getService("classes", charClass)
-    .then(function(response){
-      if (response instanceof Error) {
-        throw Error(`DnD API error: ${response.message}`);
-      }
-      let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
-      character.addCharacterClass(newClass);
-      displayClass(character);
-      displayCharacterHeader(character);
-    })
-    .catch(function(error) {
-      displayErrors(error.message);
-    });  
 
   $("#standardButton").click(function(){
     $("#standardArrayRadioContainer").show();

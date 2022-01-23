@@ -23,7 +23,8 @@
           </div>
           <div class="mb-3 col-md-4">
             <label for="charAlignment">Choose alignment:</label>
-            <select class="form-select" name="alignment" id="charAlignment">
+            <select class="form-select" name="alignment" id="charAlignment" required>
+              <option value="">Select Alignment</option>
               <option value="Lawful Good">Lawful Good</option>
               <option value="Neutral Good">Neutral Good</option>
               <option value="Chaotic Good">Chaotic Good</option>
@@ -42,7 +43,8 @@
         <div class="row g-3">
           <div class="mb-3 col-md-6">
             <label for="charClass">Select character class:</label>
-            <select class="form-select" id="charClass">
+            <select class="form-select" id="charClass" required>
+              <option value="">Select Class</option>
               <option value="barbarian">Barbarian</option>
               <option value="bard">Bard</option>
               <option value="cleric">Cleric</option>
@@ -59,7 +61,8 @@
           </div>
           <div class="mb-3 col-md-6">
             <label for="charRace">Select characters race:</label>
-            <select class="form-select" id="charRace">
+            <select class="form-select" id="charRace" required>
+              <option value="">Select Race</option>
               <option value="dragonborn">DragonBorn</option>
               <option value="dwarf">Dwarf</option>
               <option value="hill-dwarf">Hill Dwarf</option>
