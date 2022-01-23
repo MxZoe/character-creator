@@ -33,6 +33,7 @@ function displayPointBuyBonuses(character){
   $("#wisBonus").text(character.race.bonuses.get('wis'));
   $("#chaBonus").text(character.race.bonuses.get('cha'));
 }
+
 function displayScore(character){
   let str = character.abilityScores.str + character.race.bonuses.get('str');
   let dex = character.abilityScores.dex + character.race.bonuses.get('dex');
@@ -80,6 +81,7 @@ function disableAbilityScoreOption(option) {
     break;
   }
 }
+
 function attachIncreaseListeners(character){
   $("#strUp").on("click", function(){
     character.increaseScore("str");
@@ -261,6 +263,7 @@ function attachClassListener(character){
     });  
   })
 }
+
 $(document).ready(function(){
   let character = new Character();
   let charClass = $("#charClass").val();
