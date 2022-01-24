@@ -69,7 +69,7 @@ function attachDecreaseListeners(character){
 
 function displayAbilityScores(character) {
   Object.keys(character.abilityScores).forEach((abilityScore) => {
-    $(`#${abilityScore}AbilityScore`).text(character.abilityScores[abilityScore]);
+    $(`#${abilityScore}AbilityScore`).text(character.abilityScores[abilityScore] + character.race.bonuses.get(abilityScore));
   });
   Object.keys(character.abilityModifiers).forEach((abilityModifier) => {
     $(`#${abilityModifier}AbilityModifier`).text(character.abilityModifier[abilityModifier]);
@@ -138,7 +138,6 @@ function attachRaceListener(character){
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
         displayPointBuyBonuses(character);
-        character.addRacialBonuses();
         displayAbilityScores(character);
         displayCharacterStats(character);
         if(subrace !== ""){

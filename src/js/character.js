@@ -59,14 +59,6 @@ export default class Character {
   addEquipment(equipment) {
     this.equipment = equipment;
   }
-  addRacialBonuses() {
-    this.abilityScores.str += this.race.bonuses.get("str");
-    this.abilityScores.dex += this.race.bonuses.get("dex");
-    this.abilityScores.con += this.race.bonuses.get("con");
-    this.abilityScores.int += this.race.bonuses.get("int");
-    this.abilityScores.wis += this.race.bonuses.get("wis");
-    this.abilityScores.cha += this.race.bonuses.get("cha");
-  }
 
   setPointBuyStart(){
     this.abilityScores.str = 8;
@@ -75,7 +67,6 @@ export default class Character {
     this.abilityScores.int = 8;
     this.abilityScores.wis = 8;
     this.abilityScores.cha = 8;
-  
   }
 
   resetAbilityScores(){
