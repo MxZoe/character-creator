@@ -105,12 +105,4 @@ export default class Character {
       alert("You cannot have a score below 8");
     }
   }
-
-  // Shortcut Methods 
-  characterStepOne(characterName, playerName, alignment) {
-    this.addCharacterName(characterName);
-    this.addPlayerName(playerName);
-    this.addAlignment(alignment);
-  }
-
 }
