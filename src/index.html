@@ -79,394 +79,129 @@
             </select>
           </div>
         </div>
+        <button type="button" class="btn btn-primary" id="nextButton">Next</button>
       </div>
-      <!--buttons for ability score methods-->
-      <h4>Choose how you want to generate your ability score:</h4>
-      <button type="button" class="btn btn-primary" id="standardButton">Standard Array</button>
-      <button type="button" class="btn btn-primary" id="pointButton">Point Buy</button> 
-      <button type="button" class="btn btn-primary" id="rollButton" disabled>Roll 4d6</button> 
-      <!-- Standard Array Radio Button -->
-      <div id="standardArrayRadioContainer">
-        <div class="row g-3">
-          <h4>Choose where your ability scores will start using the standard array:</h4>
+      <div id="abilityScoreSelection">
+        <!--buttons for ability score methods-->
+        <h4>Choose how you want to generate your ability score:</h4>
+        <button type="button" class="btn btn-primary" id="pointButton">Point Buy</button> 
+        <button type="button" class="btn btn-primary" id="rollButton" disabled>Roll 4d6</button> 
+        <!--Point Buy-->
+        <div id="pointBuyContainer">
+          <h4>Points remaining: <span id="pointsRemaining"></span></h4>
           <p class="text-muted">The standard array is the following numbers: 15, 14, 13, 12, 10, and 8. Choose what ability scores get which numbers below. If you have any issues with reassigning scores just hit the red "Reset ability scores" button below and re-enter them.</p>
-          <div class="col-4">
-            <p>Strength</p>
+          <div class="row" id="increaseButtons">
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="strUp">+</button>
+            </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="dexUp">+</button>
+            </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="conUp">+</button>
+            </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="intUp">+</button>
+            </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="wisUp">+</button>
+            </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="chaUp">+</button>
+            </div>
           </div>
-          <div class="col-8">
-            <div class="row" id ="charStrength">
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option15" value="15" type="radio" name="str" id="str-15" checked>
-                  <label class="form-check-label" for="str-15">15</label>
-                </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="row">
+                <p>Str</p>
               </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option14" value="14" type="radio" name="str" id="str-14">
-                  <label class="form-check-label" for="str-14">14</label> 
-                </div>
+              <div class="row">
+                <p id="strNum"></p>
               </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option13" value="13" type="radio" name="str" id="str-13">
-                  <label class="form-check-label" for="str-13">13</label> 
-                </div>
+              <div class="row">
+                <p>+<span id="strBonus">0</span></p>
               </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option12" value="12" type="radio" name="str" id="str-12">
-                  <label class="form-check-label" for="str-12">12</label> 
-                </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="row">
+                <p>Dex</p>
               </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option10" value="10" type="radio" name="str" id="str-10">
-                  <label class="form-check-label" for="str-10">10</label> 
-                </div>
+              <div class="row">
+                <p id="dexNum"></p>
               </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option8" value="8" type="radio" name="str" id="str-8">
-                  <label class="form-check-label" for="str-8">8</label> 
-                </div>
+              <div class="row">
+                <p>+<span id="dexBonus">0</span></p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="row">
+                <p>Con</p>
+              </div>
+              <div class="row">
+                <p id="conNum"></p>
+              </div>
+              <div class="row">
+                <p>+<span id="conBonus">0</span></p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="row">
+                <p>Int</p>
+              </div>
+              <div class="row">
+                <p id="intNum"></p>
+              </div>
+              <div class="row">
+                <p>+<span id="intBonus">0</span></p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="row">
+                <p>Wis</p>
+              </div>
+              <div class="row">
+                <p id="wisNum"></p>
+              </div>
+              <div class="row">
+                <p>+<span id="wisBonus">0</span></p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="row">
+                <p>Cha</p>
+              </div>
+              <div class="row">
+                <p id="chaNum"></p>
+              </div>
+              <div class="row">
+                <p>+<span id="chaBonus">0</span></p>
               </div>
             </div>
           </div>
-          <div class="col-4">
-            <p>Dexterity</p>
-          </div>
-          <div class="col-8">
-            <div class="row" id ="charDexterity">
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option15" value="15" type="radio" name="dex" id="dex-15">
-                  <label class="form-check-label" for="dex-15">15</label>
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option14" value="14" type="radio" name="dex" id="dex-14" checked>
-                  <label class="form-check-label" for="dex-14">14</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option13" value="13" type="radio" name="dex" id="dex-13">
-                  <label class="form-check-label" for="dex-13">13</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option12" value="12" type="radio" name="dex" id="dex-12">
-                  <label class="form-check-label" for="dex-12">12</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option10" value="10" type="radio" name="dex" id="dex-10">
-                  <label class="form-check-label" for="dex-10">10</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option8" value="8" type="radio" name="dex" id="dex-8">
-                  <label class="form-check-label" for="dex-8">8</label> 
-                </div>
-              </div>
+          <div class="row" id="decreaseButtons">
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="strDown">-</button>
             </div>
-          </div>
-          <div class="col-4">
-            <p>Constitution</p>
-          </div>
-          <div class="col-8">
-            <div class="row" id ="charConstitution">
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option15" value="15" type="radio" name="con" id="con-15">
-                  <label class="form-check-label" for="con-15">15</label>
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option14" value="14" type="radio" name="con" id="con-14">
-                  <label class="form-check-label" for="con-14">14</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option13" value="13" type="radio" name="con" id="con-13" checked>
-                  <label class="form-check-label" for="con-13">13</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option12" value="12" type="radio" name="con" id="con-12">
-                  <label class="form-check-label" for="con-12">12</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option10" value="10" type="radio" name="con" id="dex-10">
-                  <label class="form-check-label" for="con-10">10</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option8" value="8" type="radio" name="con" id="con-8">
-                  <label class="form-check-label" for="con-8">8</label> 
-                </div>
-              </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="dexDown">-</button>
             </div>
-          </div>
-          <div class="col-4">
-            <p>Intelligence</p>
-          </div>
-          <div class="col-8">
-            <div class="row" id ="charIntelligence">
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option15" value="15" type="radio" name="int" id="int-15">
-                  <label class="form-check-label" for="int-15">15</label>
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option14" value="14" type="radio" name="int" id="int-14">
-                  <label class="form-check-label" for="int-14">14</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option13" value="13" type="radio" name="int" id="int-13">
-                  <label class="form-check-label" for="int-13">13</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option12" value="12" type="radio" name="int" id="int-12" checked>
-                  <label class="form-check-label" for="int-12">12</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option10" value="10" type="radio" name="int" id="int-10">
-                  <label class="form-check-label" for="int-10">10</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option8" value="8" type="radio" name="int" id="int-8">
-                  <label class="form-check-label" for="int-8">8</label> 
-                </div>
-              </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="conDown">-</button>
             </div>
-          </div>
-          <div class="col-4">
-            <p>Wisdom</p>
-          </div>
-          <div class="col-8">
-            <div class="row" id ="charWisdom">
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option15" value="15" type="radio" name="wis" id="wis-15">
-                  <label class="form-check-label" for="wis-15">15</label>
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option14" value="14" type="radio" name="wis" id="wis-14">
-                  <label class="form-check-label" for="wis-14">14</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option13" value="13" type="radio" name="wis" id="wis-13">
-                  <label class="form-check-label" for="wis-13">13</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option12" value="12" type="radio" name="wis" id="wis-12">
-                  <label class="form-check-label" for="wis-12">12</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option10" value="10" type="radio" name="wis" id="wis-10" checked>
-                  <label class="form-check-label" for="wis-10">10</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option8" value="8" type="radio" name="wis" id="wis-8">
-                  <label class="form-check-label" for="wis-8">8</label> 
-                </div>
-              </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="intDown">-</button>
             </div>
-          </div>
-          <div class="col-4">
-            <p>Charisma</p>
-          </div>
-          <div class="col-8">
-            <div class="row" id ="charCharisma">
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option15" value="15" type="radio" name="cha" id="cha-15">
-                  <label class="form-check-label" for="cha-15">15</label>
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option14" value="14" type="radio" name="cha" id="cha-14">
-                  <label class="form-check-label" for="cha-14">14</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option13" value="13" type="radio" name="cha" id="cha-13">
-                  <label class="form-check-label" for="cha-13">13</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option12" value="12" type="radio" name="cha" id="cha-12">
-                  <label class="form-check-label" for="cha-12">12</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option10" value="10" type="radio" name="cha" id="cha-10">
-                  <label class="form-check-label" for="cha-10">10</label> 
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input option8" value="8" type="radio" name="cha" id="cha-8" checked>
-                  <label class="form-check-label" for="cha-8">8</label> 
-                </div>
-              </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="wisDown">-</button>
+            </div>
+            <div class="col-sm-2">
+              <button type='button' class="btn btn-primary" id="chaDown">-</button>
             </div>
           </div>
         </div>
-      </div>
-      <!--Point Buy-->
-      <div id="pointBuyContainer">
-        <h4>Points remaining: <span id="pointsRemaining"></span></h4>
-        <div class="row" id="increaseButtons">
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="strUp">+</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="dexUp">+</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="conUp">+</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="intUp">+</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="wisUp">+</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="chaUp">+</button>
-          </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-success" id="submit">Finalize Character</button>
         </div>
-        <div class="row">
-          <div class="col-sm-2">
-            <div class="row">
-              <p>Str</p>
-            </div>
-            <div class="row">
-              <p id="strNum"></p>
-            </div>
-            <div class="row">
-              <p>+<span id="strBonus">0</span></p>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="row">
-              <p>Dex</p>
-            </div>
-            <div class="row">
-              <p id="dexNum"></p>
-            </div>
-            <div class="row">
-              <p>+<span id="dexBonus">0</span></p>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="row">
-              <p>Con</p>
-            </div>
-            <div class="row">
-              <p id="conNum"></p>
-            </div>
-            <div class="row">
-              <p>+<span id="conBonus">0</span></p>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="row">
-              <p>Int</p>
-            </div>
-            <div class="row">
-              <p id="intNum"></p>
-            </div>
-            <div class="row">
-              <p>+<span id="intBonus">0</span></p>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="row">
-              <p>Wis</p>
-            </div>
-            <div class="row">
-              <p id="wisNum"></p>
-            </div>
-            <div class="row">
-              <p>+<span id="wisBonus">0</span></p>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="row">
-              <p>Cha</p>
-            </div>
-            <div class="row">
-              <p id="chaNum"></p>
-            </div>
-            <div class="row">
-              <p>+<span id="chaBonus">0</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="decreaseButtons">
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="strDown">-</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="dexDown">-</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="conDown">-</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="intDown">-</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="wisDown">-</button>
-          </div>
-          <div class="col-sm-2">
-            <button type='button' class="btn btn-primary" id="chaDown">-</button>
-          </div>
-        </div>
-      </div>
-      <div class="d-grid gap-2">
-        <button type="button" class="btn btn-danger" id="resetAbilityScores">Reset ability scores</button>
-      </div>
-      <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-success" id="submit">Create Character!</button>
       </div>
     </form>
     <!--Display character information-->

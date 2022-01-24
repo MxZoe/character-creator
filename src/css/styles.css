@@ -1,7 +1,9 @@
 #standardArrayRadioContainer{
   display: none;
 }
-
+#abilityScoreSelection {
+  display: none;
+}
 #pointBuyContainer{
   display: none;
 }

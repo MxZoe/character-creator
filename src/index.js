@@ -8,18 +8,6 @@ import CharClass from "./js/char-class";
 import Race from "./js/race";
 
 //UI Logic
-function displayRace(character){
-  // let languages = character.race.getLanguages();
-  $("#displayRace").text(`Race: ${character.race.name}, Speed: ${character.race.speed}, Size: ${character.race.size}, Languages: ${character.race.languages}`);
-}
-
-function displayClass(character){
-  $("#displayClass").text(`Class: ${character.characterClass.name}, Hit die: ${character.characterClass.hitDie}, Saving throws: ${character.characterClass.savingThrows[0].name}, ${character.characterClass.savingThrows[1].name}`);
-}
-
-function displayBonuses(character){
-  $("#displayAbilityBonus").text(`STR: ${character.race.bonuses.get("str")} DEX: ${character.race.bonuses.get("dex")}  CON: ${character.race.bonuses.get("con")}  INT:${character.race.bonuses.get("int")}  WIS:${character.race.bonuses.get("wis")}  CHA: ${character.race.bonuses.get("cha")} `);
-}
 
 function displayErrors(error) {
   $('.show-errors').text(`${error}`);
@@ -34,7 +22,7 @@ function displayPointBuyBonuses(character){
   $("#chaBonus").text(character.race.bonuses.get('cha'));
 }
 
-function displayScore(character){
+function displayPointBuyScore(character){
   let str = character.abilityScores.str + character.race.bonuses.get('str');
   let dex = character.abilityScores.dex + character.race.bonuses.get('dex');
   let con = character.abilityScores.con + character.race.bonuses.get('con');
@@ -58,35 +46,11 @@ function displayScore(character){
   $("#pointsRemaining").text(character.pointBuy);
 }
 
-function disableAbilityScoreOption(option) {
-  $(`${option}`).prop("disabled", true);
-  switch ($(`${option}:checked`).val()) {
-  case "15":
-    $(".option15").prop("disabled", true);
-    break;
-  case "14":
-    $(".option14").prop("disabled", true);
-    break;
-  case "13":
-    $(".option13").prop("disabled", true);
-    break;
-  case "12":
-    $(".option12").prop("disabled", true);
-    break;
-  case "10":
-    $(".option10").prop("disabled", true);
-    break;
-  case "8":
-    $(".option8").prop("disabled", true);
-    break;
-  }
-}
-
 function attachIncreaseListeners(character){
   Object.keys(character.abilityScores).forEach((score) => {
     $(`#${score}Up`).on("click", () => {
       character.increaseScore(score);
-      displayScore(character);
+      displayPointBuyScore(character);
       $("#pointBuyPoints").html(character.pointBuy);
     });
   });
@@ -96,7 +60,7 @@ function attachDecreaseListeners(character){
   Object.keys(character.abilityScores).forEach((score) => {
     $(`#${score}Down`).on("click", () => {
       character.decreaseScore(score);
-      displayScore(character);
+      displayPointBuyScore(character);
       $("#pointBuyPoints").html(character.pointBuy);
     });
   });
@@ -105,6 +69,9 @@ function attachDecreaseListeners(character){
 function displayAbilityScores(character) {
   Object.keys(character.abilityScores).forEach((abilityScore) => {
     $(`#${abilityScore}AbilityScore`).text(character.abilityScores[abilityScore]);
+  });
+  Object.keys(character.abilityModifiers).forEach((abilityModifier) => {
+    $(`#${abilityModifier}AbilityModifier`).text(character.abilityModifier[abilityModifier]);
   });
 }
 
@@ -118,6 +85,7 @@ function displayCharacterHeader(character) {
 
 function displayCharacterStats(character) {
   $(`#speedDisplay`).text(character.race.speed);
+  $(`#armoreClassDisplay`).text(character.addArmorClass);
 }
 
 function attachCharacterListeners(character){
@@ -168,14 +136,13 @@ function attachRaceListener(character){
         character.race = newRace;
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
+        character.addRacialBonuses();
         displayAbilityScores(character);
         displayCharacterStats(character);
         if(subrace !== ""){
           character.race.name = subrace;
           return DndService.getService("subraces", subrace);
         } else {
-          displayRace(character);
-          displayBonuses(character);
           displayCharacterHeader(character);
           displayPointBuyBonuses(character);
         }
@@ -185,15 +152,13 @@ function attachRaceListener(character){
           throw Error (`DnD Api Error: ${subraceResponse.message}`);
         }
         character.race.getSubBonuses(subraceResponse, character.race.bonuses);
-        displayRace(character);
-        displayBonuses(character);
         displayCharacterHeader(character);
         displayPointBuyBonuses(character);
       })
       .catch(function(error) {
         displayErrors(error.message);
       });
-    displayScore(character);
+    displayPointBuyScore(character);
   });
 }
 
@@ -207,7 +172,6 @@ function attachClassListener(character){
         }
         let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
         character.addCharacterClass(newClass);
-        displayClass(character);
         displayCharacterHeader(character);
       })
       .catch(function(error) {
@@ -216,114 +180,30 @@ function attachClassListener(character){
   });
 }
 
-
-
 $(document).ready(function(){
   let character = new Character();
-  let charClass = $("#charClass").val();
-  let charRace = $("#charRace").val();
-  let subrace = "";
-  switch (charRace){
-  case 'high-elf': 
-    charRace = 'elf';
-    subrace = 'high-elf';
-    break;
-  case 'hill-dwarf':
-    charRace = 'dwarf';
-    subrace = 'hill-dwarf';
-    break;
-  case 'rock-gnome':
-    charRace = 'gnome';
-    subrace = 'rock-gnome';
-    break;
-  case 'lightfoot-halfling':
-    charRace = 'halfling';
-    subrace = 'lightfoot-halfling';
-    break;
-  default:
-    subrace = "";
-  }
-
+  //TODO Finish the next button
   attachCharacterListeners(character);
   attachIncreaseListeners(character);
   attachDecreaseListeners(character);
   attachRaceListener(character);
   attachClassListener(character);
+  // Calculate Ability Modifiers
+   
+  character.addAbilityModifier();
+  character.addArmorClass();
 
-  $("#standardButton").click(function(){
-    $("#standardArrayRadioContainer").show();
-    $("#pointBuyContainer").hide();
-    character.resetAbilityScores();
-  });
   $("#pointButton").click(function(){
     $("#pointBuyContainer").show();
     $("#standardArrayRadioContainer").hide();
     character.setPointBuyStart();
-    displayScore(character);
+    displayPointBuyScore(character);
   });
+
   $("#formOne").submit(function(){
     event.preventDefault();
-    // Create Character
-    
-    
-    // Get Player Name, Character Name, & Alignment
-    // let playerName = $("#playerName").val();
-    // let characterName = $("#charName").val();
-    // let alignment = $("#charAlignment").find(":selected").val();
-    //  character.addPlayerName(playerName);
-    //  character.addCharacterName(characterName);
-    //  character.addAlignment(alignment);
-    // Get Ability Scores
-    /*
-    character.abilityScores.str = parseInt($(`input[name="str"]:checked`).val());
-    character.abilityScores.dex = parseInt($(`input[name="dex"]:checked`).val());
-    character.abilityScores.con = parseInt($(`input[name="con"]:checked`).val());
-    character.abilityScores.int = parseInt($(`input[name="int"]:checked`).val());
-    character.abilityScores.wis = parseInt($(`input[name="wis"]:checked`).val());
-    character.abilityScores.cha = parseInt($(`input[name="cha"]:checked`).val());
-    */
-    // Get Race and Class
-    
-    
 
-    // Calculate Ability Modifiers
-    character.addRacialBonuses();
-    character.addAbilityModifier();
-    console.log(character.abilityModifiers);
-    character.addArmorClass();
-    console.log(character.armorClass);
-  });
-  // Standard Array UI logic
-  $("#charStrength").change(() => {
-    disableAbilityScoreOption(`input[name="str"]`);
-  });
-  $("#charDexterity").change(() => {
-    disableAbilityScoreOption(`input[name="dex"]`);
-  });
-  $("#charConstitution").change(() => {
-    disableAbilityScoreOption(`input[name="con"]`);
-  });
-  $("#charIntelligence").change(() => {
-    disableAbilityScoreOption(`input[name="int"]`);
-  });
-  $("#charWisdom").change(() => {
-    disableAbilityScoreOption(`input[name="wis"]`);
-  });  
-  $("#charCharisma").change(() => {
-    disableAbilityScoreOption(`input[name="cha"]`);
-  });
-  $("#resetAbilityScores").click(() => {
-    $(`input[name="str"]`).prop("checked", false);
-    $(`input[name="dex"]`).prop("checked", false);
-    $(`input[name="con"]`).prop("checked", false);
-    $(`input[name="int"]`).prop("checked", false);
-    $(`input[name="wis"]`).prop("checked", false);
-    $(`input[name="cha"]`).prop("checked", false);
-    $(".option15").prop("disabled", false);
-    $(".option14").prop("disabled", false);
-    $(".option13").prop("disabled", false);
-    $(".option12").prop("disabled", false);
-    $(".option10").prop("disabled", false);
-    $(".option8").prop("disabled", false);
+    // finalize form
+    $("#formOne").hide();
   });
 }); 
