@@ -14,12 +14,13 @@ function displayErrors(error) {
 }
 
 function displayPointBuyBonuses(character){
-  $("#strBonus").text(character.race.bonuses.get('str'));
-  $("#dexBonus").text(character.race.bonuses.get('dex'));
-  $("#conBonus").text(character.race.bonuses.get('con'));
-  $("#intBonus").text(character.race.bonuses.get('int'));
-  $("#wisBonus").text(character.race.bonuses.get('wis'));
-  $("#chaBonus").text(character.race.bonuses.get('cha'));
+  let scores = Object.fromEntries(character.race.bonuses);
+  $("#strBonus").text(scores.str);
+  $("#dexBonus").text(scores.dex);
+  $("#conBonus").text(scores.con);
+  $("#intBonus").text(scores.int);
+  $("#wisBonus").text(scores.wis);
+  $("#chaBonus").text(scores.cha);
 }
 
 function displayPointBuyScore(character){
@@ -136,6 +137,7 @@ function attachRaceListener(character){
         character.race = newRace;
         character.race.getLanguages(response);
         character.race.getAbilityBonuses(response);
+        displayPointBuyBonuses(character);
         character.addRacialBonuses();
         displayAbilityScores(character);
         displayCharacterStats(character);
@@ -144,7 +146,6 @@ function attachRaceListener(character){
           return DndService.getService("subraces", subrace);
         } else {
           displayCharacterHeader(character);
-          displayPointBuyBonuses(character);
         }
       })
       .then((subraceResponse) => {
@@ -158,7 +159,6 @@ function attachRaceListener(character){
       .catch(function(error) {
         displayErrors(error.message);
       });
-    displayPointBuyScore(character);
   });
 }
 
