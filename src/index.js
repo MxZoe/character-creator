@@ -182,16 +182,26 @@ function attachClassListener(character){
 
 $(document).ready(function(){
   let character = new Character();
-  //TODO Finish the next button
+
   attachCharacterListeners(character);
   attachIncreaseListeners(character);
   attachDecreaseListeners(character);
   attachRaceListener(character);
   attachClassListener(character);
+
   // Calculate Ability Modifiers
-   
   character.addAbilityModifier();
   character.addArmorClass();
+  //Next Button listener and ability score show button
+  $("#charRace").click(() => {
+    if ($("#charRace").find(":selected").val() !== "") {
+      $("#nextButton").prop("disabled", false);
+    }
+  });
+
+  $("#nextButton").on("click", () => {
+    $("#abilityScoreSelection").slideDown();
+  });
 
   $("#pointButton").click(function(){
     $("#pointBuyContainer").show();
@@ -199,11 +209,10 @@ $(document).ready(function(){
     character.setPointBuyStart();
     displayPointBuyScore(character);
   });
-
+  
+  // finalize form
   $("#formOne").submit(function(){
     event.preventDefault();
-
-    // finalize form
     $("#formOne").hide();
   });
 }); 
