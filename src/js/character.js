@@ -48,7 +48,6 @@ export default class Character {
 
   addAbilityModifier() {
     Object.keys(this.abilityScores).forEach((score) => {
-      console.log("this.abilityScores_score  "+this.abilityScores[score]);
       const mod = Math.floor((this.abilityScores[score] - 10)/2);
       this.abilityModifiers[score] = mod;
     });
