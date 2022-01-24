@@ -72,7 +72,7 @@ function displayAbilityScores(character) {
     $(`#${abilityScore}AbilityScore`).text(character.abilityScores[abilityScore] + character.race.bonuses.get(abilityScore));
   });
   Object.keys(character.abilityModifiers).forEach((abilityModifier) => {
-    $(`#${abilityModifier}AbilityModifier`).text(character.abilityModifier[abilityModifier]);
+    $(`#${abilityModifier}AbilityModifier`).text(character.abilityModifiers[abilityModifier]);
   });
 }
 
@@ -156,6 +156,7 @@ function attachRaceListener(character){
         displayPointBuyBonuses(character);
       })
       .catch(function(error) {
+        console.log(error);
         displayErrors(error.message);
       });
   });
@@ -189,8 +190,9 @@ $(document).ready(function(){
   attachClassListener(character);
 
   // Calculate Ability Modifiers
-  character.addAbilityModifier();
-  character.addArmorClass();
+  // character.addAbilityModifier();
+  // character.addArmorClass();
+  
   //Next Button listener and ability score show button
   $("#charRace").click(() => {
     if ($("#charRace").find(":selected").val() !== "") {
@@ -213,5 +215,6 @@ $(document).ready(function(){
   $("#formOne").submit(function(){
     event.preventDefault();
     $("#formOne").hide();
+    console.log(character);
   });
 }); 
