@@ -175,7 +175,7 @@ function attachClassListener(character){
         let hitdie = parseInt(response.hit_die);
         character.characterClass = new CharClass(response.name, hitdie, response.proficiency_choices, response.proficiencies, response.saving_throws);
         character.hitpoints = character.characterClass.hit_die + 1;
-        console.log(`${hitdie}, ${character.hitpoints}, ${character.characterClass.hit_die}`)
+        console.log(`${hitdie}, ${character.hitpoints}, ${character.characterClass.hit_die}`);
         displayCharacterHeader(character);
       })
       .catch(function(error) {
