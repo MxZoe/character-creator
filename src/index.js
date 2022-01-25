@@ -236,6 +236,7 @@ $(document).ready(function(){
     $("#standardArrayRadioContainer").hide();
     character.setPointBuyStart();
     displayPointBuyScore(character);
+    calcAndDisplayModifiersAndClass(character);
   });
   
   // finalize form
