@@ -47,9 +47,13 @@ export default class Character {
   }
 
   addAbilityModifier() {
+    let raceBonuses = Object.fromEntries(this.race.bonuses);
+    let bonus = Object.keys(raceBonuses);
+    let counter = 0;
     Object.keys(this.abilityScores).forEach((score) => {
-      const mod = Math.floor((this.abilityScores[score] - 10)/2);
+      const mod = Math.floor((this.abilityScores[score] + raceBonuses[bonus[counter]] - 10)/2);
       this.abilityModifiers[score] = mod;
+      counter++;
     });
   }
 
