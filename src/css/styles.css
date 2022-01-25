@@ -17,3 +17,9 @@
 .characterStatsDisplayBox {
   border: 1px dashed black;
 }
+.pointBuyDiv {
+  text-align: center;
+}
+.pointBuyDiv button {
+  width: 5em;
+}
