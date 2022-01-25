@@ -1,35 +1,61 @@
-MVP: Make a character creator that allows the user to add their name, race, class, background and ability scores.
-Stretch goal: Add proficiencies
-Stretch goal: Let the player add spells and starting equipment
-Stretch goal: add descriptions to proficiencies, spells and equipment
-Stretch goal: let the player export their character to a pdf
-Stretch goal: Let the player choose their starting level and add the appropriate hit points, ability score increases and spells/equipment
-Stretch goal: Let the player add custom options for race, class and background
+# _D&D Character Creator_
+
+#### By _**Zoe Weinstein, Elliot McGonigal. Amy Young, Patrick Dolan, and Nick Sullivan**_
+
+#### _A web application for creating your very own 5th Edition Dungeons and Dragons&trade; character and character sheet._
+## Technologies Used
+* _[D&D 5e API](http://www.dnd5eapi.co/)_
+* _HTML_
+* _CSS_
+* _Bootstrap_
+* _JavaScript_
+* _Node.js_
+* _WebPack_
+* _ESLint_
+
+## Description
+
+_This application assists users in creating their own Dungeons and Dragons&trade; character and prepares a character sheet to be printed out for reference during play. Users can select their name, race, class, alignment, and ability score allocation and the application will automatically generate other important statistics like armor class, ability modifiers, and hit die._
+<br>
+_Once the user has chosen their character details and assigned ability points, the 'Finalize Character' button can be clicked to hide the form fields and only display the finished character sheet._
+
+## Setup Instructions
+
+* _Open your terminal and navigate to the folder you'd like to download the files into._
+* _Run the command below._
+> git clone https://github.com/MxZoe/character-creator
+* _Navigate to the root directory of the project in your terminal._
+* _Run the commands bellow, allowing them time to complete._
+> npm install
+
+> npm run build
+
+> npm run start
+* _Create the character of your dreams!_
+## Project Goals
+### MVP
+___
+Make a character creator that allows the user to add their name, race, class, background and ability scores.
+### Stretch Goals
+___
+1. Let user select proficiencies
+2. Let user select spells and starting equipment
+3. Let user select descriptions to proficiencies, spells and equipment
+4. Let user export their character sheet as a PDF
+5. Let user choose their starting level and add the appropriate hit points, ability score increases and spells/equipment
+6. Let user add custom options for race, class and background
+
+## Known Bugs
+
+* __
+
+## License
+
+Copyright (c) _01/25/2022_ _by Zoe Weinstein, Elliot McGonigal. Amy Young, Patrick Dolan, and Nick Sullivan _
 
 
-Zoe changelog 01/20
-to character.js:
-  added this.pointBuy attribute;
-  I had a hard time getting the dot notion to work for a given attribute used as an argument. i.e. increaseScore(argument) would increase the strength score by 1 with an argument of "str" but i was unable to get character.abilitybonus.argument to work. So I created this.abilities to be a map like the bonus map.
-  Added a method to set all stats to 8 and the this.pointBuy to 27.
-  Added a method to set all stats to 0.
-  Added increase and decrease methods to use with pointbuy.
+_Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:_
 
-to index.html:
-  added buttons to show different stat generation methods
-  added the point buy html
+_The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software._
 
-to styles.css
-  hid standardarray and point buy sections by default
-
-to index.js
-  added code for the new buttons (excluding the roll dice button)
-  added attacheventlisteners for increase and decrease buttons
-  added a display method for point buy
-
-Got stuck on:
- couldn't get the character.pointbuy to display for some reason in the displayScore function
- When the increase/decrease buttons are clicked it submits the form for some reason
-
-Further thoughts:
- We had discussed updating character whenever a field changed which would eliminate the need for a form if we wanted. We could organize it with an attachListeners function like I do with the increase and decrease buttons.
+_THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE._
