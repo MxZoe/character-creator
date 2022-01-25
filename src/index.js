@@ -236,6 +236,7 @@ $(document).ready(function(){
 
   $("#nextButton").on("click", () => {
     $("#abilityScoreSelection").slideDown();
+    $("#nextButton").hide();
   });
 
   $("#pointButton").click(function(){
