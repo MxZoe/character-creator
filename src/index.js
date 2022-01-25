@@ -81,6 +81,8 @@ function displayCharacterHeader(character) {
   $(`#raceDisplay`).text(character.race.name);
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
+  $("#maxHitPointsDisplay").text(character.hitpoints);
+  $("#totalHitDiceDisplay").text(`1d${character.characterClass.hit_die}`);
 }
 
 function displayCharacterStats(character) {
@@ -172,6 +174,7 @@ function attachClassListener(character){
         }
         let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
         character.addCharacterClass(newClass);
+        character.hitpoints = character.characterClass.hit_die + 1;
         displayCharacterHeader(character);
       })
       .catch(function(error) {
