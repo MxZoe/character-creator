@@ -51,6 +51,7 @@ function attachIncreaseListeners(character){
   Object.keys(character.abilityScores).forEach((score) => {
     $(`#${score}Up`).on("click", () => {
       character.increaseScore(score);
+      calcAndDisplayModifiersAndClass(character);
       displayPointBuyScore(character);
       $("#pointBuyPoints").html(character.pointBuy);
     });
@@ -61,10 +62,17 @@ function attachDecreaseListeners(character){
   Object.keys(character.abilityScores).forEach((score) => {
     $(`#${score}Down`).on("click", () => {
       character.decreaseScore(score);
+      calcAndDisplayModifiersAndClass(character);
       displayPointBuyScore(character);
       $("#pointBuyPoints").html(character.pointBuy);
     });
   });
+}
+
+function calcAndDisplayModifiersAndClass(character) {
+  character.addAbilityModifier();
+  character.addArmorClass();
+  displayAbilityScores(character);
 }
 
 function displayAbilityScores(character) {
@@ -87,6 +95,7 @@ function displayCharacterHeader(character) {
 }
 
 function displayCharacterStats(character) {
+  $(`#armorClassDisplay`).text(character.armorClass);
   $(`#speedDisplay`).text(character.race.speed);
   $(`#armoreClassDisplay`).text(character.addArmorClass);
 }
@@ -141,6 +150,7 @@ function attachRaceListener(character){
         character.race.getAbilityBonuses(response);
         displayPointBuyBonuses(character);
         displayAbilityScores(character);
+        calcAndDisplayModifiersAndClass(character);
         displayCharacterStats(character);
         if(subrace !== ""){
           character.race.name = subrace;
@@ -154,6 +164,7 @@ function attachRaceListener(character){
           throw Error (`DnD Api Error: ${subraceResponse.message}`);
         }
         character.race.getSubBonuses(subraceResponse, character.race.bonuses);
+        calcAndDisplayModifiersAndClass(character);
         displayCharacterHeader(character);
         displayPointBuyBonuses(character);
       })
