@@ -13,6 +13,10 @@ function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
 
+function displayPointError(message){
+  $("#pointBuyErrorContainer").text(message);
+}
+
 function displayPointBuyBonuses(character){
   let scores = Object.fromEntries(character.race.bonuses);
   $("#strBonus").text(scores.str);
@@ -50,7 +54,10 @@ function displayPointBuyScore(character){
 function attachIncreaseListeners(character){
   Object.keys(character.abilityScores).forEach((score) => {
     $(`#${score}Up`).on("click", () => {
-      character.increaseScore(score);
+      let message = character.increaseScore(score);
+      if(typeof message === "string"){
+        displayPointError(message);
+      }
       calcAndDisplayModifiersAndClass(character);
       displayPointBuyScore(character);
       $("#pointBuyPoints").html(character.pointBuy);
@@ -61,7 +68,10 @@ function attachIncreaseListeners(character){
 function attachDecreaseListeners(character){
   Object.keys(character.abilityScores).forEach((score) => {
     $(`#${score}Down`).on("click", () => {
-      character.decreaseScore(score);
+      let message = character.decreaseScore(score);
+      if(typeof message === "string"){
+        displayPointError(message);
+      }
       calcAndDisplayModifiersAndClass(character);
       displayPointBuyScore(character);
       $("#pointBuyPoints").html(character.pointBuy);
