@@ -86,13 +86,15 @@ export default class Character {
     if( this.abilityScores[ability] < 13 && this.pointBuy > 0){
       this.abilityScores[ability]++;
       this.pointBuy--;
+      return 0;
     } else if (this.abilityScores[ability] >= 13 && this.abilityScores[ability] < 15 && this.pointBuy > 1){
       this.abilityScores[ability]++;
       this.pointBuy -= 2;
+      return 0;
     } else if(this.pointBuy === 0){
-      alert("you are out of points!");
+      return "You are out of points!";
     } else{
-      alert("Your ability score cannot exceed 15 (before racial modifiers)");
+      return "Your ability score cannot exceed 15 (before racial modifiers)";
     }
   }
 
@@ -106,7 +108,7 @@ export default class Character {
         this.pointBuy += 2;
       }
     } else{
-      alert("You cannot have a score below 8");
+      return ("You cannot have a score below 8");
     }
   }
 }
