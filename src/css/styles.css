@@ -11,6 +11,9 @@
 #abilityScoresTable, table {
   text-align: center;
 }
+#pointBuyErrorContainer {
+  color: red;
+}
 .characterStatsDisplayBox {
   border: 1px dashed black;
 }
