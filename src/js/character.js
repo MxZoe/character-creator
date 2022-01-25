@@ -4,6 +4,7 @@ export default class Character {
     this.playerName = "";
     this.alignment = "";
     this.race = {};
+    this.subrace = "";
     this.characterClass = {};
     this.hitpoints = 0;
     this.abilityScores = {

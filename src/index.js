@@ -98,7 +98,11 @@ function displayAbilityScores(character) {
 function displayCharacterHeader(character) {
   $(`#charNameDisplay`).text(character.characterName);
   $(`#playerNameDisplay`).text(character.playerName);
-  $(`#raceDisplay`).text(character.race.name);
+  if (character.subrace === "") {
+    $(`#raceDisplay`).text(character.race.name);
+  } else {
+    $(`#raceDisplay`).text(character.subrace);
+  }
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
   if (!isNaN(character.hitpoints)) {
@@ -133,24 +137,29 @@ function attachCharacterListeners(character){
 
 function attachRaceListener(character){
   $("#charRace").on("change",function(){
+    character.subrace = "";
     let charRace = $("#charRace").val();
     let subrace = '';
     switch (charRace){
     case 'high-elf': 
       charRace = 'elf';
       subrace = 'high-elf';
+      character.subrace = 'High Elf';
       break;
     case 'hill-dwarf':
       charRace = 'dwarf';
       subrace = 'hill-dwarf';
+      character.subrace = 'Hill Dwarf';
       break;
     case 'rock-gnome':
       charRace = 'gnome';
       subrace = 'rock-gnome';
+      character.subrace = 'Rock Gnome';
       break;
     case 'lightfoot-halfling':
       charRace = 'halfling';
       subrace = 'lightfoot-halfling';
+      character.subrace = 'Lightfoot Halfling';
       break;
     default:
       subrace = "";
