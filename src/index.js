@@ -177,21 +177,19 @@ function attachRaceListener(character){
         displayAbilityScores(character);
         calcAndDisplayModifiersAndClass(character);
         displayCharacterStats(character);
-        if(subrace !== ""){
-          character.race.name = subrace;
-          return DndService.getService("subraces", subrace);
-        } else {
-          displayCharacterHeader(character);
-        }
+        displayCharacterHeader(character);
+        return DndService.getService("subraces", subrace);
       })
       .then((subraceResponse) => {
         if(subraceResponse instanceof Error) {
           throw Error (`DnD Api Error: ${subraceResponse.message}`);
         }
-        character.race.getSubBonuses(subraceResponse, character.race.bonuses);
-        calcAndDisplayModifiersAndClass(character);
-        displayCharacterHeader(character);
-        displayPointBuyBonuses(character);
+        if(character.subrace !== ""){
+          character.race.getSubBonuses(subraceResponse, character.race.bonuses);
+          calcAndDisplayModifiersAndClass(character);
+          displayCharacterHeader(character);
+          displayPointBuyBonuses(character);
+        }
       })
       .catch(function(error) {
         console.log(error);
