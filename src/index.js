@@ -91,8 +91,13 @@ function displayCharacterHeader(character) {
   $(`#raceDisplay`).text(character.race.name);
   $(`#classDisplay`).text(character.characterClass.name);
   $(`#alignmentDisplay`).text(character.alignment);
-  $("#maxHitPointsDisplay").text(character.hitpoints);
-  $("#totalHitDiceDisplay").text(`1d${character.characterClass.hit_die}`);
+  if (!isNaN(character.hitpoints)) {
+    $("#maxHitPointsDisplay").text(character.hitpoints);
+    $("#totalHitDiceDisplay").text(`1d${character.characterClass.hit_die}`);
+  } else{
+    $("#maxHitPointsDisplay").text(" ");
+    $("#totalHitDiceDisplay").text(" ");
+  }
 }
 
 function displayCharacterStats(character) {
@@ -204,10 +209,6 @@ $(document).ready(function(){
   attachDecreaseListeners(character);
   attachRaceListener(character);
   attachClassListener(character);
-
-  // Calculate Ability Modifiers
-  // character.addAbilityModifier();
-  // character.addArmorClass();
   
   //Next Button listener and ability score show button
   $("#charRace").click(() => {
