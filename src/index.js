@@ -72,6 +72,7 @@ function attachDecreaseListeners(character){
 function calcAndDisplayModifiersAndClass(character) {
   character.addAbilityModifier();
   character.addArmorClass();
+  displayCharacterStats(character);
   displayAbilityScores(character);
 }
 
@@ -97,7 +98,7 @@ function displayCharacterHeader(character) {
 function displayCharacterStats(character) {
   $(`#armorClassDisplay`).text(character.armorClass);
   $(`#speedDisplay`).text(character.race.speed);
-  $(`#armoreClassDisplay`).text(character.addArmorClass);
+  $(`#initiativeDisplay`).text(character.abilityModifiers.dex);
 }
 
 function attachCharacterListeners(character){
