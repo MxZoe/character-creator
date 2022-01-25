@@ -172,9 +172,10 @@ function attachClassListener(character){
         if (response instanceof Error) {
           throw Error(`DnD API error: ${response.message}`);
         }
-        let newClass = new CharClass(response.name, response.hit_die, response.proficiency_choices, response.proficiencies, response.saving_throws);
-        character.addCharacterClass(newClass);
+        let hitdie = parseInt(response.hit_die);
+        character.characterClass = new CharClass(response.name, hitdie, response.proficiency_choices, response.proficiencies, response.saving_throws);
         character.hitpoints = character.characterClass.hit_die + 1;
+        console.log(`${hitdie}, ${character.hitpoints}, ${character.characterClass.hit_die}`)
         displayCharacterHeader(character);
       })
       .catch(function(error) {
