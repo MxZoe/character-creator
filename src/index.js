@@ -235,13 +235,9 @@ $(document).ready(function(){
   });
 
   $("#nextButton").on("click", () => {
-    $("#abilityScoreSelection").slideDown();
+    $("#abilityScoreSelection").show();
     $("#nextButton").hide();
-  });
-
-  $("#pointButton").click(function(){
     $("#pointBuyContainer").show();
-    $("#standardArrayRadioContainer").hide();
     character.setPointBuyStart();
     displayPointBuyScore(character);
     calcAndDisplayModifiersAndClass(character);
