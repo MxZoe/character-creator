@@ -80,6 +80,7 @@ function attachDecreaseListeners(character){
 }
 
 function calcAndDisplayModifiersAndClass(character) {
+  
   character.addAbilityModifier();
   character.addArmorClass();
   displayCharacterStats(character);
@@ -207,7 +208,12 @@ function attachClassListener(character){
         }
         let hitdie = parseInt(response.hit_die);
         character.characterClass = new CharClass(response.name, hitdie, response.proficiency_choices, response.proficiencies, response.saving_throws);
-        character.hitpoints = character.characterClass.hit_die + 1;
+        if(character.abilityModifiers.con !== 0){
+          character.hitpoints = character.characterClass.hit_die + character.abilityModifiers.con;
+        } else{
+          character.hitdie = character.characterClass.hit_die;
+        }
+        
         displayCharacterHeader(character);
       })
       .catch(function(error) {
