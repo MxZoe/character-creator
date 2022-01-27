@@ -80,9 +80,9 @@ function attachDecreaseListeners(character){
 }
 
 function calcAndDisplayModifiersAndClass(character) {
-  
   character.addAbilityModifier();
   character.addArmorClass();
+  character.addHitpoints()
   displayCharacterStats(character);
   displayAbilityScores(character);
 }
@@ -119,6 +119,7 @@ function displayCharacterStats(character) {
   $(`#armorClassDisplay`).text(character.armorClass);
   $(`#speedDisplay`).text(character.race.speed);
   $(`#initiativeDisplay`).text(character.abilityModifiers.dex);
+  $(`#maxHitPointsDisplay`).text(character.hitpoints);
 }
 
 function attachCharacterListeners(character){

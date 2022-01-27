@@ -61,6 +61,11 @@ export default class Character {
   addArmorClass() {
     this.armorClass = this.abilityModifiers.dex + 10;
   }
+
+  addHitpoints() {
+    this.hitpoints = this.characterClass.hit_die + this.abilityModifiers.con;
+  }
+
   addEquipment(equipment) {
     this.equipment = equipment;
   }
