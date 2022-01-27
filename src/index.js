@@ -108,7 +108,8 @@ function displayCharacterHeader(character) {
   $(`#alignmentDisplay`).text(character.alignment);
   if (!isNaN(character.hitpoints)) {
     $("#maxHitPointsDisplay").text(character.hitpoints);
-    $("#totalHitDiceDisplay").text(`1d${character.characterClass.hit_die}`);
+    character.addHitpoints();
+    $("#totalHitDiceDisplay").text(`1d${character.hitpoints}`);
   } else{
     $("#maxHitPointsDisplay").text(" ");
     $("#totalHitDiceDisplay").text(" ");
