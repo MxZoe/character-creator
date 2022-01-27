@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>DnD Character Creator</title>
+</head>
+<body>
+  <div class="container">
+    <div id="top">
+      <h2>D&D 5e Character Creator</h2>
+    </div>
+    <hr>
+    <form id="formOne">
+      <!--Player Name, Character Name, and Alignment Section-->
+      <div id="namesAndAlignment">
+        <div class="row g-3">
+          <div class="mb-3 col-md-4">
+            <label for="playerName">Player name:</label>
+            <input type="text" class="form-control" id="playerName" placeholder="Your name">
+          </div>
+          <div class="mb-3 col-md-4">
+            <label for="charName">Character name:</label>
+            <input type="text" class="form-control" id="charName" placeholder="Character name">
+          </div>
+          <div class="mb-3 col-md-4">
+            <label for="charAlignment">Choose alignment:</label>
+            <select class="form-select" name="alignment" id="charAlignment" required>
+              <option value="">Select Alignment</option>
+              <option value="Lawful Good">Lawful Good</option>
+              <option value="Neutral Good">Neutral Good</option>
+              <option value="Chaotic Good">Chaotic Good</option>
+              <option value="Lawful Neutral">Lawful Neutral</option>
+              <option value="True Neutral">True Neutral</option>
+              <option value="Chaotic Neutral">Chaotic Neutral</option>
+              <option value="Lawful Evil">Lawful Evil</option>
+              <option value="Neutral Evil">Neutral Evil</option>
+              <option value="Chaotic Evil">Chaotic Evil</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!--Class and Race Section-->
+      <div id="classAndRaceSection">
+        <div class="row g-3">
+          <div class="mb-3 col-md-6">
+            <label for="charClass">Select character class:</label>
+            <select class="form-select" id="charClass" required>
+              <option value="">Select Class</option>
+              <option value="barbarian">Barbarian</option>
+              <option value="bard">Bard</option>
+              <option value="cleric">Cleric</option>
+              <option value="druid">Druid</option>
+              <option value="fighter">Fighter</option>
+              <option value="monk">Monk</option>
+              <option value="paladin">Paladin</option>
+              <option value="ranger">Ranger</option>
+              <option value="rogue">Rogue</option>
+              <option value="sorcerer">Sorcercer</option>
+              <option value="warlock">Warlock</option>
+              <option value="wizard">Wizard</option>
+            </select>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="charRace">Select characters race:</label>
+            <select class="form-select" id="charRace" required>
+              <option value="">Select Race</option>
+              <option value="dragonborn">DragonBorn</option>
+              <option value="dwarf">Dwarf</option>
+              <option value="hill-dwarf">Hill Dwarf</option>
+              <option value="elf">Elf</option>
+              <option value="high-elf">High Elf</option>
+              <option value="gnome">Gnome</option>
+              <option value="rock-gnome">Rock Gnome</option>
+              <option value="half-elf">Half-elf</option>
+              <option value="half-orc">Half-orc</option>
+              <option value="halfling">Halfling</option>
+              <option value="lightfoot-halfling">Lightfoot Halfling</option>
+              <option value="human">Human</option>
+              <option value="tiefling">Tiefling</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="nextButton" disabled>Next</button>
+      </div>
+      <div id="abilityScoreSelection">
+        <!--buttons for ability score methods-->
+        <!-- <h4>Choose how you want to generate your ability score:</h4>
+        <button type="button" class="btn btn-primary" id="pointButton">Point Buy</button> 
+        <button type="button" class="btn btn-primary" id="rollButton" disabled>Roll 4d6 Coming Soon!</button>  -->
+        <!--Point Buy-->
+        <div id="pointBuyContainer">
+          <h4>Points remaining: <span id="pointsRemaining"></span></h4>
+          <p class="text-muted">If you would like to use the standard array use the following numbers: 15, 14, 13, 12, 10, and 8. The modifiers displayed under the scores represent your chracters racial bonuses.</p>
+          <p ><span id="pointBuyErrorContainer"></span></p>
+          <div class="row">
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="strUp">+</button>
+              <p>Strength</p>
+              <p id="strNum"></p>
+              <p>+<span id="strBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="strDown">-</button>
+            </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="dexUp">+</button>
+              <p>Dexterity</p>
+              <p id="dexNum"></p>
+              <p>+<span id="dexBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="dexDown">-</button>
+            </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="conUp">+</button>
+              <p>Constitution</p>
+              <p id="conNum"></p>
+              <p>+<span id="conBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="conDown">-</button>
+            </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="intUp">+</button>
+              <p>Intelligence</p>
+              <p id="intNum"></p>
+              <p>+<span id="intBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="intDown">-</button>
+            </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="wisUp">+</button>
+              <p>Wisdom</p>
+              <p id="wisNum"></p>
+              <p>+<span id="wisBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="wisDown">-</button>
+            </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="chaUp">+</button>
+              <p>Charisma</p>
+              <p id="chaNum"></p>
+              <p>+<span id="chaBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="chaDown">-</button>
+            </div>
+          </div>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-success" id="submit">Finalize Character</button>
+        </div>
+      </div>
+    </form>
+    <!--Display character information-->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Character Sheet</h5>
+        <!--Names, Race, Class & Alignment-->
+        <div class="row">
+          <div class="col-md-6">
+            <p class="text-muted">Character Name:</p>
+            <h3><span id="charNameDisplay"></span></h3>
+          </div>
+          <div class="col-md-3">
+            <p class="text-muted">Player Name:</p>
+            <p><span id="playerNameDisplay"></span></p>
+            <p class="text-muted">Race:</p>
+            <p><span id="raceDisplay"></span></p>
+          </div>
+          <div class="col-md-3">
+            <p class="text-muted">Class:</p>
+            <p><span id="classDisplay"></span></p>
+            <p class="text-muted">Alignment:</p>
+            <p><span id="alignmentDisplay"></span></p>
+          </div>
+        </div>
+        <!--Main character sheet content row-->
+        <div class="row">
+          <div class="col-md-3" id="abilityScoreTable">
+            <table class="table">
+                <tr>
+                  <th>Strength</th>
+                </tr>
+                <tr>
+                  <td><span id="strAbilityScore">0</span></td>
+                </tr>
+                <tr>
+                  <td><span id="strAbilityModifier" class="text-muted">0</span></td>
+                </tr>
+                <tr>
+                  <th>Dexterity</th>
+                </tr>
+                <tr>
+                  <td><span id="dexAbilityScore">0</span></td>
+                </tr>
+                <tr>
+                  <td><span id="dexAbilityModifier" class="text-muted">0</span></td>
+                </tr>
+                <tr>
+                  <th>Constitution</th>
+                </tr>
+                <tr>
+                  <td><span id="conAbilityScore">0</span></td>
+                </tr>
+                <tr>
+                  <td><span id="conAbilityModifier" class="text-muted">0</span></td>
+                </tr>
+                <tr>
+                  <th>Intelligence</th>
+                </tr>
+                <tr>
+                  <td><span id="intAbilityScore">0</span></td>
+                </tr>
+                <tr>
+                  <td><span id="intAbilityModifier" class="text-muted">0</span></td>
+                </tr>
+              <tr>
+                  <th>Wisdom</th>
+                </tr>
+                <tr>
+                  <td><span id="wisAbilityScore">0</span></td>
+                </tr>
+                <tr>
+                  <td><span id="wisAbilityModifier" class="text-muted">0</span></td>
+                </tr>
+              <tr>
+                  <th>Charisma</th>
+                </tr>
+                <tr>
+                  <td><span id="chaAbilityScore">0</span></td>
+                </tr>
+                <tr>
+                  <td><span id="chaAbilityModifier" class="text-muted">0</span></td>
+                </tr>
+            </table>
+          </div>
+          <!--Character stats (AC, Initiative, Speed, MaxHP, Hit Dice, and DeathSaves)-->
+          <div class="col-md-5" id="characterStats">
+            <div class="row">
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Armor Class:</p>
+                <p><span id="armorClassDisplay">0</span></p>
+              </div>
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Initiative:</p>
+                <p><span id="initiativeDisplay">0</span></p>
+              </div>
+              <div class="col characterStatsDisplayBox">
+                <p class="text-muted">Speed:</p>
+                <p><span id="speedDisplay">0</span></p>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <p class="text-muted">Max Hit Points:</p>
+                <p><span id="maxHitPointsDisplay">0</span></p>
+              </div>
+              <div>
+                <p class="text-muted">Total Hit Dice</p>
+                <p><span id="totalHitDiceDisplay">0</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+          <div id="displayRace"></div>
+          <div id="displayClass"></div>
+          <div id="displayAbilityBonus"></div>
+        </div>
+        <div class="show-errors"></div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>
