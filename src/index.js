@@ -82,7 +82,7 @@ function attachDecreaseListeners(character){
 function calcAndDisplayModifiersAndClass(character) {
   character.addAbilityModifier();
   character.addArmorClass();
-  character.addHitpoints()
+  character.addHitpoints();
   displayCharacterStats(character);
   displayAbilityScores(character);
 }
