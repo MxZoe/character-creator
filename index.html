@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title></title>
+  <title>DnD Character Creator</title>
 </head>
 <body>
   <div class="container">
@@ -80,123 +80,59 @@
           </div>
         </div>
         <button type="button" class="btn btn-primary" id="nextButton" disabled>Next</button>
-        <p class="text-muted">You must choose a race before hitting the next button and moving on to ability scores.</p>
       </div>
       <div id="abilityScoreSelection">
         <!--buttons for ability score methods-->
-        <h4>Choose how you want to generate your ability score:</h4>
+        <!-- <h4>Choose how you want to generate your ability score:</h4>
         <button type="button" class="btn btn-primary" id="pointButton">Point Buy</button> 
-        <button type="button" class="btn btn-primary" id="rollButton" disabled>Roll 4d6</button> 
+        <button type="button" class="btn btn-primary" id="rollButton" disabled>Roll 4d6 Coming Soon!</button>  -->
         <!--Point Buy-->
         <div id="pointBuyContainer">
           <h4>Points remaining: <span id="pointsRemaining"></span></h4>
-          <p class="text-muted">The standard array is the following numbers: 15, 14, 13, 12, 10, and 8. Choose what ability scores get which numbers below. If you have any issues with reassigning scores just hit the red "Reset ability scores" button below and re-enter them.</p>
-          <div class="row" id="increaseButtons">
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="strUp">+</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="dexUp">+</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="conUp">+</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="intUp">+</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="wisUp">+</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="chaUp">+</button>
-            </div>
-          </div>
+          <p class="text-muted">If you would like to use the standard array use the following numbers: 15, 14, 13, 12, 10, and 8. The modifiers displayed under the scores represent your chracters racial bonuses.</p>
+          <p ><span id="pointBuyErrorContainer"></span></p>
           <div class="row">
-            <div class="col-sm-2">
-              <div class="row">
-                <p>Str</p>
-              </div>
-              <div class="row">
-                <p id="strNum"></p>
-              </div>
-              <div class="row">
-                <p>+<span id="strBonus">0</span></p>
-              </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="strUp">+</button>
+              <p>Strength</p>
+              <p id="strNum"></p>
+              <p>+<span id="strBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="strDown">-</button>
             </div>
-            <div class="col-sm-2">
-              <div class="row">
-                <p>Dex</p>
-              </div>
-              <div class="row">
-                <p id="dexNum"></p>
-              </div>
-              <div class="row">
-                <p>+<span id="dexBonus">0</span></p>
-              </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="dexUp">+</button>
+              <p>Dexterity</p>
+              <p id="dexNum"></p>
+              <p>+<span id="dexBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="dexDown">-</button>
             </div>
-            <div class="col-sm-2">
-              <div class="row">
-                <p>Con</p>
-              </div>
-              <div class="row">
-                <p id="conNum"></p>
-              </div>
-              <div class="row">
-                <p>+<span id="conBonus">0</span></p>
-              </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="conUp">+</button>
+              <p>Constitution</p>
+              <p id="conNum"></p>
+              <p>+<span id="conBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="conDown">-</button>
             </div>
-            <div class="col-sm-2">
-              <div class="row">
-                <p>Int</p>
-              </div>
-              <div class="row">
-                <p id="intNum"></p>
-              </div>
-              <div class="row">
-                <p>+<span id="intBonus">0</span></p>
-              </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="intUp">+</button>
+              <p>Intelligence</p>
+              <p id="intNum"></p>
+              <p>+<span id="intBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="intDown">-</button>
             </div>
-            <div class="col-sm-2">
-              <div class="row">
-                <p>Wis</p>
-              </div>
-              <div class="row">
-                <p id="wisNum"></p>
-              </div>
-              <div class="row">
-                <p>+<span id="wisBonus">0</span></p>
-              </div>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="wisUp">+</button>
+              <p>Wisdom</p>
+              <p id="wisNum"></p>
+              <p>+<span id="wisBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="wisDown">-</button>
             </div>
-            <div class="col-sm-2">
-              <div class="row">
-                <p>Cha</p>
-              </div>
-              <div class="row">
-                <p id="chaNum"></p>
-              </div>
-              <div class="row">
-                <p>+<span id="chaBonus">0</span></p>
-              </div>
-            </div>
-          </div>
-          <div class="row" id="decreaseButtons">
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="strDown">-</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="dexDown">-</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="conDown">-</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="intDown">-</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="wisDown">-</button>
-            </div>
-            <div class="col-sm-2">
-              <button type='button' class="btn btn-primary" id="chaDown">-</button>
+            <div class="col-md-2 mx-auto d-grid pointBuyDiv">
+              <button type='button' class="btn btn-primary mx-auto" id="chaUp">+</button>
+              <p>Charisma</p>
+              <p id="chaNum"></p>
+              <p>+<span id="chaBonus">0</span></p>
+              <button type='button' class="btn btn-primary mx-auto" id="chaDown">-</button>
             </div>
           </div>
         </div>
@@ -326,5 +262,5 @@
       </div>
     </div>
   </div>
-</body>
+<script type="text/javascript" src="bundle.js"></script></body>
 </html>
